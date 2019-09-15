@@ -6,7 +6,60 @@
 
     <groupId>com.hui.cloud</groupId>
     <artifactId>hui-cloud-platform</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>cloud-common</module>
+        <module>cloud-auth</module>
+        <module>cloud-usercenter</module>
+        <module>cloud-gateway</module>
+        <module>cloud-admin</module>
+    </modules>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
 
+        <springcloud.version>Greenwich.RELEASE</springcloud.version>
+        <druid.version>1.1.20</druid.version>
+        <swagger2.version>2.9.2</swagger2.version>
+        <common-net>3.5</common-net>
+        <springboot-admin>2.1.6</springboot-admin>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+    </parent>
+    <!-- 版本管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${springcloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security.oauth.boot</groupId>
+                <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+                <version>2.1.0.RELEASE</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>

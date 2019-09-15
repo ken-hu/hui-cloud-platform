@@ -1,0 +1,31 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    # 服务注册
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        enabled: true
+        register: true
+        deregister: true
+        prefer-ip-address: true
+        health-check-interval: 30s
+        health-check-critical-timeout: 30s
+        health-check-path: /actuator/info
+        instance-id: ${spring.application.name}
+    # 网关配置
+    gateway:
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth-service/**
+            - PrefixPath=/auth-service
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/auth-service

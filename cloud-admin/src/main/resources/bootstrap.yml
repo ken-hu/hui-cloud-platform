@@ -1,0 +1,20 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: admin-service
+  cloud:
+    # 服务注册
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        enabled: true
+        register: true
+        deregister: true
+        prefer-ip-address: true
+        health-check-interval: 30s
+        health-check-critical-timeout: 30s
+        health-check-path: /actuator/info
+        instance-id: ${spring.application.name}
