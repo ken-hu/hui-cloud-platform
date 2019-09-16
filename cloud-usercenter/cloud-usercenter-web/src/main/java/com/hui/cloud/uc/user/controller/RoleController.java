@@ -1,5 +1,7 @@
 package com.hui.cloud.uc.user.controller;
 
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * <b><code>RoleController</code></b>
  * <p/>
@@ -9,5 +11,6 @@ package com.hui.cloud.uc.user.controller;
  *
  * @author Hu-Weihui
  */
+@RestController
 public class RoleController {
 }

@@ -33,12 +33,6 @@ spring:
       time-between-eviction-runs-millis: 6000
       min-evictable-idle-time-millis: 30000
       max-open-prepared-statements: 20
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-      properties:
-        hibernate.format_sql: true
   redis:
     host: 192.168.89.4
     port: 6379
