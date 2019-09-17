@@ -9,5 +9,5 @@ package com.hui.cloud.common.model;
  *
  * @author Gary.Hu
  */
-public class BaseEntity {
+public class BaseEntity<T> {
 }

@@ -1,14 +1,20 @@
 package com.hui.cloud.common.codegen;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -23,11 +29,39 @@ import java.util.Scanner;
 public class CodeGenerator {
 
     /**
+     * INFO
+     */
+    private static final String AUTH = "Gary.hu";
+    private static final String[] TABLES = new String[]{"t_uc_user"};
+    private static final String TABLE_PREFIX = "t_uc";
+    private static final String BASE_ENTITY_CLASS = "com.hui.cloud.common.model.BaseEntity";
+
+    /**
+     * DATABSE
+     */
+    private static final String URL = "jdbc:mysql://localhost:3306/hui_cloud_uc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
+    private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
+    private static final String SCHEMA = "public";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "123456";
+
+    /**
+     * GENERATOR
+     */
+    private static final String PARENT_PACKAGE = "com.hui.cloud";
+    private static final String ENTITY_PACKAGE = "model.entity";
+    private static final String SERVICE_PACKAGE = "service";
+    private static final String SERVICE_IMPL_PACKAGE = "service.impl";
+    private static final String MAPPER_PACKAGE = "mapper";
+    private static final String MAPPER_XML_PACKAGE = "";
+
+
+    /**
      * <p>
      * 读取控制台内容
      * </p>
      */
-    public static String scanner(String tip) {
+    private static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
         StringBuilder help = new StringBuilder();
         help.append("请输入" + tip + "：");
@@ -45,34 +79,86 @@ public class CodeGenerator {
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
-        // 全局配置
-        GlobalConfig gc = new GlobalConfig();
+        // 全局配置================================
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setFileOverride(true);
-        //不需要ActiveRecord特性的请改为false
-        gc.setActiveRecord(true);
-        //作者
-        gc.setAuthor("Gary.Hu");
-        gc.setOpen(false);
-        // gc.setSwagger2(true); 实体属性 Swagger2 注解
-        mpg.setGlobalConfig(gc);
+        String level1Module = scanner("一级模块名 提示:maven=> parent/一级模块名");
+        String level2Module = scanner("二级模块名 提示:maven=> parent/一级模块名/二级模块名");
+        GlobalConfig gc = new GlobalConfig()
+                //生成文件输出目录
+                .setOutputDir(projectPath
+                        + File.separator
+                        + level1Module
+                        + File.separator
+                        + level2Module
+                        + "/src/main/java")
+                // 文件覆盖
+                .setFileOverride(true)
+                //不需要ActiveRecord特性的请改为false
+                .setActiveRecord(true)
+                //作者
+                .setAuthor(AUTH)
+                //是否打开输出目录
+                .setOpen(false)
+                //是否打开Mybatis二级缓存
+                .setEnableCache(false)
+                //实体属性 Swagger2 注解
+                .setSwagger2(false)
+                .setBaseResultMap(false)
+                .setBaseColumnList(false)
+                .setDateType(DateType.TIME_PACK)
+                // 设置实体命名 (%Entity -> UserEntity)
+                .setEntityName(null)
+                // 设置Mapper命名 (%Dao -> UserDao)
+                .setMapperName(null)
+                // 设置Mapper.xml命名 (%Dao -> UserDao.xml)
+                .setXmlName(null)
+                // 设置Service命名
+                .setServiceName("%sService")
+                .setServiceImplName(null)
+                // 主键策略 1.AUTO 数据库自增 2.NONE 默认，雪花算法 3.INPUT 手动插入ID 4.ID_WORKER 全局唯一 5. UUID 6. ID_WORKER 全局唯一的字符串
+                .setIdType(IdType.NONE);
 
-        // 数据源配置
-        DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/ant?useUnicode=true&useSSL=false&characterEncoding=utf8");
-        // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("123456");
-        mpg.setDataSource(dsc);
 
-        // 包配置
-        PackageConfig pc = new PackageConfig();
-        pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.hui.cloud");
-        mpg.setPackageInfo(pc);
+        // 数据源配置================================
+        DataSourceConfig dsc = new DataSourceConfig()
+                .setUrl(URL)
+                .setSchemaName(SCHEMA)
+                .setDriverName(DRIVER_NAME)
+                .setUsername(USERNAME)
+                .setPassword(PASSWORD);
 
+        // 包配置================================
+        PackageConfig pc = new PackageConfig()
+                .setModuleName(scanner("包名 提示:com.hui.cloud.包名"))
+                // 父包名
+                .setParent(PARENT_PACKAGE)
+                // 实体类/service/mapper/xml/controller包名
+                .setEntity(ENTITY_PACKAGE)
+                .setMapper(MAPPER_PACKAGE)
+//                .setXml("mapper")
+                .setService(SERVICE_PACKAGE)
+                .setServiceImpl(SERVICE_IMPL_PACKAGE);
+
+
+        // 策略配置
+        StrategyConfig strategy = new StrategyConfig()
+                //表名前缀
+                .setTablePrefix()
+                //需要生成的表
+                .setInclude(TABLES)
+                //表名->下划线转驼峰结构
+                .setNaming(NamingStrategy.underline_to_camel)
+                //列名->下划线转驼峰结构
+                .setColumnNaming(NamingStrategy.underline_to_camel)
+                .setSuperEntityClass(BASE_ENTITY_CLASS)
+                .setEntityLombokModel(true)
+                .setRestControllerStyle(true)
+                // 建造者模式的Entity
+                .setEntityBuilderModel(true)
+                .setControllerMappingHyphenStyle(true)
+                .setTablePrefix(TABLE_PREFIX);
+
+        // 自定义配置==========================
         // 自定义配置
         InjectionConfig cfg = new InjectionConfig() {
             @Override
@@ -80,73 +166,31 @@ public class CodeGenerator {
                 // to do nothing
             }
         };
-
-        // 如果模板引擎是 freemarker
-//        String templatePath = "/templates/mapper.xml.ftl";
-        // 如果模板引擎是 velocity
-        // String templatePath = "/templates/mapper.xml.vm";
-
-        // 自定义输出配置
-//        List<FileOutConfig> focList = new ArrayList<>();
+        List<FileOutConfig> focList = new ArrayList<>();
         // 自定义配置会被优先输出
-        /*focList.add(new FileOutConfig(templatePath) {
+        focList.add(new FileOutConfig(null) {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName()
-                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
-            }
-        });*/
-        /*
-        cfg.setFileCreate(new IFileCreate() {
-            @Override
-            public boolean isCreate(ConfigBuilder configBuilder, FileType fileType, String filePath) {
-                // 判断自定义文件夹是否需要创建
-                checkDir("调用默认方法创建的目录");
-                return false;
+                return projectPath
+                        + File.separator
+                        + level1Module
+                        + File.separator
+                        + level2Module
+                        + "/src/main/resources/mapper/"
+                        + File.separator
+                        + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
-        */
-//        cfg.setFileOutConfigList(focList);
-//        mpg.setCfg(cfg);
 
-        // 配置模板
-        TemplateConfig templateConfig = new TemplateConfig();
+        cfg.setFileOutConfigList(focList);
 
-        // 配置自定义输出模板
-        //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
-        // templateConfig.setEntity("templates/entity2.java");
-        // templateConfig.setService();
-        // templateConfig.setController();
-
-        templateConfig.setXml(null);
-        mpg.setTemplate(templateConfig);
-
-        // 策略配置
-        StrategyConfig strategy = new StrategyConfig();
-        //表名前缀
-        strategy.setTablePrefix(new String[]{});
-        //需要生成的表
-        strategy.setInclude(new String[]{"voyage"});
-        //表名->下划线转驼峰结构
-        strategy.setNaming(NamingStrategy.underline_to_camel);
-        //列名->下划线转驼峰结构
-        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.hui.cloud.common.model.BaseEntity");
-        strategy.setEntityLombokModel(true);
-        strategy.setRestControllerStyle(true);
-
-        // 公共父类
-//        strategy.setSuperControllerClass("com.baomidou.ant.common.BaseController");
-
-        // 写于父类中的公共字段
-        strategy.setSuperEntityColumns("id");
-        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
-        strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "_");
+        // 配置准备 ===========================
+        mpg.setPackageInfo(pc);
+        mpg.setDataSource(dsc);
+        mpg.setGlobalConfig(gc);
+        mpg.setCfg(cfg);
         mpg.setStrategy(strategy);
-        mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
     }
-
 }
