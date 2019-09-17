@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 用户表 前端控制器
+ * 资源表 前端控制器
  * </p>
  *
  * @author Gary.hu
  * @since 2019-09-18
  */
 @RestController
-@RequestMapping("/user/user")
-public class UserController {
+@RequestMapping("/user/resource")
+public class ResourceController {
 
 }
 

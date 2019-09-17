@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户表
+ * 角色表
  * </p>
  *
  * @author Gary.hu
@@ -24,28 +24,28 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_uc_user")
-public class User extends Model<User> {
+@TableName("t_uc_role")
+public class Role extends Model<Role> {
 
     private static final long serialVersionUID=1L;
 
     /**
-     * 用户ID
+     * 角色ID
      */
-    @TableId(value = "user_id", type = IdType.NONE)
-    private Long userId;
+    @TableId(value = "role_id", type = IdType.NONE)
+    private Long roleId;
 
     /**
-     * 用户密码
+     * 角色代码
      */
-    @TableField("password")
-    private String password;
+    @TableField("role_code")
+    private String roleCode;
 
     /**
-     * 用户名
+     * 角色名字
      */
-    @TableField("user_name")
-    private String userName;
+    @TableField("role_name")
+    private String roleName;
 
     /**
      * 是否逻辑删除 1：已删除 0：未删除
@@ -81,7 +81,7 @@ public class User extends Model<User> {
 
     @Override
     protected Serializable pkVal() {
-        return this.userId;
+        return this.roleId;
     }
 
 }

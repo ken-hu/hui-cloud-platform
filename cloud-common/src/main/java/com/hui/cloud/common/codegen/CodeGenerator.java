@@ -1,6 +1,7 @@
 package com.hui.cloud.common.codegen;
 
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
@@ -8,12 +9,14 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -32,7 +35,7 @@ public class CodeGenerator {
      * INFO
      */
     private static final String AUTH = "Gary.hu";
-    private static final String[] TABLES = new String[]{"t_uc_user"};
+    private static final String[] TABLES = new String[]{"t_uc_user","t_uc_role","t_uc_resource"};
     private static final String TABLE_PREFIX = "t_uc";
     private static final String BASE_ENTITY_CLASS = "com.hui.cloud.common.model.BaseEntity";
 
@@ -128,7 +131,7 @@ public class CodeGenerator {
 
         // 包配置================================
         PackageConfig pc = new PackageConfig()
-                .setModuleName(scanner("包名 提示:"+PARENT_PACKAGE+".包名"))
+                .setModuleName(scanner("包名 提示:" + PARENT_PACKAGE + ".包名"))
                 // 父包名
                 .setParent(PARENT_PACKAGE)
                 // 实体类/service/mapper/xml/controller包名
@@ -137,7 +140,6 @@ public class CodeGenerator {
                 .setXml(null)
                 .setService(SERVICE_PACKAGE)
                 .setServiceImpl(SERVICE_IMPL_PACKAGE);
-
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig()
@@ -149,13 +151,26 @@ public class CodeGenerator {
                 .setNaming(NamingStrategy.underline_to_camel)
                 //列名->下划线转驼峰结构
                 .setColumnNaming(NamingStrategy.underline_to_camel)
-                .setSuperEntityClass(BASE_ENTITY_CLASS)
                 .setEntityLombokModel(true)
                 .setRestControllerStyle(true)
                 // 建造者模式的Entity
                 .setEntityBuilderModel(true)
                 .setControllerMappingHyphenStyle(true)
-                .setTablePrefix(TABLE_PREFIX);
+                .setTablePrefix(TABLE_PREFIX)
+                // 逻辑删除的字段名称
+                .setLogicDeleteFieldName("deleted")
+                //是否生成实体时，生成字段注解
+                .setEntityTableFieldAnnotationEnable(true)
+                .setTableFillList(
+                        Arrays.asList(
+                                new TableFill("create_time", FieldFill.INSERT_UPDATE),
+                                new TableFill("create_user", FieldFill.INSERT_UPDATE),
+                                new TableFill("modify_time", FieldFill.UPDATE),
+                                new TableFill("modify_user", FieldFill.UPDATE),
+                                new TableFill("deleted", FieldFill.INSERT)
+                        )
+                );
+
 
         // 自定义配置==========================
         InjectionConfig cfg = new InjectionConfig() {
@@ -191,13 +206,13 @@ public class CodeGenerator {
 
 
         // 配置准备 ===========================
-        mpg.setPackageInfo(pc);
-        mpg.setDataSource(dsc);
-        mpg.setGlobalConfig(gc);
-        mpg.setCfg(cfg);
-        mpg.setStrategy(strategy);
-        mpg.setTemplate(templateConfig);
-        mpg.setTemplateEngine(new VelocityTemplateEngine());
-        mpg.execute();
+        mpg.setPackageInfo(pc)
+                .setDataSource(dsc)
+                .setGlobalConfig(gc)
+                .setCfg(cfg)
+                .setStrategy(strategy)
+                .setTemplate(templateConfig)
+                .setTemplateEngine(new VelocityTemplateEngine())
+                .execute();
     }
 }

@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户表
+ * 资源表
  * </p>
  *
  * @author Gary.hu
@@ -24,28 +24,40 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_uc_user")
-public class User extends Model<User> {
+@TableName("t_uc_resource")
+public class Resource extends Model<Resource> {
 
     private static final long serialVersionUID=1L;
 
     /**
-     * 用户ID
+     * 资源ID
      */
-    @TableId(value = "user_id", type = IdType.NONE)
-    private Long userId;
+    @TableId(value = "resource_id", type = IdType.NONE)
+    private Long resourceId;
 
     /**
-     * 用户密码
+     * 资源代码
      */
-    @TableField("password")
-    private String password;
+    @TableField("resource_code")
+    private String resourceCode;
 
     /**
-     * 用户名
+     * 资源名字
      */
-    @TableField("user_name")
-    private String userName;
+    @TableField("resource_name")
+    private String resourceName;
+
+    /**
+     * 资源类型
+     */
+    @TableField("resource_type")
+    private String resourceType;
+
+    /**
+     * 资源URI
+     */
+    @TableField("resource_uri")
+    private String resourceUri;
 
     /**
      * 是否逻辑删除 1：已删除 0：未删除
@@ -81,7 +93,7 @@ public class User extends Model<User> {
 
     @Override
     protected Serializable pkVal() {
-        return this.userId;
+        return this.resourceId;
     }
 
 }
