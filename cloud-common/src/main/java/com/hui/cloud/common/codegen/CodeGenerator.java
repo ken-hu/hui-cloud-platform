@@ -94,7 +94,7 @@ public class CodeGenerator {
                         + level2Module
                         + "/src/main/java")
                 // 文件覆盖
-                .setFileOverride(true)
+                .setFileOverride(false)
                 //不需要ActiveRecord特性的请改为false
                 .setActiveRecord(true)
                 //作者

@@ -13,4 +13,24 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ResourceService extends IService<Resource> {
 
+    /**
+     * 删除资源
+     * @param resourceId
+     * @return
+     */
+    int deleteById(String resourceId);
+
+    /**
+     * 新增资源
+     * @param resource
+     * @return
+     */
+    Resource addResource(Resource resource);
+
+    /**
+     * 更新资源
+     * @param resource
+     * @return
+     */
+    int updateResource(Resource resource);
 }

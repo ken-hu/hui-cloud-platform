@@ -13,4 +13,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RoleService extends IService<Role> {
 
+    /**
+     * 新增角色
+     * @param role
+     * @return
+     */
+    Role addRole(Role role);
+
+    /**
+     * 更新角色信息
+     * @param role
+     * @return
+     */
+    int updateRole(Role role);
 }
