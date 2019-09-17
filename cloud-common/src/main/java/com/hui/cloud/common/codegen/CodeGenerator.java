@@ -11,10 +11,10 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -48,12 +48,11 @@ public class CodeGenerator {
     /**
      * GENERATOR
      */
-    private static final String PARENT_PACKAGE = "com.hui.cloud";
+    private static final String PARENT_PACKAGE = "com.hui.cloud.uc";
     private static final String ENTITY_PACKAGE = "model.entity";
     private static final String SERVICE_PACKAGE = "service";
     private static final String SERVICE_IMPL_PACKAGE = "service.impl";
     private static final String MAPPER_PACKAGE = "mapper";
-    private static final String MAPPER_XML_PACKAGE = "";
 
 
     /**
@@ -129,13 +128,13 @@ public class CodeGenerator {
 
         // 包配置================================
         PackageConfig pc = new PackageConfig()
-                .setModuleName(scanner("包名 提示:com.hui.cloud.包名"))
+                .setModuleName(scanner("包名 提示:"+PARENT_PACKAGE+".包名"))
                 // 父包名
                 .setParent(PARENT_PACKAGE)
                 // 实体类/service/mapper/xml/controller包名
                 .setEntity(ENTITY_PACKAGE)
                 .setMapper(MAPPER_PACKAGE)
-//                .setXml("mapper")
+                .setXml(null)
                 .setService(SERVICE_PACKAGE)
                 .setServiceImpl(SERVICE_IMPL_PACKAGE);
 
@@ -159,31 +158,37 @@ public class CodeGenerator {
                 .setTablePrefix(TABLE_PREFIX);
 
         // 自定义配置==========================
-        // 自定义配置
         InjectionConfig cfg = new InjectionConfig() {
             @Override
             public void initMap() {
                 // to do nothing
             }
-        };
-        List<FileOutConfig> focList = new ArrayList<>();
-        // 自定义配置会被优先输出
-        focList.add(new FileOutConfig(null) {
-            @Override
-            public String outputFile(TableInfo tableInfo) {
-                // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath
-                        + File.separator
-                        + level1Module
-                        + File.separator
-                        + level2Module
-                        + "/src/main/resources/mapper/"
-                        + File.separator
-                        + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
-            }
-        });
+        }.setFileOutConfigList(Collections.singletonList(
+                // 自定义配置会被优先输出
+                new FileOutConfig("/templates/mapper.xml.vm") {
+                    @Override
+                    public String outputFile(TableInfo tableInfo) {
+                        // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
+                        String outPutPath = projectPath
+                                + File.separator
+                                + level1Module
+                                + File.separator
+                                + level2Module
+                                + "/src/main/resources/mapper"
+                                + File.separator
+                                + pc.getModuleName()
+                                + File.separator
+                                + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                        return outPutPath;
+                    }
+                })
+        );
 
-        cfg.setFileOutConfigList(focList);
+        // 模板设置
+        TemplateConfig templateConfig = new TemplateConfig();
+        // 设置XML位置为NULL 由自定义模板位置决定
+        templateConfig.setXml(null);
+
 
         // 配置准备 ===========================
         mpg.setPackageInfo(pc);
@@ -191,6 +196,8 @@ public class CodeGenerator {
         mpg.setGlobalConfig(gc);
         mpg.setCfg(cfg);
         mpg.setStrategy(strategy);
+        mpg.setTemplate(templateConfig);
+        mpg.setTemplateEngine(new VelocityTemplateEngine());
         mpg.execute();
     }
 }

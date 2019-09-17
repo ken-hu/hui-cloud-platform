@@ -1,3 +1,5 @@
+CREATE DATABASE `hui_cloud_uc` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+
 CREATE TABLE `t_uc_user` (
 	`user_id` BIGINT (20) NOT NULL COMMENT '用户ID',
 	`password` VARCHAR (50) NULL COMMENT '用户密码',
