@@ -17,4 +17,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements ResourceService {
 
+    @Override
+    public int deleteById(String resourceId) {
+        return 0;
+    }
+
+    @Override
+    public Resource addResource(Resource resource) {
+        return null;
+    }
+
+    @Override
+    public int updateResource(Resource resource) {
+        return 0;
+    }
 }

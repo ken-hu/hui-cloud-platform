@@ -29,3 +29,11 @@ spring:
           filters:
             - StripPrefix=1
             - PrefixPath=/auth-service
+        - id: usercenter-service
+          uri: lb://usercenter-service
+          predicates:
+            - Path=/usercenter-service/**
+            - PrefixPath=/usercenter-service
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/usercenter-service

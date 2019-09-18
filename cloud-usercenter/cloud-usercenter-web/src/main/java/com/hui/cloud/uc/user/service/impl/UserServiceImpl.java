@@ -46,7 +46,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public List<User> selectAllByPage(Integer pageNum, Integer pageSize) {
         Page page = new Page(pageNum, pageSize);
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
-        List users = userMapper.selectPage(page, queryWrapper).getRecords();
+        List<User> users = userMapper.selectPage(page, queryWrapper).getRecords();
         return users;
     }
 }
