@@ -24,7 +24,5 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class UcApplication {
     public static void main(String[] args) {
         SpringApplication.run(UcApplication.class, args);
-        log.debug(" test the debug file !!!");
-        log.debug(" test the debug file 2. 0 !!!");
     }
 }
