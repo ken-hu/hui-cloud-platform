@@ -35,14 +35,14 @@ public class CodeGenerator {
      * INFO
      */
     private static final String AUTH = "Gary.hu";
-    private static final String[] TABLES = new String[]{"t_uc_sys_user","t_uc_sys_role","t_uc_sys_resource"};
-    private static final String TABLE_PREFIX = "t_uc";
+    private static final String[] TABLES = new String[]{"t_auth_client_detail"};
+    private static final String TABLE_PREFIX = "t_auth";
     private static final String BASE_ENTITY_CLASS = "com.hui.cloud.common.model.BaseEntity";
 
     /**
      * DATABSE
      */
-    private static final String URL = "jdbc:mysql://localhost:3306/hui_cloud_uc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
+    private static final String URL = "jdbc:mysql://localhost:3306/hui_cloud_auth?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
     private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
     private static final String SCHEMA = "public";
     private static final String USERNAME = "root";
@@ -51,7 +51,7 @@ public class CodeGenerator {
     /**
      * GENERATOR
      */
-    private static final String PARENT_PACKAGE = "com.hui.cloud.uc";
+    private static final String PARENT_PACKAGE = "com.hui.cloud.auth";
     private static final String ENTITY_PACKAGE = "model.entity";
     private static final String SERVICE_PACKAGE = "service";
     private static final String SERVICE_IMPL_PACKAGE = "service.impl";
@@ -82,17 +82,19 @@ public class CodeGenerator {
         AutoGenerator mpg = new AutoGenerator();
 
         // 全局配置================================
+        //console 获取路径
         String projectPath = System.getProperty("user.dir");
         String level1Module = scanner("一级模块名 提示:maven=> parent/一级模块名");
-        String level2Module = scanner("二级模块名 提示:maven=> parent/一级模块名/二级模块名");
+        String level2Module = scanner("二级模块名 提示:maven=> parent/一级模块名/二级模块名(没有则回车跳过)");
+        String outputPath = projectPath + File.separator + level1Module;
+        // 拼接输出路径
+        if (!StringUtils.isEmpty(level2Module)) {
+            outputPath = outputPath + File.separator + level2Module;
+        }
+        outputPath = outputPath + "/src/main/java";
         GlobalConfig gc = new GlobalConfig()
                 //生成文件输出目录
-                .setOutputDir(projectPath
-                        + File.separator
-                        + level1Module
-                        + File.separator
-                        + level2Module
-                        + "/src/main/java")
+                .setOutputDir(outputPath)
                 // 文件覆盖
                 .setFileOverride(false)
                 //不需要ActiveRecord特性的请改为false
@@ -184,17 +186,21 @@ public class CodeGenerator {
                     @Override
                     public String outputFile(TableInfo tableInfo) {
                         // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                        String outPutPath = projectPath
-                                + File.separator
-                                + level1Module
+                        String xmlOutPutPath = projectPath + File.separator + level1Module;
+                        if (!StringUtils.isEmpty(level2Module)) {
+                            xmlOutPutPath = xmlOutPutPath + File.separator + level2Module;
+                        }
+                        xmlOutPutPath = xmlOutPutPath
                                 + File.separator
                                 + level2Module
                                 + "/src/main/resources/mapper"
                                 + File.separator
                                 + pc.getModuleName()
                                 + File.separator
-                                + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
-                        return outPutPath;
+                                + tableInfo.getEntityName()
+                                + "Mapper"
+                                + StringPool.DOT_XML;
+                        return xmlOutPutPath;
                     }
                 })
         );
