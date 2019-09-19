@@ -1,4 +1,4 @@
-package com.hui.cloud.auth.oauth.model;
+package com.hui.cloud.auth.oauth.model.bo;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

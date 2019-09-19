@@ -1,6 +1,6 @@
 package com.hui.cloud.auth.oauth.service;
 
-import com.hui.cloud.auth.oauth.model.AuthUserDetail;
+import com.hui.cloud.auth.oauth.model.bo.AuthUserDetail;
 import com.hui.cloud.uc.user.api.SysUserApi;
 import com.hui.cloud.uc.user.dto.SysUserDTO;
 import lombok.extern.slf4j.Slf4j;
