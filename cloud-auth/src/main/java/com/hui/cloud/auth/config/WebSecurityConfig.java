@@ -1,6 +1,7 @@
 package com.hui.cloud.auth.config;
 
 import com.hui.cloud.auth.oauth.handler.AuthLogoutHandler;
+import com.hui.cloud.auth.oauth.service.AuthUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -26,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthUserDetailsService authUserDetailsService;
 
@@ -38,6 +40,7 @@ public class WebSecurityConfig {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        //配置忽略的资源
         web.ignoring().antMatchers("/swagger-ui.html")
                 .antMatchers("/webjars/**")
                 .antMatchers("/v2/**")
@@ -55,7 +58,10 @@ public class WebSecurityConfig {
                 .and()
                 .authorizeRequests()
                 //swagger
-                .antMatchers("/swagger-ui.html/**", "/swagger-resources/**", "/v2/api-docs", "/webjars/**")
+                .antMatchers("/swagger-ui.html/**",
+                        "/swagger-resources/**",
+                        "/v2/api-docs",
+                        "/webjars/**")
                 .permitAll()
                 //oauth token
 //                .antMatchers("*")
@@ -64,7 +70,6 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated();
         // 退出登录处理
         http.logout().logoutSuccessHandler(new AuthLogoutHandler());
-
     }
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)

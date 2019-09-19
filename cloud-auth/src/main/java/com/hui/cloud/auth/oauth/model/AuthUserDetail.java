@@ -6,17 +6,26 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * <b><code>AuthRoleDetail</code></b>
+ * <p/>
+ * 授权用户
+ * <p/>
+ * <b>Creation Time:</b> 2019/9/19 22:39.
+ *
+ * @author Gary.hu
+ */
 @Data
 public class AuthUserDetail implements UserDetails {
-    private String userId;
-
     private String userName;
 
     private String password;
 
+    Collection<? extends GrantedAuthority> grantedAuthorities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return grantedAuthorities;
     }
 
     @Override

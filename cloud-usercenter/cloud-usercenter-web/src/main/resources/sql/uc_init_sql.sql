@@ -1,7 +1,7 @@
 CREATE DATABASE `hui_cloud_uc` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 
-DROP TABLE IF EXISTS `t_uc_user`;
-CREATE TABLE `t_uc_user` (
+DROP TABLE IF EXISTS `t_uc_sys_user`;
+CREATE TABLE `t_uc_sys_user` (
 	`user_id` BIGINT ( 20 ) NOT NULL COMMENT '用户ID',
 	`password` VARCHAR ( 50 ) NULL COMMENT '用户密码',
 	`user_name` VARCHAR ( 50 ) NULL COMMENT '用户名',
@@ -13,8 +13,8 @@ CREATE TABLE `t_uc_user` (
 	PRIMARY KEY ( `user_id` ) USING BTREE
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '用户表';
 
-DROP TABLE IF EXISTS `t_uc_role`;
-CREATE TABLE `t_uc_role` (
+DROP TABLE IF EXISTS `t_uc_sys_role`;
+CREATE TABLE `t_uc_sys_role` (
 	`role_id` BIGINT ( 20 ) NOT NULL COMMENT '角色ID',
 	`role_code` VARCHAR ( 50 ) NULL COMMENT '角色代码',
 	`role_name` VARCHAR ( 50 ) NULL COMMENT '角色名字',
@@ -26,8 +26,8 @@ CREATE TABLE `t_uc_role` (
 	PRIMARY KEY ( `role_id` ) USING BTREE
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '角色表';
 
-DROP TABLE IF EXISTS `t_uc_resource`;
-CREATE TABLE `t_uc_resource` (
+DROP TABLE IF EXISTS `t_uc_sys_resource`;
+CREATE TABLE `t_uc_sys_resource` (
 	`resource_id` BIGINT ( 20 ) NOT NULL COMMENT '资源ID',
 	`resource_code` VARCHAR ( 50 ) NULL COMMENT '资源代码',
 	`resource_name` VARCHAR ( 50 ) NULL COMMENT '资源名字',

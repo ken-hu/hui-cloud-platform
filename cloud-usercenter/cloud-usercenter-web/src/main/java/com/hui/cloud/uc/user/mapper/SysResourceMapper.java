@@ -1,6 +1,6 @@
 package com.hui.cloud.uc.user.mapper;
 
-import com.hui.cloud.uc.user.model.entity.Resource;
+import com.hui.cloud.uc.user.model.entity.SysResource;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author Gary.hu
- * @since 2019-09-18
+ * @since 2019-09-19
  */
-public interface ResourceMapper extends BaseMapper<Resource> {
+public interface SysResourceMapper extends BaseMapper<SysResource> {
 
 }

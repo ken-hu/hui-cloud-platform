@@ -15,37 +15,49 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 角色表
+ * 资源表
  * </p>
  *
  * @author Gary.hu
- * @since 2019-09-18
+ * @since 2019-09-19
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_uc_role")
-public class Role extends Model<Role> {
+@TableName("t_uc_sys_resource")
+public class SysResource extends Model<SysResource> {
 
     private static final long serialVersionUID=1L;
 
     /**
-     * 角色ID
+     * 资源ID
      */
-    @TableId(value = "role_id", type = IdType.NONE)
-    private Long roleId;
+    @TableId(value = "resource_id", type = IdType.NONE)
+    private Long resourceId;
 
     /**
-     * 角色代码
+     * 资源代码
      */
-    @TableField("role_code")
-    private String roleCode;
+    @TableField("resource_code")
+    private String resourceCode;
 
     /**
-     * 角色名字
+     * 资源名字
      */
-    @TableField("role_name")
-    private String roleName;
+    @TableField("resource_name")
+    private String resourceName;
+
+    /**
+     * 资源类型
+     */
+    @TableField("resource_type")
+    private String resourceType;
+
+    /**
+     * 资源URI
+     */
+    @TableField("resource_uri")
+    private String resourceUri;
 
     /**
      * 是否逻辑删除 1：已删除 0：未删除
@@ -81,7 +93,7 @@ public class Role extends Model<Role> {
 
     @Override
     protected Serializable pkVal() {
-        return this.roleId;
+        return this.resourceId;
     }
 
 }

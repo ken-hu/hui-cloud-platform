@@ -1,63 +1,47 @@
 package com.hui.cloud.uc.user.model.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 资源表
+ * 用户表
  * </p>
  *
  * @author Gary.hu
- * @since 2019-09-18
+ * @since 2019-09-19
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_uc_resource")
-public class Resource extends Model<Resource> {
+@TableName("t_uc_sys_user")
+public class SysUser extends Model<SysUser> {
 
     private static final long serialVersionUID=1L;
 
     /**
-     * 资源ID
+     * 用户ID
      */
-    @TableId(value = "resource_id", type = IdType.NONE)
-    private Long resourceId;
+    @TableId(value = "user_id", type = IdType.NONE)
+    private Long userId;
 
     /**
-     * 资源代码
+     * 用户密码
      */
-    @TableField("resource_code")
-    private String resourceCode;
+    @TableField("password")
+    private String password;
 
     /**
-     * 资源名字
+     * 用户名
      */
-    @TableField("resource_name")
-    private String resourceName;
-
-    /**
-     * 资源类型
-     */
-    @TableField("resource_type")
-    private String resourceType;
-
-    /**
-     * 资源URI
-     */
-    @TableField("resource_uri")
-    private String resourceUri;
+    @TableField("user_name")
+    private String userName;
 
     /**
      * 是否逻辑删除 1：已删除 0：未删除
@@ -93,7 +77,7 @@ public class Resource extends Model<Resource> {
 
     @Override
     protected Serializable pkVal() {
-        return this.resourceId;
+        return this.userId;
     }
 
 }

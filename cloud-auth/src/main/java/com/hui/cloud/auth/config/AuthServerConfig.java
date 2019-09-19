@@ -2,6 +2,7 @@ package com.hui.cloud.auth.config;
 
 import com.hui.cloud.auth.oauth.handler.AuthLogoutHandler;
 import com.hui.cloud.auth.oauth.handler.AuthWebResponseExceptionHandler;
+import com.hui.cloud.auth.oauth.service.AuthUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,9 +41,6 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private AuthUserDetailsService authUserDetailsService;
-
-    @Autowired
-    private DataSource dataSource;
 
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;

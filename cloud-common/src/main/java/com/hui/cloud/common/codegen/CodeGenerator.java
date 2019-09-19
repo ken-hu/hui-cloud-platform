@@ -35,7 +35,7 @@ public class CodeGenerator {
      * INFO
      */
     private static final String AUTH = "Gary.hu";
-    private static final String[] TABLES = new String[]{"t_uc_user","t_uc_role","t_uc_resource"};
+    private static final String[] TABLES = new String[]{"t_uc_sys_user","t_uc_sys_role","t_uc_sys_resource"};
     private static final String TABLE_PREFIX = "t_uc";
     private static final String BASE_ENTITY_CLASS = "com.hui.cloud.common.model.BaseEntity";
 

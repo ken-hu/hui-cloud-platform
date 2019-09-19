@@ -22,7 +22,7 @@ public class AuthWebResponseExceptionHandler implements WebResponseExceptionTran
 
     @Override
     public ResponseEntity translate(Exception e) throws Exception {
-        log.error("AuthService 发生异常 ", e);
+        log.error("AuthService occur a unkonw exception ", e);
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ResponseVO.error(e.getMessage()));

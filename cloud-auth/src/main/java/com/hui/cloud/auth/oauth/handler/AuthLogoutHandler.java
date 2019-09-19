@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * <b><code>AuthLogoutHandler</code></b>
  * <p/>
- * Description:
+ * 退出登录成功处理
  * <p/>
  * <b>Creation Time:</b> 2019/3/12 23:51.
  *
@@ -33,9 +33,9 @@ public class AuthLogoutHandler implements LogoutSuccessHandler {
         try {
             httpServletResponse.setContentType("application/json;charset=UTF-8");
             httpServletResponse.getWriter().write(objectMapper.writeValueAsString(ResponseVO.ok("成功退出")));
-            log.info("用户退出成功");
+            log.info("User logout Successful !!!");
         } catch (IOException e) {
-            log.error("用户退出失败",e);
+            log.error("User logout Fail !!!",e);
         }
     }
 }

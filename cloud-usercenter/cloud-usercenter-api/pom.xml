@@ -11,5 +11,16 @@
 
     <artifactId>cloud-usercenter-api</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.hui.cloud</groupId>
+            <artifactId>cloud-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+    </dependencies>
 </project>
