@@ -191,8 +191,6 @@ public class CodeGenerator {
                             xmlOutPutPath = xmlOutPutPath + File.separator + level2Module;
                         }
                         xmlOutPutPath = xmlOutPutPath
-                                + File.separator
-                                + level2Module
                                 + "/src/main/resources/mapper"
                                 + File.separator
                                 + pc.getModuleName()
