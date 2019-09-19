@@ -1,13 +1,10 @@
 package com.hui.cloud.auth.config;
 
 import com.hui.cloud.auth.oauth.handler.AuthLogoutHandler;
-import com.hui.cloud.auth.oauth.service.AuthUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <b><code>WebConfig</code></b>
  * <p/>
- * <p>
+ * Web安全配置
  * <p/>
  * <b>Creation Time:</b> 2019/9/18 18:44.
  *
@@ -29,14 +26,14 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private AuthUserDetailsService authUserDetailsService;
+//    @Autowired
+//    private AuthUserDetailsService authUserDetailsService;
 
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(authUserDetailsService);
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(authUserDetailsService);
+//    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -50,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //禁用 csrf, 由于使用的是JWT，我们这里不需要csrf
+        //禁用 csrf, 由于使用的是JWT，这里不需要csrf
         http.csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(((httpServletRequest, httpServletResponse, e) ->
@@ -72,12 +69,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout().logoutSuccessHandler(new AuthLogoutHandler());
     }
 
+    /**
+     * AuthenticationManager创建bean
+     * @return
+     * @throws Exception
+     */
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * 密码加密器
+     * @return
+     */
     @Bean(name = "passwordEncoder")
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

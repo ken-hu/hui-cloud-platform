@@ -1,6 +1,6 @@
 package com.hui.cloud.auth.oauth.model.bo;
 
-import lombok.Data;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
@@ -17,7 +17,7 @@ import java.util.Set;
  *
  * @author Gary.Hu
  */
-@Data
+@Setter
 public class AuthClientDetail implements ClientDetails {
 
     private String clientId;

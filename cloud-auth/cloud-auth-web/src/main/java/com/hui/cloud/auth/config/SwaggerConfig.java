@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * <b><code>AuthServerConfig</code></b>
  * <p/>
- * Description:
+ * SwaggerAPI配置
  * <p/>
  * <b>Creation Time:</b> 2019/3/12 22:39.
  *

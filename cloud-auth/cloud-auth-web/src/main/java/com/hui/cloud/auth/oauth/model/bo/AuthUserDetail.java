@@ -1,6 +1,6 @@
 package com.hui.cloud.auth.oauth.model.bo;
 
-import lombok.Data;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,7 +15,7 @@ import java.util.Collection;
  *
  * @author Gary.hu
  */
-@Data
+@Setter
 public class AuthUserDetail implements UserDetails {
     private String userName;
 

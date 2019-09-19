@@ -1,4 +1,4 @@
-package com.hui.cloud.auth.oauth.service;
+package com.hui.cloud.auth.oauth.service.impl;
 
 import com.hui.cloud.auth.oauth.model.bo.AuthUserDetail;
 import com.hui.cloud.uc.user.api.SysUserApi;
