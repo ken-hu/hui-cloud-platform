@@ -110,7 +110,8 @@ public class CodeGenerator {
                 .setSwagger2(false)
                 .setBaseResultMap(false)
                 .setBaseColumnList(false)
-                .setDateType(DateType.TIME_PACK)
+                //由于使用了Druid暂时不支持LocalDateTime。只能转换回Date
+                .setDateType(DateType.ONLY_DATE)
                 // 设置实体命名 (%Entity -> UserEntity)
                 .setEntityName(null)
                 // 设置Mapper命名 (%Dao -> UserDao)
@@ -121,7 +122,9 @@ public class CodeGenerator {
                 .setServiceName("%sService")
                 .setServiceImplName(null)
                 // 主键策略 1.AUTO 数据库自增 2.NONE 默认，雪花算法 3.INPUT 手动插入ID 4.ID_WORKER 全局唯一 5. UUID 6. ID_WORKER 全局唯一的字符串
-                .setIdType(IdType.NONE);
+                .setIdType(IdType.NONE)
+                //XML 生成ResultMap
+                .setBaseResultMap(true);
 
 
         // 数据源配置================================
@@ -166,10 +169,10 @@ public class CodeGenerator {
                 .setEntityTableFieldAnnotationEnable(true)
                 .setTableFillList(
                         Arrays.asList(
-                                new TableFill("create_time", FieldFill.INSERT_UPDATE),
-                                new TableFill("create_user", FieldFill.INSERT_UPDATE),
-                                new TableFill("modify_time", FieldFill.UPDATE),
-                                new TableFill("modify_user", FieldFill.UPDATE),
+                                new TableFill("create_time", FieldFill.UPDATE),
+                                new TableFill("create_user", FieldFill.UPDATE),
+                                new TableFill("modify_time", FieldFill.INSERT_UPDATE),
+                                new TableFill("modify_user", FieldFill.INSERT_UPDATE),
                                 new TableFill("deleted", FieldFill.INSERT)
                         )
                 );
