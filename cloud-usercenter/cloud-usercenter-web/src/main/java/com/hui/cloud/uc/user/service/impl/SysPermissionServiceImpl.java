@@ -41,4 +41,27 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
         List<SysPermission> sysPermissions = sysPermissionMapper.selectPage(page, null).getRecords();
         return sysPermissions;
     }
+
+    /**
+     * 查询用户权限
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<SysPermission> listByUserId(Long userId) {
+        List<SysPermission> sysPermissions = sysPermissionMapper.selectByUserId(userId);
+        return sysPermissions;
+    }
+
+    /**
+     * 查询角色的所有权限
+     *
+     * @param roleId
+     * @return
+     */
+    @Override
+    public List<SysPermission> listByRoleId(Long roleId) {
+        return null;
+    }
 }

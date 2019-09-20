@@ -41,4 +41,15 @@ public class SysGroupServiceImpl extends ServiceImpl<SysGroupMapper, SysGroup> i
         List<SysGroup> sysGroups = sysGroupMapper.selectPage(page, null).getRecords();
         return sysGroups;
     }
+
+    /**
+     * 查询用户所属用户组
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<SysGroup> listByUserId(Long userId) {
+        return null;
+    }
 }

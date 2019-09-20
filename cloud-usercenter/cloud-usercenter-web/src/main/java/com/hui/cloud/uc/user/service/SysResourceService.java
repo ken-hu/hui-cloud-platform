@@ -14,6 +14,7 @@ import java.util.List;
  * @since 2019-09-19
  */
 public interface SysResourceService extends IService<SysResource> {
+
     /**
      * 分页查询资源
      * @param pageNum
@@ -21,4 +22,12 @@ public interface SysResourceService extends IService<SysResource> {
      * @return
      */
     List<SysResource> listByPage(Integer pageNum,Integer pageSize);
+
+    /**
+     * 查询权限的资源
+     * @param permissionId
+     * @return
+     */
+    List<SysResource> listByPermission(Long permissionId);
+
 }

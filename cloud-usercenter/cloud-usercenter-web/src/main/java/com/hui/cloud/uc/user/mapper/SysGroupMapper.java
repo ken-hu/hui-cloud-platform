@@ -1,7 +1,7 @@
 package com.hui.cloud.uc.user.mapper;
 
-import com.hui.cloud.uc.user.model.entity.SysGroup;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hui.cloud.uc.user.model.entity.SysGroup;
 import org.springframework.stereotype.Repository;
 
 /**

@@ -41,4 +41,15 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
         List<SysResource> sysResources = sysResourceMapper.selectPage(page, null).getRecords();
         return sysResources;
     }
+
+    /**
+     * 查询权限的资源
+     *
+     * @param permissionId
+     * @return
+     */
+    @Override
+    public List<SysResource> listByPermission(Long permissionId) {
+        return null;
+    }
 }

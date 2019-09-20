@@ -1,13 +1,16 @@
 package com.hui.cloud.uc.user.model.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -15,7 +18,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author Gary.hu
- * @since 2019-09-20
+ * @since 2019-09-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -46,25 +49,25 @@ public class SysPermission extends Model<SysPermission> {
     /**
      * 创建时间
      */
-    @TableField(value = "create_time", fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime createTime;
+    @TableField(value = "create_time", fill = FieldFill.UPDATE)
+    private Date createTime;
 
     /**
      * 创建用户
      */
-    @TableField(value = "create_user", fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "create_user", fill = FieldFill.UPDATE)
     private String createUser;
 
     /**
      * 修改时间
      */
-    @TableField(value = "modify_time", fill = FieldFill.UPDATE)
-    private LocalDateTime modifyTime;
+    @TableField(value = "modify_time", fill = FieldFill.INSERT_UPDATE)
+    private Date modifyTime;
 
     /**
      * 修改用户
      */
-    @TableField(value = "modify_user", fill = FieldFill.UPDATE)
+    @TableField(value = "modify_user", fill = FieldFill.INSERT_UPDATE)
     private String modifyUser;
 
 

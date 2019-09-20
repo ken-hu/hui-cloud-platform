@@ -35,9 +35,32 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      * @return
      */
     @Override
-    public List<SysRole> listByPage(Integer pageNum,Integer pageSize) {
+    public List<SysRole> listByPage(Integer pageNum, Integer pageSize) {
         Page<SysRole> page = new Page<>(pageNum, pageSize);
         List<SysRole> sysRoles = sysRoleMapper.selectPage(page, null).getRecords();
         return sysRoles;
+    }
+
+    /**
+     * 查询用户角色
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<SysRole> listByUserId(Long userId) {
+        List<SysRole> sysRoles = sysRoleMapper.selectByUserId(userId);
+        return sysRoles;
+    }
+
+    /**
+     * 查询组角色
+     *
+     * @param groupId
+     * @return
+     */
+    @Override
+    public List<SysRole> listByGroupId(Long groupId) {
+        return null;
     }
 }

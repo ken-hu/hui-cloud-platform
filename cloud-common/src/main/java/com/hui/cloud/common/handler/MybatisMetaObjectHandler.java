@@ -6,8 +6,8 @@ import lombok.Data;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,8 +24,8 @@ public class MybatisMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         List<FieldValObj> fieldValObjs = Arrays.asList(
-                new FieldValObj("creaateTime", LocalDate.now()),
-                new FieldValObj("modifyTime", LocalDate.now()),
+                new FieldValObj("creaateTime", new Date()),
+                new FieldValObj("modifyTime", new Date()),
                 new FieldValObj("createUser", "Gary.Hu"),
                 new FieldValObj("modifyUser", "Gary.Hu"),
                 new FieldValObj("deleted", 0)
@@ -36,7 +36,7 @@ public class MybatisMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         List<FieldValObj> fieldValObjs = Arrays.asList(
-                new FieldValObj("modifyTime", LocalDate.now()),
+                new FieldValObj("modifyTime", new Date()),
                 new FieldValObj("modifyUser", "Gary.Hu")
         );
         fieldValObjs.forEach(x -> fieldFill(x, metaObject));

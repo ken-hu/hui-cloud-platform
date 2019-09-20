@@ -22,4 +22,12 @@ public interface SysGroupService extends IService<SysGroup> {
      * @return
      */
     List<SysGroup> listByPage(Integer pageNum, Integer pageSize);
+
+    /**
+     * 查询用户所属用户组
+     * @param userId
+     * @return
+     */
+    List<SysGroup> listByUserId(Long userId);
+
 }

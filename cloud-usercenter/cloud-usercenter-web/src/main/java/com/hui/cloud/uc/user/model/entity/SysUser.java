@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author Gary.hu
- * @since 2019-09-19
+ * @since 2019-09-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,16 +32,16 @@ public class SysUser extends Model<SysUser> {
     private Long userId;
 
     /**
-     * 用户密码
-     */
-    @TableField("password")
-    private String password;
-
-    /**
      * 用户名
      */
     @TableField("user_name")
     private String userName;
+
+    /**
+     * 用户密码
+     */
+    @TableField("password")
+    private String password;
 
     /**
      * 是否逻辑删除 1：已删除 0：未删除
@@ -53,25 +53,25 @@ public class SysUser extends Model<SysUser> {
     /**
      * 创建时间
      */
-    @TableField(value = "create_time", fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime createTime;
+    @TableField(value = "create_time", fill = FieldFill.UPDATE)
+    private Date createTime;
 
     /**
      * 创建用户
      */
-    @TableField(value = "create_user", fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "create_user", fill = FieldFill.UPDATE)
     private String createUser;
 
     /**
      * 修改时间
      */
-    @TableField(value = "modify_time", fill = FieldFill.UPDATE)
-    private LocalDateTime modifyTime;
+    @TableField(value = "modify_time", fill = FieldFill.INSERT_UPDATE)
+    private Date modifyTime;
 
     /**
      * 修改用户
      */
-    @TableField(value = "modify_user", fill = FieldFill.UPDATE)
+    @TableField(value = "modify_user", fill = FieldFill.INSERT_UPDATE)
     private String modifyUser;
 
 

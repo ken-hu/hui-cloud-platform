@@ -1,0 +1,2 @@
+INSERT INTO t_uc_sys_user(user_id, user_name, password, deleted , create_time, create_user, modify_time, modify_user)
+VALUES ('1','admin','admin',0,'2019-01-01 00:00:00','gary.hu','2019-01-01 00:00:00','gary.hu');

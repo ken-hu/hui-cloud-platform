@@ -14,11 +14,27 @@ import java.util.List;
  * @since 2019-09-19
  */
 public interface SysRoleService extends IService<SysRole> {
+
     /**
      * 分页查询角色
      * @param pageNum
      * @param pageSize
      * @return
      */
-    List<SysRole> listByPage(Integer pageNum,Integer pageSize);
+    List<SysRole> listByPage(Integer pageNum, Integer pageSize);
+
+    /**
+     * 查询用户角色
+     * @param userId
+     * @return
+     */
+    List<SysRole> listByUserId(Long userId);
+
+    /**
+     * 查询组角色
+     * @param groupId
+     * @return
+     */
+    List<SysRole> listByGroupId(Long groupId);
+
 }

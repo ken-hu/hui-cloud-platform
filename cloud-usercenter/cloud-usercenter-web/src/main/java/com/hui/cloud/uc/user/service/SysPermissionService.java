@@ -23,4 +23,17 @@ public interface SysPermissionService extends IService<SysPermission> {
      */
     List<SysPermission> listByPage(Integer pageNum, Integer pageSize);
 
+    /**
+     * 查询用户的权限
+     * @param userId
+     * @return
+     */
+    List<SysPermission> listByUserId(Long userId);
+
+    /**
+     * 查询角色的所有权限
+     * @param roleId
+     * @return
+     */
+    List<SysPermission> listByRoleId(Long roleId);
 }

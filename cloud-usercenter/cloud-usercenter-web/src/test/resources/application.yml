@@ -1,0 +1,43 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: usercenter-service
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:hui_cloud_uc;DB_CLOSE_DELAY=-1;MODE=MySql;DATABASE_TO_UPPER=FALSE
+    schema: classpath:db/schema-h2.sql
+    data: classpath:db/data-h2.sql
+    username: sa
+    password: sa
+    platform: h2
+  h2:
+    # 可以通过 url/h2-console 访问 h2 web
+    path: /h2-console
+    console:
+      # 开启 h2 web console
+      enabled: true
+    settings:
+      # 配置后 h2 web console 就可以在远程访问，否则只能在本机访问
+      web-allow-others: true
+  redis:
+    host: 192.168.89.4
+    port: 6379
+  rabbitmq:
+    host: 192.168.89.4
+    port: 5672
+    username: admin
+    password: admin
+# 日志配置
+logging:
+  config: classpath:logback-spring.xml
+
+# mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*/*.xml
+  type-aliases-package: com.hui.cloud.uc.user.model.entity
+  global-config:
+    banner: false
+    db-config:
+      logic-not-delete-value: 0
+      logic-delete-value: 1

@@ -1,5 +1,3 @@
-CREATE DATABASE `hui_cloud_uc` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-
 DROP TABLE IF EXISTS `t_uc_sys_user`;
 CREATE TABLE `t_uc_sys_user` (
 	`user_id` BIGINT ( 20 ) NOT NULL COMMENT '用户ID',
@@ -10,8 +8,8 @@ CREATE TABLE `t_uc_sys_user` (
 	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',
 	`modify_time` datetime ( 0 ) NULL COMMENT '修改时间',
 	`modify_user` VARCHAR ( 50 ) NULL COMMENT '修改用户',
-	PRIMARY KEY ( `user_id` ) USING BTREE
-) ENGINE = INNODB ,DEFAULT CHARSET = utf8 ,COMMENT '用户表';
+	PRIMARY KEY ( `user_id` )
+) ;
 
 DROP TABLE IF EXISTS `t_uc_sys_role`;
 CREATE TABLE `t_uc_sys_role` (
@@ -22,8 +20,8 @@ CREATE TABLE `t_uc_sys_role` (
 	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',
 	`modify_time` datetime ( 0 ) NULL COMMENT '修改时间',
 	`modify_user` VARCHAR ( 50 ) NULL COMMENT '修改用户',
-	PRIMARY KEY ( `role_id` ) USING BTREE
-) ENGINE = INNODB, DEFAULT CHARSET = utf8, COMMENT '角色表';
+	PRIMARY KEY ( `role_id` ) 
+) ;
 
 DROP TABLE IF EXISTS `t_uc_sys_user_role_rel`;
 CREATE TABLE `t_uc_sys_user_role_rel` (
@@ -34,8 +32,8 @@ CREATE TABLE `t_uc_sys_user_role_rel` (
 	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',
 	`modify_time` datetime ( 0 ) NULL COMMENT '修改时间',
 	`modify_user` VARCHAR ( 50 ) NULL COMMENT '修改用户',
-PRIMARY KEY ( `id` ) USING BTREE
-) ENGINE = INNODB, DEFAULT CHARSET = utf8, COMMENT '用户-角色-关联表';
+PRIMARY KEY ( `id` ) 
+) ;
 
 DROP TABLE IF EXISTS `t_uc_sys_resource`;
 CREATE TABLE `t_uc_sys_resource` (
@@ -48,8 +46,8 @@ CREATE TABLE `t_uc_sys_resource` (
 	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',
 	`modify_time` datetime ( 0 ) NULL COMMENT '修改时间',
 	`modify_user` VARCHAR ( 50 ) NULL COMMENT '修改用户',
-PRIMARY KEY ( `resource_id` ) USING BTREE
-) ENGINE = INNODB, DEFAULT CHARSET = utf8, COMMENT '资源表';
+PRIMARY KEY ( `resource_id` ) 
+) ;
 
 DROP TABLE IF EXISTS `t_uc_sys_permission`;
 CREATE TABLE `t_uc_sys_permission` (
@@ -60,8 +58,8 @@ CREATE TABLE `t_uc_sys_permission` (
 	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',
 	`modify_time` datetime ( 0 ) NULL COMMENT '修改时间',
 	`modify_user` VARCHAR ( 50 ) NULL COMMENT '修改用户',
-PRIMARY KEY ( `permission_id` ) USING BTREE
-) ENGINE = INNODB, DEFAULT CHARSET = utf8, COMMENT '权限表';
+PRIMARY KEY ( `permission_id` ) 
+) ;
 
 DROP TABLE IF EXISTS `t_uc_sys_resource_permission_rel`;
 CREATE TABLE `t_uc_sys_resource_permission_rel` (
@@ -72,8 +70,8 @@ CREATE TABLE `t_uc_sys_resource_permission_rel` (
 	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',
 	`modify_time` datetime ( 0 ) NULL COMMENT '修改时间',
 	`modify_user` VARCHAR ( 50 ) NULL COMMENT '修改用户',
-PRIMARY KEY ( `id` ) USING BTREE
-) ENGINE = INNODB, DEFAULT CHARSET = utf8, COMMENT '资源-权限-关联表';
+PRIMARY KEY ( `id` ) 
+) ;
 
 DROP TABLE IF EXISTS `t_uc_sys_role_permission_rel`;
 CREATE TABLE `t_uc_sys_role_permission_rel` (
@@ -84,8 +82,8 @@ CREATE TABLE `t_uc_sys_role_permission_rel` (
 	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',
 	`modify_time` datetime ( 0 ) NULL COMMENT '修改时间',
 	`modify_user` VARCHAR ( 50 ) NULL COMMENT '修改用户',
-PRIMARY KEY ( `id` ) USING BTREE
-) ENGINE = INNODB, DEFAULT CHARSET = utf8, COMMENT '角色-权限-关联表';
+PRIMARY KEY ( `id` ) 
+) ;
 
 DROP TABLE IF EXISTS `t_uc_sys_group`;
 CREATE TABLE `t_uc_sys_group` (
@@ -96,8 +94,8 @@ CREATE TABLE `t_uc_sys_group` (
 	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',
 	`modify_time` datetime ( 0 ) NULL COMMENT '修改时间',
 	`modify_user` VARCHAR ( 50 ) NULL COMMENT '修改用户',
-PRIMARY KEY ( `group_id` ) USING BTREE
-) ENGINE = INNODB, DEFAULT CHARSET = utf8, COMMENT '组表';
+PRIMARY KEY ( `group_id` ) 
+) ;
 
 DROP TABLE IF EXISTS `t_uc_sys_user_group_rel`;
 CREATE TABLE `t_uc_sys_user_group_rel` (
@@ -108,8 +106,8 @@ CREATE TABLE `t_uc_sys_user_group_rel` (
 	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',
 	`modify_time` datetime ( 0 ) NULL COMMENT '修改时间',
 	`modify_user` VARCHAR ( 50 ) NULL COMMENT '修改用户',
-PRIMARY KEY ( `id` ) USING BTREE
-) ENGINE = INNODB, DEFAULT CHARSET = utf8, COMMENT '用户-组-关联表';
+PRIMARY KEY ( `id` ) 
+) ;
 
 DROP TABLE IF EXISTS `t_uc_sys_role_group_rel`;
 CREATE TABLE `t_uc_sys_role_group_rel` (
@@ -120,5 +118,5 @@ CREATE TABLE `t_uc_sys_role_group_rel` (
 	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',
 	`modify_time` datetime ( 0 ) NULL COMMENT '修改时间',
 	`modify_user` VARCHAR ( 50 ) NULL COMMENT '修改用户',
-PRIMARY KEY ( `id` ) USING BTREE
-) ENGINE = INNODB, DEFAULT CHARSET = utf8, COMMENT '角色-组-关联表';
+PRIMARY KEY ( `id` ) 
+) ;
