@@ -35,14 +35,15 @@ public class CodeGenerator {
      * INFO
      */
     private static final String AUTH = "Gary.hu";
-    private static final String[] TABLES = new String[]{"t_auth_client_detail"};
-    private static final String TABLE_PREFIX = "t_auth";
+    private static final String[] TABLES = new String[]{"t_uc_sys_user", "t_uc_sys_role"
+            , "t_uc_sys_resource", "t_uc_sys_permission", "t_uc_sys_group"};
+    private static final String TABLE_PREFIX = "t_uc";
     private static final String BASE_ENTITY_CLASS = "com.hui.cloud.common.model.BaseEntity";
 
     /**
      * DATABSE
      */
-    private static final String URL = "jdbc:mysql://localhost:3306/hui_cloud_auth?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
+    private static final String URL = "jdbc:mysql://localhost:3306/hui_cloud_uc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
     private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
     private static final String SCHEMA = "public";
     private static final String USERNAME = "root";
@@ -51,7 +52,7 @@ public class CodeGenerator {
     /**
      * GENERATOR
      */
-    private static final String PARENT_PACKAGE = "com.hui.cloud.auth";
+    private static final String PARENT_PACKAGE = "com.hui.cloud.uc";
     private static final String ENTITY_PACKAGE = "model.entity";
     private static final String SERVICE_PACKAGE = "service";
     private static final String SERVICE_IMPL_PACKAGE = "service.impl";

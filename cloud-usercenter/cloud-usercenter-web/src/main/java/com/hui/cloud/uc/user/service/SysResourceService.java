@@ -1,7 +1,9 @@
 package com.hui.cloud.uc.user.service;
 
-import com.hui.cloud.uc.user.model.entity.SysResource;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hui.cloud.uc.user.model.entity.SysResource;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +14,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2019-09-19
  */
 public interface SysResourceService extends IService<SysResource> {
-
+    /**
+     * 分页查询资源
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    List<SysResource> listByPage(Integer pageNum,Integer pageSize);
 }

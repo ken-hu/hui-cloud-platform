@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
@@ -19,7 +18,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Gary.hu
- * @since 2019-09-19
+ * @since 2019-09-20
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -58,13 +57,6 @@ public class SysResource extends Model<SysResource> {
      */
     @TableField("resource_uri")
     private String resourceUri;
-
-    /**
-     * 是否逻辑删除 1：已删除 0：未删除
-     */
-    @TableField(value = "deleted", fill = FieldFill.INSERT)
-    @TableLogic
-    private Integer deleted;
 
     /**
      * 创建时间

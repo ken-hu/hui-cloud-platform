@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 角色表
+ * 组表
  * </p>
  *
  * @author Gary.hu
@@ -20,28 +20,28 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_uc_sys_role")
-public class SysRole extends Model<SysRole> {
+@TableName("t_uc_sys_group")
+public class SysGroup extends Model<SysGroup> {
 
     private static final long serialVersionUID=1L;
 
     /**
-     * 角色ID
+     * 组ID
      */
-    @TableId(value = "role_id", type = IdType.NONE)
-    private Long roleId;
+    @TableId(value = "group_id", type = IdType.NONE)
+    private Long groupId;
 
     /**
-     * 角色代码
+     * 组代码
      */
-    @TableField("role_code")
-    private String roleCode;
+    @TableField("group_code")
+    private String groupCode;
 
     /**
-     * 角色名字
+     * 组名字
      */
-    @TableField("role_name")
-    private String roleName;
+    @TableField("group_name")
+    private String groupName;
 
     /**
      * 创建时间
@@ -70,7 +70,7 @@ public class SysRole extends Model<SysRole> {
 
     @Override
     protected Serializable pkVal() {
-        return this.roleId;
+        return this.groupId;
     }
 
 }

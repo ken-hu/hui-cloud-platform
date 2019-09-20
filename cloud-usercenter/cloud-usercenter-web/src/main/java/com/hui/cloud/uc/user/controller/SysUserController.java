@@ -28,13 +28,14 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
-    @GetMapping("")
+    @GetMapping("/user")
     public ResponseVO<SysUserDTO> getSysUser(@RequestParam String userName){
         SysUser sysUser = sysUserService.getUserByName(userName);
         SysUserDTO sysUserDTO = new SysUserDTO();
         BeanUtils.copyProperties(sysUser,sysUserDTO);
         return ResponseVO.ok(sysUserDTO);
     }
+
 
 }
 

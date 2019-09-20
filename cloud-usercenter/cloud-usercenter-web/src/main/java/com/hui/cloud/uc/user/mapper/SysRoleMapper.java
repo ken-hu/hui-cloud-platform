@@ -1,7 +1,8 @@
 package com.hui.cloud.uc.user.mapper;
 
-import com.hui.cloud.uc.user.model.entity.SysRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hui.cloud.uc.user.model.entity.SysRole;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author Gary.hu
  * @since 2019-09-19
  */
+@Repository
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
 }
