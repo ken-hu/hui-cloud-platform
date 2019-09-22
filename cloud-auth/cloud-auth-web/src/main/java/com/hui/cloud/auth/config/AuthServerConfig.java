@@ -1,11 +1,11 @@
 package com.hui.cloud.auth.config;
 
-import com.hui.cloud.auth.oauth.handler.AuthLogoutHandler;
-import com.hui.cloud.auth.oauth.handler.AuthWebResponseExceptionHandler;
-import com.hui.cloud.auth.oauth.service.impl.ApprovalStoreService;
-import com.hui.cloud.auth.oauth.service.impl.AuthClientDetailsService;
-import com.hui.cloud.auth.oauth.service.impl.AuthCodeService;
-import com.hui.cloud.auth.oauth.service.impl.AuthUserDetailsService;
+import com.hui.cloud.auth.handler.AuthLogoutHandler;
+import com.hui.cloud.auth.handler.AuthWebResponseExceptionHandler;
+import com.hui.cloud.auth.service.impl.ApprovalStoreService;
+import com.hui.cloud.auth.service.impl.AuthClientDetailsService;
+import com.hui.cloud.auth.service.impl.AuthCodeService;
+import com.hui.cloud.auth.service.impl.AuthUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

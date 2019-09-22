@@ -1,6 +1,6 @@
 package com.hui.cloud.auth.config;
 
-import com.hui.cloud.auth.oauth.handler.AuthLogoutHandler;
+import com.hui.cloud.auth.handler.AuthLogoutHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

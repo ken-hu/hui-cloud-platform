@@ -34,10 +34,10 @@ spring:
       min-evictable-idle-time-millis: 30000
       max-open-prepared-statements: 20
   redis:
-    host: 192.168.89.4
+    host: 127.0.0.1
     port: 6379
   rabbitmq:
-    host: 192.168.89.4
+    host: 127.0.0.1
     port: 5672
     username: admin
     password: admin
@@ -46,13 +46,16 @@ spring:
       host: localhost
       port: 8500
       discovery:
+        register: true
+        # 服务停止时取消注册
+        deregister: true
         service-name: ${spring.application.name}
         health-check-path: /actuator/health
         health-check-interval: 10s
+        # 设置健康检查失败多长时间后，取消注册
+        health-check-critical-timeout: 30s
         prefer-ip-address: true
         instance-id: ${spring.application.name}
-        register: true
-        deregister: true
 # 日志配置
 logging:
   config: classpath:logback-spring.xml

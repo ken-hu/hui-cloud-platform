@@ -183,24 +183,24 @@ public class ResponseVO<T> implements Serializable {
         return new ResponseVO<>(ResponseConstant.BAD_REQUEST_CODE, msg, data);
     }
 
-    static class ResponseConstant {
-        private static final String SUCCESS = "SUCCESS";
-        private static final String SUCCESS_CODE = "200";
+    public static class ResponseConstant {
+        public static final String SUCCESS = "SUCCESS";
+        public static final String SUCCESS_CODE = "200";
 
-        private static final String ERROR = "ERROR";
-        private static final String ERROR_CODE = "500";
+        public static final String ERROR = "ERROR";
+        public static final String ERROR_CODE = "500";
 
-        private static final String FORBIDDEN = "FORBIDDEN";
-        private static final String FORBIDDEN_CODE = "403";
+        public static final String FORBIDDEN = "FORBIDDEN";
+        public static final String FORBIDDEN_CODE = "403";
 
-        private static final String UNAUTHORIZED = "UNAUTHORIZED";
-        private static final String UNAUTHORIZED_CODE = "401";
+        public static final String UNAUTHORIZED = "UNAUTHORIZED";
+        public static final String UNAUTHORIZED_CODE = "401";
 
-        private static final String NOT_FOUND = "NOT_FOUND";
-        private static final String NOT_FOUND_CODE = "404";
+        public static final String NOT_FOUND = "NOT_FOUND";
+        public static final String NOT_FOUND_CODE = "404";
 
-        private static final String BAD_REQUEST = "BAD_REQUEST";
-        private static final String BAD_REQUEST_CODE = "400";
+        public static final String BAD_REQUEST = "BAD_REQUEST";
+        public static final String BAD_REQUEST_CODE = "400";
     }
 
 }

@@ -52,8 +52,8 @@ public class CodeGenerator {
     /**
      * GENERATOR
      */
-    private static final String PARENT_PACKAGE = "com.hui.cloud.uc";
-    private static final String ENTITY_PACKAGE = "model.entity";
+    private static final String PARENT_PACKAGE = "com.hui.cloud";
+    private static final String ENTITY_PACKAGE = "entity";
     private static final String SERVICE_PACKAGE = "service";
     private static final String SERVICE_IMPL_PACKAGE = "service.impl";
     private static final String MAPPER_PACKAGE = "mapper";
