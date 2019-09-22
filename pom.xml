@@ -29,7 +29,7 @@
         <druid.version>1.1.20</druid.version>
         <swagger2.version>2.9.2</swagger2.version>
         <common-net>3.5</common-net>
-        <springboot-admin>2.1.8</springboot-admin>
+        <springboot-admin>2.1.6</springboot-admin>
         <springboot-mybatis>2.1.0</springboot-mybatis>
         <mybatis-plus>3.2.0</mybatis-plus>
         <lcn.version>5.0.2.RELEASE</lcn.version>

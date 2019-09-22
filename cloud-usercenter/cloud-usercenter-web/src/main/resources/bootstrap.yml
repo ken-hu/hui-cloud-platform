@@ -47,10 +47,12 @@ spring:
       port: 8500
       discovery:
         service-name: ${spring.application.name}
-        health-check-path: ${server.servlet.context-path}/actuator/health
+        health-check-path: /actuator/health
         health-check-interval: 10s
         prefer-ip-address: true
         instance-id: ${spring.application.name}
+        register: true
+        deregister: true
 # 日志配置
 logging:
   config: classpath:logback-spring.xml
