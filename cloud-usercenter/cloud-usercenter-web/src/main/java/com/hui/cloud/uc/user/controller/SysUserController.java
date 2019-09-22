@@ -91,24 +91,24 @@ public class SysUserController {
     /**
      * 用户绑定角色
      * @param userId
-     * @param roles
+     * @param roleIds
      * @return
      */
     @PutMapping("/user/{id}/roles")
-    public ResponseVO bindRoles(@PathVariable("id") Long userId, @RequestParam List<SysRole> roles) {
-        sysUserService.bindRoles(roles,userId);
+    public ResponseVO bindRoles(@PathVariable("id") Long userId, @RequestParam List<Long> roleIds) {
+        sysUserService.bindRoles(roleIds,userId);
         return ResponseVO.ok();
     }
 
     /**
      * 用户绑定用户组
      * @param userId
-     * @param groups
+     * @param groupIds
      * @return
      */
     @PutMapping("/user/{id}/groups")
-    public ResponseVO bindGroups(@PathVariable("id") Long userId, @RequestParam List<SysGroup> groups) {
-        sysUserService.bindGroups(groups,userId);
+    public ResponseVO bindGroups(@PathVariable("id") Long userId, @RequestParam List<Long> groupIds) {
+        sysUserService.bindGroups(groupIds,userId);
         return ResponseVO.ok();
     }
 
