@@ -53,11 +53,15 @@
 
 ## 启动教程
 
-### 0.初始化数据库
+### 0.初始化数据库 & 组件安装
+【usercenter-service】-> resources/sql/uc_init_sql.sql
+```shell
+#安装+运行consul
+$ docker pull consul
+$ docker run -d --name=dev-consul -p8500:8500 consul
+```
 
-SQL/init_table.sql
-
-### 1. 基础服务
+### 1. 基础服务介绍
 
 |   service    | service-name | port |          Note           |
 | :----------: | :----------: | :--: | :---------------------: |
@@ -76,7 +80,7 @@ SQL/init_table.sql
 |   授权服务       |           AuthApplication          |                                  |      |
 |   用户中心       |              UcApplication         |                                  |      |
 
-```
+
 ## 软件架构
 
 1. 该项目是基于springcloud的微服务项目骨架
@@ -91,7 +95,8 @@ SQL/init_table.sql
 待完善~
 
 ## 项目结构
-``` xml
+
+```xml
 ├─cloud-admin
 │  └─src
 │      └─main
@@ -243,7 +248,7 @@ SQL/init_table.sql
                             └─uc
                                 └─user
                                     └─service
-  
+```  
 
 
 
