@@ -1,5 +1,7 @@
 package com.hui.cloud.uc.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hui.cloud.uc.user.mapper.SysResourceMapper;
@@ -8,6 +10,7 @@ import com.hui.cloud.uc.user.service.SysResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -37,8 +40,9 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
      */
     @Override
     public List<SysResource> listByPage(Integer pageNum, Integer pageSize) {
+        QueryWrapper<SysResource> query = Wrappers.<SysResource>query();
         Page<SysResource> page = new Page<>(pageNum, pageSize);
-        List<SysResource> sysResources = sysResourceMapper.selectPage(page, null).getRecords();
+        List<SysResource> sysResources = sysResourceMapper.selectPage(page, query).getRecords();
         return sysResources;
     }
 
@@ -49,7 +53,8 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
      * @return
      */
     @Override
-    public List<SysResource> listByPermission(Long permissionId) {
-        return null;
+    public HashSet<SysResource> listByPermissionId(Long permissionId) {
+        HashSet<SysResource> sysResources = sysResourceMapper.listByPermissionId(permissionId);
+        return sysResources;
     }
 }

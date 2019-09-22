@@ -3,6 +3,7 @@ package com.hui.cloud.uc.user.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hui.cloud.uc.user.model.entity.SysGroup;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -28,6 +29,6 @@ public interface SysGroupService extends IService<SysGroup> {
      * @param userId
      * @return
      */
-    List<SysGroup> listByUserId(Long userId);
+    HashSet<SysGroup> listByUserId(Long userId);
 
 }

@@ -8,6 +8,7 @@ import com.hui.cloud.uc.user.service.SysPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -49,8 +50,8 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
      * @return
      */
     @Override
-    public List<SysPermission> listByUserId(Long userId) {
-        List<SysPermission> sysPermissions = sysPermissionMapper.selectByUserId(userId);
+    public HashSet<SysPermission> listByUserId(Long userId) {
+        HashSet<SysPermission> sysPermissions = sysPermissionMapper.selectByUserId(userId);
         return sysPermissions;
     }
 
@@ -61,7 +62,19 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
      * @return
      */
     @Override
-    public List<SysPermission> listByRoleId(Long roleId) {
-        return null;
+    public HashSet<SysPermission> listByRoleId(Long roleId) {
+        HashSet<SysPermission> sysPermissions = sysPermissionMapper.selectByRoleId(roleId);
+        return sysPermissions;
+    }
+
+    /**
+     * 权限绑定资源
+     *
+     * @param resourceIds
+     * @param permissionId
+     */
+    @Override
+    public void bindResource(List<Long> resourceIds, Long permissionId) {
+        resourceIds.forEach(x -> sysPermissionMapper.insertResourcePermissionRel(permissionId,x));
     }
 }

@@ -15,7 +15,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *
  * @author Hu-Weihui
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.hui.cloud"})
 @EnableDiscoveryClient
 @EnableFeignClients
 @MapperScan("com.hui.cloud.uc.*.mapper")

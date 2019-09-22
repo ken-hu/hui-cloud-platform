@@ -3,14 +3,18 @@ package com.hui.cloud.uc.user.controller;
 
 import com.hui.cloud.common.model.ResponseVO;
 import com.hui.cloud.uc.user.dto.SysUserDTO;
+import com.hui.cloud.uc.user.model.entity.SysGroup;
+import com.hui.cloud.uc.user.model.entity.SysRole;
 import com.hui.cloud.uc.user.model.entity.SysUser;
+import com.hui.cloud.uc.user.service.SysGroupService;
+import com.hui.cloud.uc.user.service.SysRoleService;
 import com.hui.cloud.uc.user.service.SysUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
+import java.util.List;
 
 
 /**
@@ -25,17 +29,88 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user/sys-user")
 public class SysUserController {
 
-    @Autowired
     private SysUserService sysUserService;
 
+    private SysRoleService sysRoleService;
+
+    private SysGroupService sysGroupService;
+
+    @Autowired
+    public SysUserController(SysUserService sysUserService, SysRoleService sysRoleService, SysGroupService sysGroupService) {
+        this.sysUserService = sysUserService;
+        this.sysRoleService = sysRoleService;
+        this.sysGroupService = sysGroupService;
+    }
+
+    /**
+     * 用户名查询用户
+     * @param userName
+     * @return
+     */
     @GetMapping("/user")
-    public ResponseVO<SysUserDTO> getSysUser(@RequestParam String userName){
+    public ResponseVO getSysUser(@RequestParam String userName) {
         SysUser sysUser = sysUserService.getUserByName(userName);
         SysUserDTO sysUserDTO = new SysUserDTO();
-        BeanUtils.copyProperties(sysUser,sysUserDTO);
+        BeanUtils.copyProperties(sysUser, sysUserDTO);
         return ResponseVO.ok(sysUserDTO);
     }
 
+    /**
+     * 分页查询用户
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/users")
+    public ResponseVO listSysUser(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+        List<SysUser> sysUsers = sysUserService.listByPage(pageNum, pageSize);
+        return ResponseVO.ok(sysUsers);
+    }
+
+    /**
+     * 查询用户的角色
+     * @param userId
+     * @return
+     */
+    @GetMapping("/user/{id}/roles")
+    public ResponseVO listUserRoles(@PathVariable("id") Long userId) {
+        HashSet<SysRole> sysRoles = sysRoleService.listByUserId(userId);
+        return ResponseVO.ok(sysRoles);
+    }
+
+    /**
+     * 查询用户的组
+     * @return
+     */
+    @GetMapping("/user/{id}/groups")
+    public ResponseVO listUserGroups(@PathVariable("id") Long userId){
+        HashSet<SysGroup> sysGroups = sysGroupService.listByUserId(userId);
+        return ResponseVO.ok(sysGroups);
+    }
+
+    /**
+     * 用户绑定角色
+     * @param userId
+     * @param roles
+     * @return
+     */
+    @PutMapping("/user/{id}/roles")
+    public ResponseVO bindRoles(@PathVariable("id") Long userId, @RequestParam List<SysRole> roles) {
+        sysUserService.bindRoles(roles,userId);
+        return ResponseVO.ok();
+    }
+
+    /**
+     * 用户绑定用户组
+     * @param userId
+     * @param groups
+     * @return
+     */
+    @PutMapping("/user/{id}/groups")
+    public ResponseVO bindGroups(@PathVariable("id") Long userId, @RequestParam List<SysGroup> groups) {
+        sysUserService.bindGroups(groups,userId);
+        return ResponseVO.ok();
+    }
 
 }
 

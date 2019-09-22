@@ -3,6 +3,7 @@ package com.hui.cloud.uc.user.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hui.cloud.uc.user.model.entity.SysPermission;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -28,12 +29,19 @@ public interface SysPermissionService extends IService<SysPermission> {
      * @param userId
      * @return
      */
-    List<SysPermission> listByUserId(Long userId);
+    HashSet<SysPermission> listByUserId(Long userId);
 
     /**
      * 查询角色的所有权限
      * @param roleId
      * @return
      */
-    List<SysPermission> listByRoleId(Long roleId);
+    HashSet<SysPermission> listByRoleId(Long roleId);
+
+    /**
+     * 权限绑定资源
+     * @param resourceIds
+     * @param permissionId
+     */
+    void bindResource(List<Long> resourceIds, Long permissionId);
 }

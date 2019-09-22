@@ -3,6 +3,7 @@ package com.hui.cloud.uc.user.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hui.cloud.uc.user.model.entity.SysResource;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -28,6 +29,6 @@ public interface SysResourceService extends IService<SysResource> {
      * @param permissionId
      * @return
      */
-    List<SysResource> listByPermission(Long permissionId);
+    HashSet<SysResource> listByPermissionId(Long permissionId);
 
 }

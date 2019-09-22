@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @author Gary.Hu
  */
-@SpringBootApplication(scanBasePackages = "com.hui.cloud.uc")
+@SpringBootApplication(scanBasePackages = "com.hui.cloud")
 public class UcTestApplication {
     public static void main(String[] args) {
         SpringApplication.run(UcTestApplication.class, args);

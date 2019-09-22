@@ -1,6 +1,7 @@
 package com.hui.cloud.uc.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -32,6 +33,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     /**
      * 通过用户名获取用户信息
+     *
      * @param userName
      * @return
      */
@@ -51,9 +53,31 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     public List<SysUser> listByPage(Integer pageNum, Integer pageSize) {
-        Page<SysUser> page = new Page<>(pageNum,pageSize);
-        List<SysUser> sysUsers = sysUserMapper.selectPage(page, null).getRecords();
+        QueryWrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>();
+        Page<SysUser> page = new Page<>(pageNum, pageSize);
+        List<SysUser> sysUsers = sysUserMapper.selectPage(page, queryWrapper).getRecords();
         return sysUsers;
     }
 
+    /**
+     * 用户绑定角色
+     *
+     * @param roleIds
+     * @param userId
+     */
+    @Override
+    public void bindRoles(List<Long> roleIds, Long userId) {
+        roleIds.forEach(x -> sysUserMapper.insertUserRoleRel(userId, x));
+    }
+
+    /**
+     * 用户绑定组
+     *
+     * @param groupIds
+     * @param userId
+     */
+    @Override
+    public void bindGroups(List<Long> groupIds, Long userId) {
+        groupIds.forEach(x -> sysUserMapper.insertUserGroupRel(userId, x));
+    }
 }

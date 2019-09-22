@@ -8,6 +8,7 @@ import com.hui.cloud.uc.user.service.SysGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -49,7 +50,8 @@ public class SysGroupServiceImpl extends ServiceImpl<SysGroupMapper, SysGroup> i
      * @return
      */
     @Override
-    public List<SysGroup> listByUserId(Long userId) {
-        return null;
+    public HashSet<SysGroup> listByUserId(Long userId) {
+        HashSet<SysGroup> sysGroups = sysGroupMapper.listByUserId(userId);
+        return sysGroups;
     }
 }

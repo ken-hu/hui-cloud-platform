@@ -33,22 +33,15 @@ public class SysRoleController {
 
     /**
      * 查询角色列表
+     *
      * @param pageNum
      * @param pageSize
      * @return
      */
     @GetMapping("/roles")
-    public ResponseVO listRoles(Integer pageNum,Integer pageSize){
+    public ResponseVO listRoles(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         List<SysRole> sysRoles = sysRoleService.listByPage(pageNum, pageSize);
         return ResponseVO.ok(sysRoles);
     }
-
-
-    @GetMapping("/roles/by")
-    public ResponseVO listRolesByUserId(@RequestParam Long userId){
-        List<SysRole> sysRoles = sysRoleService.listByUserId(userId);
-        return ResponseVO.ok(sysRoles);
-    }
-
 }
 

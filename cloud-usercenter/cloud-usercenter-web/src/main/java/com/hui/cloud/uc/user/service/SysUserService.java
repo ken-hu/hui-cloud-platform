@@ -29,4 +29,18 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     List<SysUser> listByPage(Integer pageNum, Integer pageSize);
+
+    /**
+     * 用户绑定角色
+     * @param roleIds
+     * @param userId
+     */
+    void bindRoles(List<Long> roleIds, Long userId);
+
+    /**
+     * 用户绑定组
+     * @param groupIds
+     * @param userId
+     */
+    void bindGroups(List<Long> groupIds, Long userId);
 }

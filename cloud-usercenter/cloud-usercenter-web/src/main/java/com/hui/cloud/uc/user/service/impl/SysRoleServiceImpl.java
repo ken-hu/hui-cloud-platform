@@ -1,13 +1,17 @@
 package com.hui.cloud.uc.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hui.cloud.uc.user.mapper.SysRoleMapper;
 import com.hui.cloud.uc.user.model.entity.SysRole;
+import com.hui.cloud.uc.user.service.SysGroupService;
 import com.hui.cloud.uc.user.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -22,22 +26,26 @@ import java.util.List;
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
 
     private SysRoleMapper sysRoleMapper;
+    private SysGroupService sysGroupService;
 
     @Autowired
-    public SysRoleServiceImpl(SysRoleMapper sysRoleMapper) {
+    public SysRoleServiceImpl(SysRoleMapper sysRoleMapper, SysGroupService sysGroupService) {
         this.sysRoleMapper = sysRoleMapper;
+        this.sysGroupService = sysGroupService;
     }
 
     /**
      * 分页查询角色
+     *
      * @param pageNum
      * @param pageSize
      * @return
      */
     @Override
     public List<SysRole> listByPage(Integer pageNum, Integer pageSize) {
+        QueryWrapper<SysRole> query = Wrappers.<SysRole>query();
         Page<SysRole> page = new Page<>(pageNum, pageSize);
-        List<SysRole> sysRoles = sysRoleMapper.selectPage(page, null).getRecords();
+        List<SysRole> sysRoles = sysRoleMapper.selectPage(page, query).getRecords();
         return sysRoles;
     }
 
@@ -48,8 +56,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      * @return
      */
     @Override
-    public List<SysRole> listByUserId(Long userId) {
-        List<SysRole> sysRoles = sysRoleMapper.selectByUserId(userId);
+    public HashSet<SysRole> listByUserId(Long userId) {
+        HashSet<SysRole> sysRoles = sysRoleMapper.selectByUserId(userId);
         return sysRoles;
     }
 
@@ -60,7 +68,20 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      * @return
      */
     @Override
-    public List<SysRole> listByGroupId(Long groupId) {
-        return null;
+    public HashSet<SysRole> listByGroupId(Long groupId) {
+        HashSet<SysRole> sysRoles = sysRoleMapper.selectByGroupId(groupId);
+        return sysRoles;
     }
+
+    /**
+     * 用户绑定权限
+     *
+     * @param permissionIds
+     * @param roleId
+     */
+    @Override
+    public void bindPermissions(List<Long> permissionIds, Long roleId) {
+        permissionIds.forEach(x -> sysRoleMapper.insertRolePermissionRel(roleId, x));
+    }
+
 }

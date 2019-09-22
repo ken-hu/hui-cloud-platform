@@ -2,7 +2,10 @@ package com.hui.cloud.uc.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hui.cloud.uc.user.model.entity.SysGroup;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.HashSet;
 
 /**
  * <p>
@@ -14,5 +17,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SysGroupMapper extends BaseMapper<SysGroup> {
-
+    @Select("select * from t_uc_sys_group a inner join t_uc_sys_user_group_rel b where a.group_id = b.group_id and b.user_id = #{userId} ")
+    HashSet<SysGroup> listByUserId(Long userId);
 }

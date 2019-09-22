@@ -3,6 +3,7 @@ package com.hui.cloud.uc.user.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hui.cloud.uc.user.model.entity.SysRole;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public interface SysRoleService extends IService<SysRole> {
 
     /**
      * 分页查询角色
+     *
      * @param pageNum
      * @param pageSize
      * @return
@@ -25,16 +27,24 @@ public interface SysRoleService extends IService<SysRole> {
 
     /**
      * 查询用户角色
+     *
      * @param userId
      * @return
      */
-    List<SysRole> listByUserId(Long userId);
+    HashSet<SysRole> listByUserId(Long userId);
 
     /**
      * 查询组角色
+     *
      * @param groupId
      * @return
      */
-    List<SysRole> listByGroupId(Long groupId);
+    HashSet<SysRole> listByGroupId(Long groupId);
 
+    /**
+     *  角色绑定权限
+     * @param permissionIds
+     * @param roleId
+     */
+    void bindPermissions(List<Long> permissionIds, Long roleId);
 }

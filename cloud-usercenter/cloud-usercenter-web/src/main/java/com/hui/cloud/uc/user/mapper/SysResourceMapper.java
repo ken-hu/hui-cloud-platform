@@ -2,7 +2,10 @@ package com.hui.cloud.uc.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hui.cloud.uc.user.model.entity.SysResource;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.HashSet;
 
 /**
  * <p>
@@ -15,4 +18,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SysResourceMapper extends BaseMapper<SysResource> {
 
+    @Select("select * from t_uc_sys_resource a inner join t_uc_sys_resource_permission_rel b where a.resource_id = b.permission_id and a.permission_id = #{permissionId}")
+    HashSet<SysResource> listByPermissionId(Long permissionId);
 }
