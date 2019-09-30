@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -69,15 +68,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //允许这些资源访问
         web.ignoring().antMatchers()
                 .antMatchers("/swagger-ui.html", "/swagger-resources/**","/webjars/**","/v2/**")
-                .antMatchers("/actuator/**")
-                .antMatchers("/test", "/auth-service/oauth/token", "/sys-user/**");
+                .antMatchers("/actuator/**");
+//                .antMatchers("/test", "/auth-service/oauth/token", "/sys-user/**");
     }
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //禁用 csrf, 由于使用的是JWT，这里不需要csrf
-        http.cors().and()
+        /*http.cors().and()
                 .csrf().disable()
                 .headers().frameOptions().sameOrigin()
                 .and()
@@ -92,8 +91,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         ))
                 .and()
                 .authorizeRequests()
-                .antMatchers("/test","/auth-service/oauth/token","/oauth/**","/sys-user/**")
-                .permitAll()
+//                .antMatchers("/test","/auth-service/oauth/token","/oauth/**","/sys-user/**")
+//                .permitAll()
                 //swagger
                 .antMatchers("/swagger-ui.html/**",
                         "/swagger-resources/**",
@@ -105,10 +104,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .permitAll()
                 .and()
+                .anonymous().disable();*/
+        http
+                .csrf().disable() //关闭CSRF
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -> {
+                    log.info(authException.getMessage(),authException);
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                })
+                .and()
+                .authorizeRequests()
+                .antMatchers("/**").authenticated()
+                .and()
+                .httpBasic()
+                .and()
                 .anonymous().disable();
-//                .defaultSuccessUrl("/");
-        // 退出登录处理
-//        http.logout().logoutSuccessHandler(new AuthLogoutHandler());
     }
 
 }

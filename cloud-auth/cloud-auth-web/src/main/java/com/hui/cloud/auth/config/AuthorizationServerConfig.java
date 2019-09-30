@@ -103,6 +103,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 //此处的scopes是无用的，可以随意设置,不填或者为空则默认是所有客户端都可以访问
                 .scopes("all")
                 .secret(passwordEncoder.encode("123456"))
+                .resourceIds("auth-service","usercenter-service")
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token");
     }
 

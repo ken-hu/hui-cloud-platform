@@ -82,8 +82,8 @@ public class SysUserController {
 
         System.out.println(authorization);
 
-        String test = authClient.test();
-        System.out.println(test);
+//        String test = authClient.test();
+//        System.out.println(test);
 
 
         AuthTokenDTO jwt= authClient.getToken(authorization, username, password, "password");
