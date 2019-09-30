@@ -56,13 +56,6 @@
         <appender-ref ref="File"/>
     </logger>
 
-    <!--sql打印-->
-    <logger name="com.hui.cloud.*.*.mapper" level="DEBUG" additivity="false">
-        <appender-ref ref="STDOUT"/>
-        <appender-ref ref="File" />
-    </logger>
-
-
     <!-- 控制台输出日志级别 -->
     <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
     <root level="INFO">

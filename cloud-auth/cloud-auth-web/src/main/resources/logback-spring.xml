@@ -8,7 +8,7 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
-                %red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %black([%file:%line]) %boldMagenta(%logger{36}) - %cyan(%msg%n)
+                %red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %black([%file:%line]) %boldMagenta(%logger) - %cyan(%msg%n)
             </pattern>
             <charset>UTF-8</charset>
         </encoder>
@@ -56,13 +56,11 @@
         <appender-ref ref="File"/>
     </logger>
 
-    <!--sql打印-->
-    <logger name="com.hui.cloud.*.*.mapper" level="DEBUG" additivity="false">
+    <!--security打印-->
+    <logger name="org.springframework.security.web" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="File" />
     </logger>
-
-
     <!-- 控制台输出日志级别 -->
     <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
     <root level="INFO">

@@ -15,10 +15,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *
  * @author Hu-Weihui
  */
-@SpringBootApplication(scanBasePackages = {"com.hui.cloud"})
+@SpringBootApplication(scanBasePackages = {"com.hui.cloud.uc"})
 @EnableDiscoveryClient
-@EnableFeignClients
-@MapperScan("com.hui.cloud.uc.*.mapper")
+@EnableFeignClients(basePackages = "com.hui.cloud")
+@MapperScan("com.hui.cloud.uc.mapper")
 public class UcApplication {
     public static void main(String[] args) {
         SpringApplication.run(UcApplication.class, args);

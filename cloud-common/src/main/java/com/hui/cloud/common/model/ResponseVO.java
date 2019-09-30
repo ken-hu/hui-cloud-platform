@@ -25,7 +25,7 @@ public class ResponseVO<T> implements Serializable {
     private ResponseVO() {
     }
 
-    public ResponseVO(String code, String msg, T data) {
+    public ResponseVO(Integer code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
@@ -35,16 +35,16 @@ public class ResponseVO<T> implements Serializable {
         this.data = data;
     }
 
-    public ResponseVO(String code, String msg) {
+    public ResponseVO(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    private String code;
+    private Integer code;
     private String msg;
     private T data;
 
-    private static <T> ResponseVO<T> response(String code, String msg, T data) {
+    private static <T> ResponseVO<T> response(Integer code, String msg, T data) {
         return new ResponseVO<>(code, msg, data);
     }
 
@@ -63,11 +63,11 @@ public class ResponseVO<T> implements Serializable {
     }
 
     public static <T> ResponseVO<T> ok(String msg) {
-        return ok(msg,null);
+        return ok(msg, null);
     }
 
     public static <T> ResponseVO<T> ok(String msg, T data) {
-        return new ResponseVO<>(ResponseConstant.SUCCESS, msg, data);
+        return new ResponseVO<>(ResponseConstant.SUCCESS_CODE, msg, data);
     }
 
 
@@ -86,7 +86,7 @@ public class ResponseVO<T> implements Serializable {
     }
 
     public static <T> ResponseVO<T> error(String msg) {
-        return error(msg,null);
+        return error(msg, null);
     }
 
     public static <T> ResponseVO<T> error(String msg, T data) {
@@ -185,22 +185,22 @@ public class ResponseVO<T> implements Serializable {
 
     public static class ResponseConstant {
         public static final String SUCCESS = "SUCCESS";
-        public static final String SUCCESS_CODE = "200";
+        public static final Integer SUCCESS_CODE = 200;
 
         public static final String ERROR = "ERROR";
-        public static final String ERROR_CODE = "500";
+        public static final Integer ERROR_CODE = 500;
 
         public static final String FORBIDDEN = "FORBIDDEN";
-        public static final String FORBIDDEN_CODE = "403";
+        public static final Integer FORBIDDEN_CODE = 403;
 
         public static final String UNAUTHORIZED = "UNAUTHORIZED";
-        public static final String UNAUTHORIZED_CODE = "401";
+        public static final Integer UNAUTHORIZED_CODE = 401;
 
         public static final String NOT_FOUND = "NOT_FOUND";
-        public static final String NOT_FOUND_CODE = "404";
+        public static final Integer NOT_FOUND_CODE = 404;
 
         public static final String BAD_REQUEST = "BAD_REQUEST";
-        public static final String BAD_REQUEST_CODE = "400";
+        public static final Integer BAD_REQUEST_CODE = 400;
     }
 
 }

@@ -4,7 +4,11 @@ import com.hui.cloud.uc.entity.SysRole;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.List;
 
@@ -38,5 +42,22 @@ public class SysRoleServiceTest extends BaseJunitTest{
     public void listByGroupIdTest(){
         HashSet<SysRole> sysRoles = sysRoleService.listByGroupId(1L);
         sysRoles.forEach(x->log.info(x.toString()));
+    }
+
+    @Test
+    public void testClientSecurit() throws IOException {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encode = passwordEncoder.encode("123456");
+
+
+        final Base64.Decoder decoder = Base64.getDecoder();
+        final Base64.Encoder encoder = Base64.getEncoder();
+        final String text = "dXNlcmNlbnRlci1zZXJ2aWNlOjEyMzQ1Ng==";
+        final byte[] textByte = text.getBytes("UTF-8");
+        //编码
+        final String encodedText = new String(decoder.decode(text),"UTF-8");
+
+        log.info(encodedText);
+        log.info(encode);
     }
 }

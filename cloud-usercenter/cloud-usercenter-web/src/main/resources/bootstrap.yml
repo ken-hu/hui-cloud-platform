@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8001
 spring:
   application:
     name: usercenter-service
@@ -63,7 +63,7 @@ logging:
 # mybatis-plus
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*/*.xml
-  type-aliases-package: com.hui.cloud.uc.user.model.entity
+  type-aliases-package: com.hui.cloud.uc.entity
   global-config:
     banner: false
     db-config:

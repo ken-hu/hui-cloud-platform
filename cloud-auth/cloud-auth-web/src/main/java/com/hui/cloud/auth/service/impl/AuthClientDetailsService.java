@@ -2,9 +2,9 @@ package com.hui.cloud.auth.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Sets;
-import com.hui.cloud.auth.service.bo.AuthClientDetail;
 import com.hui.cloud.auth.entity.ClientDetail;
 import com.hui.cloud.auth.service.ClientDetailService;
+import com.hui.cloud.auth.service.bo.AuthClientDetail;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -42,8 +42,11 @@ public class AuthClientDetailsService implements ClientDetailsService {
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
         ClientDetail clientDetail = clientDetailService.get(clientId);
 
+        if (null == clientDetail) {
+            throw new ClientRegistrationException(clientId + "客户端不存在");
+        }
         AuthClientDetail authClientDetail = new AuthClientDetail();
-        BeanUtils.copyProperties(clientDetail,authClientDetail);
+        BeanUtils.copyProperties(clientDetail, authClientDetail);
 
         Set resourceIds = filedToSet(clientDetail.getResourceIds());
         Set scope = filedToSet(clientDetail.getScope());
@@ -63,7 +66,10 @@ public class AuthClientDetailsService implements ClientDetailsService {
     }
 
     private Set filedToSet(String field) {
-        HashSet<String> filedSet = Sets.newHashSet(StringUtils.split(field, ","));
-        return filedSet;
+        if (!StringUtils.isEmpty(field)) {
+            HashSet<String> filedSet = Sets.newHashSet(StringUtils.split(field, ","));
+            return filedSet;
+        }
+        return null;
     }
 }

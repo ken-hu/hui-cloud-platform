@@ -30,7 +30,7 @@ spring:
     password: admin
 # 日志配置
 logging:
-  config: classpath:logback-spring.xml
+  pattern: '%red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %black([%file:%line]) %boldMagenta(%logger{36}) - %cyan(%msg%n)'
 
 # mybatis-plus
 mybatis-plus:

@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author Gary.Hu
  */
-@FeignClient(name = "usercenter-service" , fallback = SysUserApi.SysUserApiFallBack.class)
-public interface SysUserApi {
-    @GetMapping("")
+@FeignClient(name = "usercenter-service" , fallback = SysUserClient.SysUserClientFallBack.class)
+public interface SysUserClient {
+    @GetMapping("/user")
     ResponseVO<SysUserDTO> getSysUser(@RequestParam String userName);
 
     /**
      * 服务降级处理
      */
-    class SysUserApiFallBack implements SysUserApi{
+    class SysUserClientFallBack implements SysUserClient {
         @Override
         public ResponseVO<SysUserDTO> getSysUser(String userName) {
             return null;

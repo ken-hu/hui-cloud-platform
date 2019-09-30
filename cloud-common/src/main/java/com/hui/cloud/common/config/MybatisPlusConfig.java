@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * @author Gary.Hu
  */
 @Configuration
-@MapperScan("com.hui.cloud.*.*.mapper*")
+@MapperScan("com.hui.cloud.*.mapper*")
 public class MybatisPlusConfig {
     /**
      * 分页插件

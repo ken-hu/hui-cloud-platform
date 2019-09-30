@@ -58,6 +58,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     public HashSet<SysRole> listByUserId(Long userId) {
         HashSet<SysRole> sysRoles = sysRoleMapper.selectByUserId(userId);
+        HashSet<SysRole> sysGroupRoles = listByGroupId(userId);
+        sysRoles.addAll(sysGroupRoles);
         return sysRoles;
     }
 

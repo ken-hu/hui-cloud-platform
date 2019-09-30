@@ -1,16 +1,17 @@
 package com.hui.cloud.auth.service.impl;
 
-import com.hui.cloud.auth.service.bo.AuthUserDetail;
-import com.hui.cloud.uc.api.SysUserApi;
-import com.hui.cloud.uc.dto.SysUserDTO;
+import com.hui.cloud.uc.api.SysUserClient;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 /**
  * <b><code>UserDetailsServiceImpl</code></b>
@@ -25,19 +26,26 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class AuthUserDetailsService implements UserDetailsService {
 
-    private SysUserApi sysUserApi;
+    private SysUserClient sysUserClient;
 
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthUserDetailsService(SysUserApi sysUserApi, PasswordEncoder passwordEncoder) {
-        this.sysUserApi = sysUserApi;
+    public AuthUserDetailsService(SysUserClient sysUserClient, PasswordEncoder passwordEncoder) {
+        this.sysUserClient = sysUserClient;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SysUserDTO sysUserDTO = sysUserApi.getSysUser(username).getData();
+        log.error("================userName : {}============================",username);
+        if (username.equals("admin")){
+            User user = new User("admin",passwordEncoder.encode("admin"),true,
+                    true, true,
+                    true, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"),new SimpleGrantedAuthority("ROLE_ANONYMOUS")));
+            return user;
+        }
+        /*SysUserDTO sysUserDTO = sysUserApi.getSysUser(username).getData();
         log.info(sysUserDTO.toString());
         if (null == sysUserDTO) {
             throw new UsernameNotFoundException("Not found this username : " + username);
@@ -45,7 +53,8 @@ public class AuthUserDetailsService implements UserDetailsService {
         AuthUserDetail authUserDetail = new AuthUserDetail();
         BeanUtils.copyProperties(sysUserDTO, authUserDetail);
         authUserDetail.setPassword(passwordEncoder.encode(sysUserDTO.getPassword()));
-        return authUserDetail;
+        return authUserDetail;*/
+        return null;
     }
 
 }

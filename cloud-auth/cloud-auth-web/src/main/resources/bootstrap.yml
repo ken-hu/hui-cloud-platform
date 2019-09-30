@@ -2,10 +2,10 @@ server:
   port: 8000
 spring:
   application:
-    name: usercenter-service
+    name: auth-service
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1/hui_cloud_uc?characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1/hui_cloud_auth?characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -33,6 +33,29 @@ spring:
       time-between-eviction-runs-millis: 6000
       min-evictable-idle-time-millis: 30000
       max-open-prepared-statements: 20
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: admin
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        register: true
+        # 服务停止时取消注册
+        deregister: true
+        service-name: ${spring.application.name}
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+        # 设置健康检查失败多长时间后，取消注册
+        health-check-critical-timeout: 30s
+        prefer-ip-address: true
+        instance-id: ${spring.application.name}
 # 日志配置
 logging:
   config: classpath:logback-spring.xml
@@ -40,7 +63,7 @@ logging:
 # mybatis-plus
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*/*.xml
-  type-aliases-package: com.hui.cloud.uc.user.model.entity
+  type-aliases-package: com.hui.cloud.auth.entity
   global-config:
     banner: false
     db-config:

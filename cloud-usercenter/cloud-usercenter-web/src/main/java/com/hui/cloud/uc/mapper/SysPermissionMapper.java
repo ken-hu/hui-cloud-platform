@@ -19,9 +19,6 @@ import java.util.HashSet;
 @Repository
 public interface SysPermissionMapper extends BaseMapper<SysPermission> {
 
-    @Select("select * from t_uc_sys_permission a inner join t_uc_user_permission_rel b where a.id = b.permission_id and a.user_id= #{userId}")
-    HashSet<SysPermission> selectByUserId(Long userId);
-
     @Select("select * from t_uc_sys_permission a inner join t_uc_role_permission_rel b where a.id = b.permission_id and a.role_id= #{roleId}")
     HashSet<SysPermission> selectByRoleId(Long roleId);
 

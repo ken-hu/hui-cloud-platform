@@ -11,4 +11,10 @@
 
     <artifactId>cloud-auth-api</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-netflix-hystrix</artifactId>
+        </dependency>
+    </dependencies>
 </project>

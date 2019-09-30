@@ -1,9 +1,9 @@
 package com.hui.cloud.auth.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
 /**
  * <code>AuthTokenDTO</code>
@@ -15,11 +15,20 @@ import java.util.Set;
  * @author Gary.Hu
  */
 @Data
-public class AuthTokenDTO {
-    private String accessToken = null;
-    private String refreshToken = null;
-    private String tokenType = null;
-    private Integer expiresIn = null;
-    private Integer reExpiresIn = null;
-    private Set<String> scope = new HashSet<String>();
+public class AuthTokenDTO implements Serializable {
+    @JsonProperty("access_token")
+    private String accessToken;
+
+    @JsonProperty("refresh_token")
+    private String refreshToken;
+
+    @JsonProperty("token_type")
+    private String tokenType;
+
+    @JsonProperty("expires_in")
+    private Integer expiresIn;
+
+    private String scope;
+
+    private String jti;
 }
