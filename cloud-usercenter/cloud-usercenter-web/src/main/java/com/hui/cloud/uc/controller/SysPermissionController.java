@@ -1,9 +1,16 @@
 package com.hui.cloud.uc.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.hui.cloud.common.model.ResponseVO;
+import com.hui.cloud.uc.entity.SysResource;
+import com.hui.cloud.uc.service.SysPermissionService;
+import com.hui.cloud.uc.service.SysResourceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * <p>
@@ -17,5 +24,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sys-permission")
 public class SysPermissionController {
 
+    private SysResourceService sysResourceService;
+
+    private SysPermissionService sysPermissionService;
+
+    @Autowired
+    public SysPermissionController(SysResourceService sysResourceService, SysPermissionService sysPermissionService) {
+        this.sysResourceService = sysResourceService;
+        this.sysPermissionService = sysPermissionService;
+    }
+
+    /**
+     * 查看权限拥有的资源
+     * @param permissionId
+     * @return
+     */
+    @GetMapping(value = "/permission/{id}/resources", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseVO listResources(@PathVariable("id") Long permissionId) {
+        HashSet<SysResource> sysResources = sysResourceService.listByPermissionId(permissionId);
+        return ResponseVO.ok(sysResources);
+    }
+
+
+    /**
+     * 权限绑定资源
+     * @param permissionId
+     * @param resourcesIds
+     * @return
+     */
+    @PutMapping(value = "/permission/{id}/resources",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseVO bindResources(@PathVariable("id") Long permissionId, @RequestParam List<Long> resourcesIds){
+        sysPermissionService.bindResource(resourcesIds, permissionId);
+        return ResponseVO.ok();
+    }
 }
 

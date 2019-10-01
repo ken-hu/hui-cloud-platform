@@ -1,11 +1,13 @@
 package com.hui.cloud.uc.service;
 
+import com.google.common.collect.Sets;
 import com.hui.cloud.uc.entity.SysRole;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -59,5 +61,15 @@ public class SysRoleServiceTest extends BaseJunitTest{
 
         log.info(encodedText);
         log.info(encode);
+    }
+
+
+    @Test
+    public void testSet(){
+        String field = "usercenter-service";
+        log.info(field);
+        String[] split = StringUtils.split(field, ",");
+        log.info(split.toString());
+        Sets.newHashSet(field);
     }
 }

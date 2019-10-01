@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
  *
  * @author Hu-Weihui
  */
-@SpringBootApplication(scanBasePackages = {"com.hui.cloud.uc"})
+@SpringBootApplication(scanBasePackages = {"com.hui.cloud"})
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = "com.hui.cloud")
 @MapperScan("com.hui.cloud.uc.mapper")

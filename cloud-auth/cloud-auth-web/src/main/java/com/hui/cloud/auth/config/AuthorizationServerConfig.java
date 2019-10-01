@@ -21,8 +21,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
-import javax.sql.DataSource;
-
 /**
  * <b><code>AuthServerConfig</code></b>
  * <p/>
@@ -52,7 +50,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     private String publicKey = "public-key";
 
-    private DataSource dataSource;
 
     @Autowired
     public AuthorizationServerConfig(AuthenticationManager authenticationManager,
@@ -60,14 +57,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                                      AuthUserDetailsService authUserDetailsService,
                                      RedisConnectionFactory redisConnectionFactory,
                                      AuthWebResponseExceptionHandler authWebResponseExceptionHandler,
-                                      PasswordEncoder passwordEncoder, DataSource dataSource) {
+                                      PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.authClientDetailsService = authClientDetailsService;
         this.authUserDetailsService = authUserDetailsService;
         this.redisConnectionFactory = redisConnectionFactory;
         this.authWebResponseExceptionHandler = authWebResponseExceptionHandler;
         this.passwordEncoder = passwordEncoder;
-        this.dataSource = dataSource;
     }
 
 
@@ -96,15 +92,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-//        clients.withClientDetails(authClientDetailsService);
+        clients.withClientDetails(authClientDetailsService);
          //内存数据测试
-        clients.inMemory()
+        /*clients.inMemory()
                 .withClient("usercenter-service")
                 //此处的scopes是无用的，可以随意设置,不填或者为空则默认是所有客户端都可以访问
                 .scopes("all")
                 .secret(passwordEncoder.encode("123456"))
                 .resourceIds("auth-service","usercenter-service")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token");
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token");*/
     }
 
     /**

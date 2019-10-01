@@ -3,6 +3,8 @@ package com.hui.cloud.auth.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hui.cloud.auth.entity.ClientDetail;
 
+import java.util.List;
+
 /**
  * <p>
  * Oauth客户端表 服务类
@@ -19,4 +21,12 @@ public interface ClientDetailService extends IService<ClientDetail> {
      * @return
      */
     ClientDetail get(String clientId);
+
+    /**
+     * 分页查询客户端
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    List<ClientDetail> listByPage(Integer pageNum, Integer pageSize);
 }

@@ -1,12 +1,13 @@
 package com.hui.cloud.auth.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Sets;
 import com.hui.cloud.auth.entity.ClientDetail;
 import com.hui.cloud.auth.service.ClientDetailService;
 import com.hui.cloud.auth.service.bo.AuthClientDetail;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
@@ -26,21 +27,22 @@ import java.util.Set;
  * @author Gary.Hu
  */
 @Component
+@Slf4j
 public class AuthClientDetailsService implements ClientDetailsService {
 
     private ClientDetailService clientDetailService;
 
-    private ObjectMapper objectMapper;
 
     @Autowired
-    public AuthClientDetailsService(ClientDetailService clientDetailService, ObjectMapper objectMapper) {
+    public AuthClientDetailsService(ClientDetailService clientDetailService) {
         this.clientDetailService = clientDetailService;
-        this.objectMapper = objectMapper;
     }
 
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
         ClientDetail clientDetail = clientDetailService.get(clientId);
+
+        log.info(clientDetail.toString());
 
         if (null == clientDetail) {
             throw new ClientRegistrationException(clientId + "客户端不存在");
@@ -48,11 +50,14 @@ public class AuthClientDetailsService implements ClientDetailsService {
         AuthClientDetail authClientDetail = new AuthClientDetail();
         BeanUtils.copyProperties(clientDetail, authClientDetail);
 
+        log.info(authClientDetail.toString());
+
         Set resourceIds = filedToSet(clientDetail.getResourceIds());
+
         Set scope = filedToSet(clientDetail.getScope());
         Set authorizedGrantTypes = filedToSet(clientDetail.getAuthorizedGrantTypes());
         Set registeredRedirectUri = filedToSet(clientDetail.getWebServerRedirectUri());
-        Set authorities = filedToSet(clientDetail.getAuthorities());
+        Set authorities = filedToSetA(clientDetail.getAuthorities());
         Set autoApprovedScopes = filedToSet(clientDetail.getAutoapprove());
 
         authClientDetail.setResourceIds(resourceIds);
@@ -62,14 +67,23 @@ public class AuthClientDetailsService implements ClientDetailsService {
         authClientDetail.setAuthorities(authorities);
         authClientDetail.setAutoApprovedScopes(autoApprovedScopes);
         //TODO 还没写additionalInformation
+        log.info(authClientDetail.toString());
         return authClientDetail;
     }
 
     private Set filedToSet(String field) {
-        if (!StringUtils.isEmpty(field)) {
+        if (!StringUtils.isEmpty(field) && field.contains(",")) {
             HashSet<String> filedSet = Sets.newHashSet(StringUtils.split(field, ","));
             return filedSet;
         }
-        return null;
+        return Sets.newHashSet(field);
+    }
+
+    private Set filedToSetA(String field) {
+        if (!StringUtils.isEmpty(field) && field.contains(",")) {
+            HashSet<String> filedSet = Sets.newHashSet(StringUtils.split(field, ","));
+            return filedSet;
+        }
+        return Sets.newHashSet(new SimpleGrantedAuthority(field));
     }
 }

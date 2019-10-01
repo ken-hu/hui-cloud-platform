@@ -1,11 +1,15 @@
 package com.hui.cloud.auth.service.impl;
 
-import com.hui.cloud.auth.mapper.ClientDetailMapper;
-import com.hui.cloud.auth.entity.ClientDetail;
-import com.hui.cloud.auth.service.ClientDetailService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hui.cloud.auth.entity.ClientDetail;
+import com.hui.cloud.auth.mapper.ClientDetailMapper;
+import com.hui.cloud.auth.service.ClientDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -28,5 +32,20 @@ public class ClientDetailServiceImpl extends ServiceImpl<ClientDetailMapper, Cli
     @Override
     public ClientDetail get(String clientId) {
         return clientDetailMapper.selectById(clientId);
+    }
+
+    /**
+     * 分页查询客户端
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<ClientDetail> listByPage(Integer pageNum, Integer pageSize) {
+        QueryWrapper<ClientDetail> query = new QueryWrapper<ClientDetail>();
+        Page<ClientDetail> page = new Page<>(pageNum, pageSize);
+        List<ClientDetail> clientDetails = clientDetailMapper.selectPage(page, query).getRecords();
+        return clientDetails;
     }
 }

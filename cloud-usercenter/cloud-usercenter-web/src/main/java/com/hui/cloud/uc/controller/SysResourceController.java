@@ -24,5 +24,6 @@ public class SysResourceController {
     public SysResourceController(SysResourceService sysResourceService) {
         this.sysResourceService = sysResourceService;
     }
+
 }
 

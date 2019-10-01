@@ -24,12 +24,13 @@ public class MybatisMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         List<FieldValObj> fieldValObjs = Arrays.asList(
-                new FieldValObj("creaateTime", new Date()),
+                new FieldValObj("createTime", new Date()),
                 new FieldValObj("modifyTime", new Date()),
                 new FieldValObj("createUser", "Gary.Hu"),
                 new FieldValObj("modifyUser", "Gary.Hu"),
                 new FieldValObj("deleted", 0)
         );
+
         fieldValObjs.forEach(x -> fieldFill(x, metaObject));
     }
 
@@ -39,19 +40,20 @@ public class MybatisMetaObjectHandler implements MetaObjectHandler {
                 new FieldValObj("modifyTime", new Date()),
                 new FieldValObj("modifyUser", "Gary.Hu")
         );
+
         fieldValObjs.forEach(x -> fieldFill(x, metaObject));
     }
 
     /**
-     * 字段填充
+     * 字段填充-UPDATE
      *
      * @param fieldValObj
      * @param metaObject
      */
     private void fieldFill(FieldValObj fieldValObj, MetaObject metaObject) {
         Object val = getFieldValByName(fieldValObj.getFieldName(), metaObject);
-        if (null != val) {
-            setUpdateFieldValByName(fieldValObj.getFieldName(), fieldValObj.getData(), metaObject);
+        if (null == val) {
+            setFieldValByName(fieldValObj.getFieldName(), fieldValObj.getData(), metaObject);
         }
     }
 

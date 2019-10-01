@@ -2,9 +2,7 @@ package com.hui.cloud.uc.controller;
 
 
 import com.hui.cloud.auth.api.AuthClient;
-import com.hui.cloud.auth.dto.AuthTokenDTO;
 import com.hui.cloud.common.model.ResponseVO;
-import com.hui.cloud.uc.dto.RegisterRequestDTO;
 import com.hui.cloud.uc.dto.SysUserDTO;
 import com.hui.cloud.uc.entity.SysGroup;
 import com.hui.cloud.uc.entity.SysRole;
@@ -15,7 +13,6 @@ import com.hui.cloud.uc.service.SysUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -51,53 +48,12 @@ public class SysUserController {
     }
 
     /**
-     * 用户注册
-     *
-     * @param registerRequestDTO
-     * @return
-     */
-    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseVO register(@RequestBody RegisterRequestDTO registerRequestDTO) {
-        SysUser sysUser = new SysUser();
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodePassword = encoder.encode(registerRequestDTO.getPassword());
-        sysUser.setUserName(registerRequestDTO.getUserName());
-        sysUser.setPassword(encodePassword);
-        sysUserService.save(sysUser);
-        return ResponseVO.ok();
-    }
-
-
-    /**
-     * 用户登录
-     * @param authorization
-     * @param username
-     * @param password
-     * @return
-     */
-    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseVO login(@RequestParam(value = "authorization") String authorization,
-                            @RequestParam("username") String username,
-                            @RequestParam("password") String password) {
-
-        System.out.println(authorization);
-
-//        String test = authClient.test();
-//        System.out.println(test);
-
-
-        AuthTokenDTO jwt= authClient.getToken(authorization, username, password, "password");
-        return ResponseVO.ok(jwt);
-    }
-
-
-    /**
      * 用户名查询用户
      *
      * @param userName
      * @return
      */
-    @GetMapping("/user")
+    @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO getSysUser(@RequestParam String userName) {
         SysUser sysUser = sysUserService.getUserByName(userName);
         SysUserDTO sysUserDTO = new SysUserDTO();
@@ -112,7 +68,7 @@ public class SysUserController {
      * @param pageSize
      * @return
      */
-    @GetMapping("/users")
+    @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO listSysUser(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         List<SysUser> sysUsers = sysUserService.listByPage(pageNum, pageSize);
         return ResponseVO.ok(sysUsers);
@@ -124,7 +80,7 @@ public class SysUserController {
      * @param userId
      * @return
      */
-    @GetMapping("/user/{id}/roles")
+    @GetMapping(value = "/user/{id}/roles", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO listUserRoles(@PathVariable("id") Long userId) {
         HashSet<SysRole> sysRoles = sysRoleService.listByUserId(userId);
         return ResponseVO.ok(sysRoles);
@@ -135,7 +91,7 @@ public class SysUserController {
      *
      * @return
      */
-    @GetMapping("/user/{id}/groups")
+    @GetMapping(value = "/user/{id}/groups", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO listUserGroups(@PathVariable("id") Long userId) {
         HashSet<SysGroup> sysGroups = sysGroupService.listByUserId(userId);
         return ResponseVO.ok(sysGroups);
@@ -148,7 +104,7 @@ public class SysUserController {
      * @param roleIds
      * @return
      */
-    @PutMapping("/user/{id}/roles")
+    @PutMapping(value = "/user/{id}/roles", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO bindRoles(@PathVariable("id") Long userId, @RequestParam List<Long> roleIds) {
         sysUserService.bindRoles(roleIds, userId);
         return ResponseVO.ok();
@@ -161,7 +117,7 @@ public class SysUserController {
      * @param groupIds
      * @return
      */
-    @PutMapping("/user/{id}/groups")
+    @PutMapping(value = "/user/{id}/groups", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO bindGroups(@PathVariable("id") Long userId, @RequestParam List<Long> groupIds) {
         sysUserService.bindGroups(groupIds, userId);
         return ResponseVO.ok();

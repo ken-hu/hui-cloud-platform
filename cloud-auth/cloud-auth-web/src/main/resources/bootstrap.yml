@@ -69,3 +69,5 @@ mybatis-plus:
     db-config:
       logic-not-delete-value: 0
       logic-delete-value: 1
+mybatis:
+  mapper-locations: classpath*:mapper/*/*.xml

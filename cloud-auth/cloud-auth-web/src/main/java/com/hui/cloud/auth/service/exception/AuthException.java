@@ -1,4 +1,4 @@
-package com.hui.cloud.auth.exception;
+package com.hui.cloud.auth.service.exception;
 
 import com.hui.cloud.common.exception.BussinessException;
 

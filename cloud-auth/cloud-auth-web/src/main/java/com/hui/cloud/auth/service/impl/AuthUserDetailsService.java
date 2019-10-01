@@ -1,6 +1,8 @@
 package com.hui.cloud.auth.service.impl;
 
+import com.hui.cloud.auth.service.bo.AuthUserDetail;
 import com.hui.cloud.uc.api.SysUserClient;
+import com.hui.cloud.uc.dto.SysUserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,23 +40,22 @@ public class AuthUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.error("================userName : {}============================",username);
         if (username.equals("admin")){
-            User user = new User("admin",passwordEncoder.encode("admin"),true,
+            User user = new User("admin",passwordEncoder.encode("123456"),true,
                     true, true,
-                    true, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"),new SimpleGrantedAuthority("ROLE_ANONYMOUS")));
+                    true, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
             return user;
         }
-        /*SysUserDTO sysUserDTO = sysUserApi.getSysUser(username).getData();
+        SysUserDTO sysUserDTO = sysUserClient.getSysUser(username).getData();
         log.info(sysUserDTO.toString());
         if (null == sysUserDTO) {
             throw new UsernameNotFoundException("Not found this username : " + username);
         }
-        AuthUserDetail authUserDetail = new AuthUserDetail();
-        BeanUtils.copyProperties(sysUserDTO, authUserDetail);
-        authUserDetail.setPassword(passwordEncoder.encode(sysUserDTO.getPassword()));
-        return authUserDetail;*/
-        return null;
+        AuthUserDetail authUserDetail =
+                new AuthUserDetail(sysUserDTO.getUserName(), sysUserDTO.getPassword(),
+                        Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+        log.info(authUserDetail.toString());
+        return authUserDetail;
     }
 
 }

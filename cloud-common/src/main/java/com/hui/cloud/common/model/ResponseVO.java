@@ -55,15 +55,15 @@ public class ResponseVO<T> implements Serializable {
      * @return
      */
     public static <T> ResponseVO<T> ok() {
-        return ok(null);
+        return new ResponseVO<>(ResponseConstant.SUCCESS_CODE, ResponseConstant.SUCCESS, null);
     }
 
     public static <T> ResponseVO<T> ok(T data) {
-        return ok(ResponseConstant.SUCCESS, data);
+        return new ResponseVO<>(ResponseConstant.SUCCESS_CODE, ResponseConstant.SUCCESS, data);
     }
 
     public static <T> ResponseVO<T> ok(String msg) {
-        return ok(msg, null);
+        return new ResponseVO<>(ResponseConstant.SUCCESS_CODE, msg, null);
     }
 
     public static <T> ResponseVO<T> ok(String msg, T data) {
@@ -78,15 +78,15 @@ public class ResponseVO<T> implements Serializable {
      * @return
      */
     public static <T> ResponseVO<T> error() {
-        return error(null);
+        return new ResponseVO<>(ResponseConstant.ERROR_CODE, ResponseConstant.ERROR, null);
     }
 
     public static <T> ResponseVO<T> error(T data) {
-        return error(ResponseConstant.ERROR, data);
+        return new ResponseVO<>(ResponseConstant.ERROR_CODE, ResponseConstant.ERROR, data);
     }
 
     public static <T> ResponseVO<T> error(String msg) {
-        return error(msg, null);
+        return new ResponseVO<>(ResponseConstant.ERROR_CODE, msg, null);
     }
 
     public static <T> ResponseVO<T> error(String msg, T data) {
@@ -100,15 +100,15 @@ public class ResponseVO<T> implements Serializable {
      * @return
      */
     public static <T> ResponseVO<T> forbidden() {
-        return forbidden(null);
+        return new ResponseVO<>(ResponseConstant.FORBIDDEN_CODE, ResponseConstant.FORBIDDEN, null);
     }
 
     public static <T> ResponseVO<T> forbidden(T data) {
-        return forbidden(ResponseConstant.FORBIDDEN, data);
+        return new ResponseVO<>(ResponseConstant.FORBIDDEN_CODE, ResponseConstant.FORBIDDEN, data);
     }
 
     public static <T> ResponseVO<T> forbidden(String msg) {
-        return forbidden(msg, null);
+        return new ResponseVO<>(ResponseConstant.FORBIDDEN_CODE, msg, null);
     }
 
     public static <T> ResponseVO<T> forbidden(String msg, T data) {
@@ -123,15 +123,16 @@ public class ResponseVO<T> implements Serializable {
      * @return
      */
     public static <T> ResponseVO<T> unauthorized() {
-        return unauthorized(null);
+        return new ResponseVO<>(ResponseConstant.UNAUTHORIZED_CODE, ResponseConstant.UNAUTHORIZED, null);
     }
 
     public static <T> ResponseVO<T> unauthorized(T data) {
-        return unauthorized(ResponseConstant.UNAUTHORIZED, data);
+        return new ResponseVO<>(ResponseConstant.UNAUTHORIZED_CODE, ResponseConstant.UNAUTHORIZED, data);
     }
 
     public static <T> ResponseVO<T> unauthorized(String msg) {
-        return unauthorized(msg, null);
+        return new ResponseVO<>(ResponseConstant.UNAUTHORIZED_CODE, msg, null);
+
     }
 
     public static <T> ResponseVO<T> unauthorized(String msg, T data) {
@@ -145,15 +146,16 @@ public class ResponseVO<T> implements Serializable {
      * @return
      */
     public static <T> ResponseVO<T> notFound() {
-        return notFound(null);
+        return new ResponseVO<>(ResponseConstant.NOT_FOUND_CODE, ResponseConstant.NOT_FOUND, null);
     }
 
     public static <T> ResponseVO<T> notFound(T data) {
-        return notFound(ResponseConstant.NOT_FOUND, data);
+        return new ResponseVO<>(ResponseConstant.NOT_FOUND_CODE, ResponseConstant.NOT_FOUND, data);
     }
 
     public static <T> ResponseVO<T> notFound(String msg) {
-        return notFound(msg, null);
+        return new ResponseVO<>(ResponseConstant.NOT_FOUND_CODE, msg, null);
+
     }
 
     public static <T> ResponseVO<T> notFound(String msg, T data) {
@@ -168,15 +170,15 @@ public class ResponseVO<T> implements Serializable {
      * @return
      */
     public static <T> ResponseVO<T> badRequest() {
-        return badRequest(null);
+        return new ResponseVO<>(ResponseConstant.BAD_REQUEST_CODE, ResponseConstant.BAD_REQUEST, null);
     }
 
     public static <T> ResponseVO<T> badRequest(T data) {
-        return badRequest(ResponseConstant.BAD_REQUEST, data);
+        return new ResponseVO<>(ResponseConstant.BAD_REQUEST_CODE, ResponseConstant.BAD_REQUEST, data);
     }
 
     public static <T> ResponseVO<T> badRequest(String msg) {
-        return badRequest(msg, null);
+        return new ResponseVO<>(ResponseConstant.BAD_REQUEST_CODE, msg, null);
     }
 
     public static <T> ResponseVO<T> badRequest(String msg, T data) {

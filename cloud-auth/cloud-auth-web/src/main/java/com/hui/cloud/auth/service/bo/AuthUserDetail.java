@@ -1,10 +1,11 @@
 package com.hui.cloud.auth.service.bo;
 
-import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * <b><code>AuthRoleDetail</code></b>
@@ -15,13 +16,18 @@ import java.util.Collection;
  *
  * @author Gary.hu
  */
-@Setter
-public class AuthUserDetail implements UserDetails {
-    private String userName;
+@ToString
+public class AuthUserDetail implements UserDetails{
 
+    private String username;
     private String password;
+    private List<GrantedAuthority> grantedAuthorities;
 
-    Collection<? extends GrantedAuthority> grantedAuthorities;
+    public AuthUserDetail(String username, String password, List<GrantedAuthority> grantedAuthorities) {
+        this.username = username;
+        this.password = password;
+        this.grantedAuthorities = grantedAuthorities;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -30,12 +36,12 @@ public class AuthUserDetail implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return username;
     }
 
     @Override

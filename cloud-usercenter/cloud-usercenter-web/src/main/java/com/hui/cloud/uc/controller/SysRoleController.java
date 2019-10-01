@@ -5,10 +5,8 @@ import com.hui.cloud.common.model.ResponseVO;
 import com.hui.cloud.uc.entity.SysRole;
 import com.hui.cloud.uc.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,10 +36,23 @@ public class SysRoleController {
      * @param pageSize
      * @return
      */
-    @GetMapping("/roles")
+    @GetMapping(value = "/roles", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO listRoles(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         List<SysRole> sysRoles = sysRoleService.listByPage(pageNum, pageSize);
         return ResponseVO.ok(sysRoles);
+    }
+
+    /**
+     * 角色绑定权限
+     *
+     * @param permissionId
+     * @param roleId
+     * @return
+     */
+    @PutMapping(value = "/rols/{id}/permissions", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseVO bindPermissions(@PathVariable("id") Long roleId, @RequestParam List<Long> permissionId) {
+        sysRoleService.bindPermissions(permissionId, roleId);
+        return ResponseVO.ok();
     }
 }
 

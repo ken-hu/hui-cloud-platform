@@ -1,6 +1,8 @@
 package com.hui.cloud.auth.service.bo;
 
 import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
@@ -18,6 +20,8 @@ import java.util.Set;
  * @author Gary.Hu
  */
 @Setter
+@Slf4j
+@ToString
 public class AuthClientDetail implements ClientDetails {
 
     private String clientId;
@@ -73,66 +77,66 @@ public class AuthClientDetail implements ClientDetails {
 
     @Override
     public String getClientId() {
-        return null;
+        return clientId;
     }
 
     @Override
     public Set<String> getResourceIds() {
-        return null;
+        return resourceIds;
     }
 
     @Override
     public boolean isSecretRequired() {
-        return false;
+        return true;
     }
 
     @Override
     public String getClientSecret() {
-        return null;
+        return clientSecret;
     }
 
     @Override
     public boolean isScoped() {
-        return false;
+        return true;
     }
 
     @Override
     public Set<String> getScope() {
-        return null;
+        return scope;
     }
 
     @Override
     public Set<String> getAuthorizedGrantTypes() {
-        return null;
+        return authorizedGrantTypes;
     }
 
     @Override
     public Set<String> getRegisteredRedirectUri() {
-        return null;
+        return registeredRedirectUri;
     }
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
     public Integer getAccessTokenValiditySeconds() {
-        return null;
+        return accessTokenValiditySeconds;
     }
 
     @Override
     public Integer getRefreshTokenValiditySeconds() {
-        return null;
+        return refreshTokenValiditySeconds;
     }
 
     @Override
     public boolean isAutoApprove(String s) {
-        return false;
+        return true;
     }
 
     @Override
     public Map<String, Object> getAdditionalInformation() {
-        return null;
+        return additionalInformation;
     }
 }
