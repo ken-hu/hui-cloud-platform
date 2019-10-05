@@ -34,8 +34,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                //swagger放行
+                .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/v2/**").permitAll()
+                .antMatchers("/usercenter-service/**").permitAll()
                 //允许登录、注册放行
-                .antMatchers("/sys-user/login","/sys-user/register","/h2-console").permitAll()
+                .antMatchers("/sys-user/user","/sys-user/login","/sys-user/register","/h2-console").permitAll()
                 // 健康检查放行
                 .antMatchers("/actuator/**").permitAll()
                 //OPTIONS请求 放行
@@ -46,7 +49,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.tokenStore(tokenStore);
+        resources
+                .tokenStore(tokenStore)
+                // 设置资源ID
+                .resourceId("usercenter-service");
     }
 
 

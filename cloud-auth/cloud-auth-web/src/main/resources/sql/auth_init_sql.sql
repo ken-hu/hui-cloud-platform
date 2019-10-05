@@ -15,14 +15,3 @@ CREATE TABLE `t_auth_client_detail` (
 	`autoapprove` VARCHAR ( 200 ) NULL COMMENT '用户是否自动Approval操作',
 	PRIMARY KEY ( `client_id` ) USING BTREE
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT 'Oauth客户端表';
-
-DROP TABLE IF EXISTS `t_auth_approvals_detail`;
-CREATE TABLE `t_auth_approvals_detail` (
-	`user_id` VARCHAR ( 200 ) NOT NULL COMMENT '客户端ID',
-	`client_id` VARCHAR ( 200 ) NULL COMMENT '资源ID集合,多个资源时用逗号(,)分隔',
-	`scope` VARCHAR ( 200 ) NULL COMMENT '客户端密匙',
-	`status` VARCHAR ( 200 ) NULL COMMENT '客户端申请的权限范围',
-	`expiresat` VARCHAR ( 200 ) NULL COMMENT ' 客户端支持的grant_type',
-	`lastmodifiedat` VARCHAR ( 200 ) NULL COMMENT ' 重定向URI',
-	PRIMARY KEY ( `client_id` ) USING BTREE
-) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT 'Oauth客户端表';

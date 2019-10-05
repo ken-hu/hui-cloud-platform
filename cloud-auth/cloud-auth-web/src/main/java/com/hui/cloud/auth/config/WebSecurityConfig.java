@@ -74,6 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 // swagger 放行
                 .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/v2/**")
+                //健康检查放行
                 .antMatchers("/actuator/**");
     }
 

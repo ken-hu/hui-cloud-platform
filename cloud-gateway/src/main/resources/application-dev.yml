@@ -25,15 +25,23 @@ spring:
           uri: lb://auth-service
           predicates:
             - Path=/auth-service/**
-            - PrefixPath=/auth-service
           filters:
             - StripPrefix=1
-            - PrefixPath=/auth-service
+#            - PrefixPath=/auth-service
         - id: usercenter-service
           uri: lb://usercenter-service
           predicates:
             - Path=/usercenter-service/**
-            - PrefixPath=/usercenter-service
           filters:
             - StripPrefix=1
-            - PrefixPath=/usercenter-service
+#            - PrefixPath=/usercenter-service
+        - id: schedule-service
+          uri: lb://schedule-service
+          predicates:
+            - Path=/schedule-service/**
+          filters:
+            - StripPrefix=1
+#            - PrefixPath=/schedule-service
+# 日志配置
+logging:
+  config: classpath:logback-spring.xml

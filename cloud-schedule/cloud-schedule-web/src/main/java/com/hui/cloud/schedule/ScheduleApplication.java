@@ -1,24 +1,23 @@
-package com.hui.cloud.txlcn;
+package com.hui.cloud.schedule;
 
-import com.codingapi.txlcn.tm.config.EnableTransactionManagerServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * <code>TxLcnApplication</code>
+ * <code>ScheduleApplication</code>
  * <desc>
- * <p>
+ * 描述：
  * <desc/>
- * Creation Time: 2019/9/21 0:01.
+ * Creation Time: 2019/10/2 2:48.
  *
  * @author Gary.Hu
  */
-@EnableTransactionManagerServer
 @SpringBootApplication
 @EnableDiscoveryClient
-public class TxLcnApplication {
+public class ScheduleApplication {
     public static void main(String[] args) {
-        SpringApplication.run(TxLcnApplication.class, args);
+        SpringApplication.run(ScheduleApplication.class, args);
+
     }
 }

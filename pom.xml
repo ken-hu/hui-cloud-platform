@@ -33,12 +33,13 @@
         <springboot-mybatis>2.1.0</springboot-mybatis>
         <mybatis-plus>3.2.0</mybatis-plus>
         <lcn.version>5.0.2.RELEASE</lcn.version>
+        <quartz.version>2.3.1</quartz.version>
     </properties>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.8.RELEASE</version>
+        <version>2.1.9.RELEASE</version>
     </parent>
     <!-- 版本管理 -->
     <dependencyManagement>

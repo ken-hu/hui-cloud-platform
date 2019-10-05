@@ -46,7 +46,8 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
                         .filter(predicateDefinition -> ("Path").equalsIgnoreCase(predicateDefinition.getName()))
                         .forEach(predicateDefinition -> resources.add(swaggerResource(routeDefinition.getId(),
                                 predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0")
-                                        .replace("/**", API_URI)))));
+                                        // 注意我的swagger配置了 group 所以传参新增 ?group=serviceId
+                                        .replace("/**", API_URI+"?group="+routeDefinition.getId())))));
         return resources;
     }
 
