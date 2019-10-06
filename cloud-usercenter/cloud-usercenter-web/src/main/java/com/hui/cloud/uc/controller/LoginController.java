@@ -3,6 +3,7 @@ package com.hui.cloud.uc.controller;
 import com.hui.cloud.auth.api.AuthClient;
 import com.hui.cloud.auth.dto.AuthTokenDTO;
 import com.hui.cloud.common.model.ResponseVO;
+import com.hui.cloud.uc.dto.LoginRequestDTO;
 import com.hui.cloud.uc.vo.LoginUserVO;
 import com.hui.cloud.uc.entity.SysUser;
 import com.hui.cloud.uc.service.SysUserService;
@@ -40,19 +41,17 @@ public class LoginController {
      * 登录接口需要在请求头添加 Authorization
      * 传递格式  clietnId:clientscert (Base64转格式)=> Base Basic dXNlcmNlbnRlci1zZXJ2aWNlOjEyMzQ1Ng==
      * @param authorization
-     * @param username
-     * @param password
+     * @param loginRequestDTO
      * @return
      */
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO login(@RequestHeader(value = "Authorization") String authorization,
-                            @RequestParam("username") String username,
-                            @RequestParam("password") String password) {
-        SysUser sysUser = sysUserService.getUserByName(username);
+                            @RequestBody LoginRequestDTO loginRequestDTO) {
+        SysUser sysUser = sysUserService.getUserByName(loginRequestDTO.getUserName());
         if(null==sysUser){
             throw new SysUserException("该用户不存在");
         }
-        AuthTokenDTO authTokenDTO= authClient.getToken(authorization, username, password, "password");
+        AuthTokenDTO authTokenDTO= authClient.getToken(authorization, loginRequestDTO.getUserName(), loginRequestDTO.getPassword(), "password");
 
         LoginUserVO loginUserVO = new LoginUserVO();
         BeanUtils.copyProperties(authTokenDTO,loginUserVO);
