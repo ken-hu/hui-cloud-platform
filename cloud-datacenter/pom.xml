@@ -9,18 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cloud-schedule</artifactId>
+    <artifactId>cloud-datacenter</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>cloud-schedule-web</module>
-        <module>cloud-schedule-api</module>
+        <module>cloud-datacenter-web</module>
+        <module>cloud-datacenter-api</module>
     </modules>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.hui.cloud</groupId>
-            <artifactId>cloud-common</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 </project>

@@ -60,7 +60,7 @@ spring:
     job-store-type: jdbc
     jdbc:
       initialize-schema: never
-      schema: classpath:/sql/schedule_init_sql.sql
+      schema: classpath:/sql/schedule_init.sql
     scheduler-name: quartzScheduler
     properties:
       org:

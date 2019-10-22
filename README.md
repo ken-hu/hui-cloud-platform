@@ -68,7 +68,7 @@
 
 【auth-service】-> resources/sql/auth_init_sql.sql
 
-【schedule-service】-> resources/sql/schedule_init_sql.sql
+【schedule-service】-> resources/sql/schedule_init.sql
 
 ```shell
 #安装+运行consul

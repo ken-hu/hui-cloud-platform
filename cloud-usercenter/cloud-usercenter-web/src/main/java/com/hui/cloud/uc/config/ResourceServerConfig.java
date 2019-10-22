@@ -54,6 +54,4 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 // 设置资源ID
                 .resourceId("usercenter-service");
     }
-
-
 }

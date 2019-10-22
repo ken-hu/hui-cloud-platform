@@ -16,4 +16,11 @@
         <module>cloud-usercenter-web</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.hui.cloud</groupId>
+            <artifactId>cloud-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
