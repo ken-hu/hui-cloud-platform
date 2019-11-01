@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS `t_uc_sys_user`;
 CREATE TABLE `t_uc_sys_user` (
 	`user_id` BIGINT ( 20 ) NOT NULL COMMENT '用户ID',
 	`user_name` VARCHAR ( 50 ) NULL COMMENT '用户名',
-	`password` VARCHAR ( 50 ) NULL COMMENT '用户密码',
+	`password` VARCHAR ( 200 ) NULL COMMENT '用户密码',
 	`deleted` INT ( 2 ) NULL COMMENT '是否逻辑删除 1：已删除 0：未删除',
 	`create_time` datetime ( 0 ) NULL COMMENT '创建时间',
 	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',

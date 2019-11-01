@@ -8,7 +8,7 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
-                %red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %black([%file:%line]) %boldMagenta(%logger{36}) - %cyan(%msg%n)
+                %red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %black([%file:%line]) %boldMagenta(%logger{36}) - [traceId:%black(%X{X-B3-TraceId}),spanId:%green(%X{X-B3-SpanId}),ParentSpanId:%blue(%X{X-B3-ParentSpanId})] %cyan(%msg%n)
             </pattern>
             <charset>UTF-8</charset>
         </encoder>

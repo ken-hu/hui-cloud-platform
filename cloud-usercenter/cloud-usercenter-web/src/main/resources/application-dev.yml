@@ -59,14 +59,14 @@ spring:
         # 这是什么大坑？ 不加 健康检查不通过
         heartbeat:
           enabled: true
-#  zipkin:
-#    base-url: http://localhost:9411/
-#  sleuth:
-#    web:
-#      client:
-#        enabled: true
-#    sampler:
-#      probability: 1.0
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
 # 日志配置
 logging:
   config: classpath:logback-spring.xml
