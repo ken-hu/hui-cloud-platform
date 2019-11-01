@@ -26,5 +26,6 @@
             <artifactId>spring-boot-admin-starter-server</artifactId>
             <version>${springboot-admin}</version>
         </dependency>
+
     </dependencies>
 </project>
