@@ -34,7 +34,7 @@ spring:
       min-evictable-idle-time-millis: 30000
       max-open-prepared-statements: 20
   redis:
-    host: 127.0.0.1
+    host: 192.168.64.144
     port: 6379
   rabbitmq:
     host: 127.0.0.1
@@ -43,7 +43,7 @@ spring:
     password: admin
   cloud:
     consul:
-      host: localhost
+      host: 192.168.64.144
       port: 8500
       discovery:
         register: true
@@ -58,7 +58,7 @@ spring:
         instance-id: ${spring.application.name}
 # 日志配置
 logging:
-  config: classpath:logback-spring.xml
+  config: classpath:logback-config.xml
 
 # mybatis-plus
 mybatis-plus:

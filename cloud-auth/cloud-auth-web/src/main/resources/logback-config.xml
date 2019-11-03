@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <!--从application.yml读取变量名-->
+    <springProperty scope="context" name="APPLICATION_NAME" source="spring.application.name"/>
+    <!--定义变量-->
+    <property name="LOG_DIR" value="logs"/>
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %black([%file:%line]) %boldMagenta(%logger{36}) - [traceId:%black(%X{X-B3-TraceId}),spanId:%green(%X{X-B3-SpanId}),ParentSpanId:%blue(%X{X-B3-ParentSpanId})] %cyan(%msg%n)"/>
+    <property name="FILE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%file:%line] %logger - [traceId:%X{X-B3-TraceId},spanId:%X{X-B3-SpanId},ParentSpanId:%X{X-B3-ParentSpanId}] %msg%n"/>
+
+
+    <!-- 控制台输出日志级别 -->
+    <!-- 级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
+    <!--springboot会自动根据启动参数匹配logback-spring.xml的打印方式-->
+
+    <!--#######################################################################-->
+    <!--####################        DEV测试环境       ########################-->
+    <!--#######################################################################-->
+    <springProfile name="dev">
+        <!-- 1. Log输出到控制台-->
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <!-- 2. Log输出到文件-->
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <encoder>
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+                <charset>utf-8</charset>
+            </encoder>
+
+            <!-- 文件路径 ，注意LOG_PATH是默认值，它的配置对应application.properties里的logging.path值-->
+            <!--配置了fileNamePattern就不用配置这个-->
+            <!--<file>${LOG_DIR}/${APPLICATION_NAME}-console.log</file>-->
+
+            <!--rolling: 当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名 -->
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- 文件名称 -->
+                <fileNamePattern>${LOG_DIR}/${APPLICATION_NAME}-console.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <!-- 文件最大保存历史数量 -->
+                <MaxHistory>30</MaxHistory>
+                <!--TimeBasedRollingPolicy: 时间滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动 -->
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <!-- maxFileSize:这是活动文件的大小，默认值是10MB，测试时可改成1KB看效果 -->
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <!-- 追加方式记录日志 -->
+            <append>true</append>
+            <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                <level>DEBUG</level>
+                <onMatch>ACCEPT</onMatch>
+                <onMismatch>DENY</onMismatch>
+            </filter>
+        </appender>
+
+        <!--异步写日志-->
+        <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+            <appender-ref ref="FILE"/>
+        </appender>
+
+        <!-- 单独配置包的日志打印 -->
+        <logger name="com.hui.cloud" level="DEBUG" additivity="false">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="ASYNC"/>
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="ASYNC"/>
+        </root>
+    </springProfile>
+
+    <!--#######################################################################-->
+    <!--####################        生产环境       ########################-->
+    <!--#######################################################################-->
+    <springProfile name="prd">
+        <!-- 1. Log输出到控制台-->
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <!-- 2. Log输出到文件-->
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <encoder>
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+                <charset>utf-8</charset>
+            </encoder>
+
+            <!-- 文件路径 ，注意LOG_PATH是默认值，它的配置对应application.properties里的logging.path值-->
+            <!--配置了fileNamePattern就不用配置这个-->
+            <!--<file>${LOG_DIR}/${APPLICATION_NAME}-console.log</file>-->
+
+            <!--rolling: 当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名 -->
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- 文件名称 -->
+                <fileNamePattern>${LOG_DIR}/${APPLICATION_NAME}-console.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <!-- 文件最大保存历史数量 -->
+                <MaxHistory>30</MaxHistory>
+                <!--TimeBasedRollingPolicy: 时间滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动 -->
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <!-- maxFileSize:这是活动文件的大小，默认值是10MB，测试时可改成1KB看效果 -->
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <!-- 追加方式记录日志 -->
+            <append>true</append>
+            <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                <level>DEBUG</level>
+                <onMatch>ACCEPT</onMatch>
+                <onMismatch>DENY</onMismatch>
+            </filter>
+        </appender>
+
+        <!--异步写日志-->
+        <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+            <appender-ref ref="FILE"/>
+        </appender>
+
+        <!-- 单独配置包的日志打印 -->
+        <logger name="com.hui.cloud" level="DEBUG" additivity="false">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="ASYNC"/>
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="ASYNC"/>
+        </root>
+    </springProfile>
+
+    <!--#######################################################################-->
+    <!--####################        JUNIT测试环境       ########################-->
+    <!--#######################################################################-->
+    <springProfile name="junit">
+        <!-- 1. Log输出到控制台-->
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+        </appender>
+
+        <!-- 单独配置包的日志打印 -->
+        <logger name="com.hui.cloud" level="DEBUG" additivity="false">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+</configuration>

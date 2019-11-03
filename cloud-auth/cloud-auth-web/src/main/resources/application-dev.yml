@@ -58,7 +58,7 @@ spring:
         instance-id: ${spring.application.name}
 # 日志配置
 logging:
-  config: classpath:logback-spring.xml
+  config: classpath:logback-config.xml
 
 # mybatis-plus
 mybatis-plus:

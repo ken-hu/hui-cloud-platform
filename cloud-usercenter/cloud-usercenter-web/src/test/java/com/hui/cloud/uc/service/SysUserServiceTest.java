@@ -1,5 +1,6 @@
 package com.hui.cloud.uc.service;
 
+import com.hui.cloud.uc.BaseJunitTest;
 import com.hui.cloud.uc.entity.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -36,6 +37,8 @@ public class SysUserServiceTest extends BaseJunitTest {
 
     @Test
     public void listByPage() throws Exception{
+        log.debug(" debug test !!!!!!!!!!!!!!!!!!!!!!!###################");
+
         List<SysUser> sysUsers = sysUserService.listByPage(1, 2);
         sysUsers.forEach(x->log.info(x.toString()));
     }

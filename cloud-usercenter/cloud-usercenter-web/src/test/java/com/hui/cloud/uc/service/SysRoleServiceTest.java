@@ -1,6 +1,7 @@
 package com.hui.cloud.uc.service;
 
 import com.google.common.collect.Sets;
+import com.hui.cloud.uc.BaseJunitTest;
 import com.hui.cloud.uc.entity.SysRole;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -24,7 +25,7 @@ import java.util.List;
  * @author Gary.Hu
  */
 @Slf4j
-public class SysRoleServiceTest extends BaseJunitTest{
+public class SysRoleServiceTest extends BaseJunitTest {
     @Autowired
     private SysRoleService sysRoleService;
 
