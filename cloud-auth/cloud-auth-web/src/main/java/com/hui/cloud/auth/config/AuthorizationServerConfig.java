@@ -94,13 +94,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.withClientDetails(authClientDetailsService);
          //内存数据测试
-        /*clients.inMemory()
+        clients.inMemory()
                 .withClient("usercenter-service")
                 //此处的scopes是无用的，可以随意设置,不填或者为空则默认是所有客户端都可以访问
                 .scopes("all")
                 .secret(passwordEncoder.encode("123456"))
                 .resourceIds("auth-service","usercenter-service")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token");*/
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token");
     }
 
     /**

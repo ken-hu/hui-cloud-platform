@@ -9,15 +9,18 @@ spring:
       host: localhost
       port: 8500
       discovery:
-        service-name: ${spring.application.name}
-        enabled: true
         register: true
+        # 服务停止时取消注册
         deregister: true
-        prefer-ip-address: true
-        health-check-interval: 30s
+        service-name: ${spring.application.name}
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+        # 设置健康检查失败多长时间后，取消注册
         health-check-critical-timeout: 30s
-        health-check-path: /actuator/info
+        prefer-ip-address: true
         instance-id: ${spring.application.name}
+        heartbeat:
+          enabled: true
     # 网关配置
     gateway:
       routes:

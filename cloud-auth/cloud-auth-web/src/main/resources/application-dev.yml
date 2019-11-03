@@ -43,7 +43,7 @@ spring:
     password: admin
   cloud:
     consul:
-      host: localhost
+      host: 127.0.0.1
       port: 8500
       discovery:
         register: true
@@ -56,6 +56,16 @@ spring:
         health-check-critical-timeout: 30s
         prefer-ip-address: true
         instance-id: ${spring.application.name}
+        heartbeat:
+          enabled: true
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
 # 日志配置
 logging:
   config: classpath:logback-config.xml
