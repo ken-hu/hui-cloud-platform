@@ -35,15 +35,14 @@ public class CodeGenerator {
      * INFO
      */
     private static final String AUTH = "Gary.hu";
-    private static final String[] TABLES = new String[]{"t_uc_sys_resource_permission_rel",
-            "t_uc_sys_role_group_rel","t_uc_sys_role_permission_rel","t_uc_sys_user_group_rel","t_uc_sys_user_role_rel"};
-    private static final String TABLE_PREFIX = "t_uc";
+    private static final String[] TABLES = new String[]{"t_schedule_job"};
+    private static final String TABLE_PREFIX = "t_schedule";
     private static final String BASE_ENTITY_CLASS = "com.hui.cloud.common.model.BaseEntity";
 
     /**
      * DATABSE
      */
-    private static final String URL = "jdbc:mysql://localhost:3306/hui_cloud_uc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
+    private static final String URL = "jdbc:mysql://localhost:3306/hui_cloud_schedule?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai";
     private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
     private static final String SCHEMA = "public";
     private static final String USERNAME = "root";

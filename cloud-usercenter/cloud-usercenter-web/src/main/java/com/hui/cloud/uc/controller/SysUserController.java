@@ -1,13 +1,14 @@
 package com.hui.cloud.uc.controller;
 
 
-import com.hui.cloud.auth.api.AuthClient;
 import com.hui.cloud.common.model.ResponseVO;
 import com.hui.cloud.uc.dto.SysUserDTO;
 import com.hui.cloud.uc.entity.SysGroup;
+import com.hui.cloud.uc.entity.SysPermission;
 import com.hui.cloud.uc.entity.SysRole;
 import com.hui.cloud.uc.entity.SysUser;
 import com.hui.cloud.uc.service.SysGroupService;
+import com.hui.cloud.uc.service.SysPermissionService;
 import com.hui.cloud.uc.service.SysRoleService;
 import com.hui.cloud.uc.service.SysUserService;
 import org.springframework.beans.BeanUtils;
@@ -28,23 +29,22 @@ import java.util.List;
  * @since 2019-09-19
  */
 @RestController
-@RequestMapping("/sys-user")
 public class SysUserController {
 
     private SysUserService sysUserService;
+
+    private SysPermissionService sysPermissionService;
 
     private SysRoleService sysRoleService;
 
     private SysGroupService sysGroupService;
 
-    private AuthClient authClient;
-
     @Autowired
-    public SysUserController(SysUserService sysUserService, SysRoleService sysRoleService, SysGroupService sysGroupService, AuthClient authClient) {
+    public SysUserController(SysUserService sysUserService, SysPermissionService sysPermissionService, SysRoleService sysRoleService, SysGroupService sysGroupService) {
         this.sysUserService = sysUserService;
+        this.sysPermissionService = sysPermissionService;
         this.sysRoleService = sysRoleService;
         this.sysGroupService = sysGroupService;
-        this.authClient = authClient;
     }
 
     /**
@@ -84,6 +84,18 @@ public class SysUserController {
     public ResponseVO listUserRoles(@PathVariable("id") Long userId) {
         HashSet<SysRole> sysRoles = sysRoleService.listByUserId(userId);
         return ResponseVO.ok(sysRoles);
+    }
+
+
+    /**
+     * 查询用户权限
+     * @param userId
+     * @return
+     */
+    @GetMapping(value = "/user/{id}/permissions", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseVO listUserPermissions(@PathVariable("id") Long userId) {
+        HashSet<SysPermission> sysPermissions = sysPermissionService.listByUserId(userId);
+        return ResponseVO.ok(sysPermissions);
     }
 
     /**

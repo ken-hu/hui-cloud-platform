@@ -6,7 +6,7 @@ spring:
   cloud:
     # 服务注册
     consul:
-      host: localhost
+      host: 127.0.0.1
       port: 8500
       discovery:
         register: true
@@ -47,4 +47,4 @@ spring:
 #            - PrefixPath=/schedule-service
 # 日志配置
 logging:
-  config: classpath:logback-spring.xml
+  config: classpath:logback-config.xml

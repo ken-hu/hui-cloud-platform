@@ -23,17 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Gary.Hu
  */
 @RestController
-@RequestMapping("/sys-user")
 public class RegisterController {
 
     private SysUserService sysUserService;
 
-    private AuthClient authClient;
-
     @Autowired
-    public RegisterController(SysUserService sysUserService, AuthClient authClient) {
+    public RegisterController(SysUserService sysUserService) {
         this.sysUserService = sysUserService;
-        this.authClient = authClient;
     }
     /**
      * 用户注册
@@ -41,11 +37,11 @@ public class RegisterController {
      * @param registerRequestDTO
      * @return
      */
-    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/user/register", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO register(@RequestBody RegisterRequestDTO registerRequestDTO) {
-        SysUser sysUser = new SysUser();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodePassword = encoder.encode(registerRequestDTO.getPassword());
+        SysUser sysUser = new SysUser();
         sysUser.setUserName(registerRequestDTO.getUserName());
         sysUser.setPassword(encodePassword);
         sysUserService.save(sysUser);

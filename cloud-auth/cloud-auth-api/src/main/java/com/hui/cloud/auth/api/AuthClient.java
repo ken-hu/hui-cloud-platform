@@ -3,7 +3,6 @@ package com.hui.cloud.auth.api;
 import com.hui.cloud.auth.dto.AuthTokenDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +26,9 @@ public interface AuthClient {
                           @RequestParam("grant_type") String grantType);
 
 
-    @GetMapping(value = "/test",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    String test();
+    @PostMapping(value = "/oauth/token",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    AuthTokenDTO refreshToken(@RequestHeader(value = "Authorization") String authorization,
+                              @RequestParam("refresh_token") String refreshToken,
+                              @RequestParam("grant_type") String grantType);
 }

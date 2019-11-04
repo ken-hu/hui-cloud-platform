@@ -1,5 +1,5 @@
 CREATE DATABASE `hui_cloud_schedule` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-
+-- ############### quartz官网SQL部分 ###################
 -- 1.1. qrtz_blob_triggers : 以Blob 类型存储的触发器。
 -- 1.2. qrtz_calendars：存放日历信息， quartz可配置一个日历来指定一个时间范围。
 -- 1.3. qrtz_cron_triggers：存放cron类型的触发器。
@@ -12,6 +12,7 @@ CREATE DATABASE `hui_cloud_schedule` CHARACTER SET 'utf8' COLLATE 'utf8_general_
 -- 1.10. qrtz_simple_triggers：简单触发器的信息。
 -- 1.11. qrtz_trigger_listeners：触发器监听器。
 -- 1.12. qrtz_triggers：触发器的基本信息。
+-- ####################################################
 
 DROP TABLE IF EXISTS QRTZ_FIRED_TRIGGERS;
 DROP TABLE IF EXISTS QRTZ_PAUSED_TRIGGER_GRPS;
@@ -182,3 +183,24 @@ CREATE INDEX IDX_QRTZ_FT_J_G ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_NAME,JOB_GROU
 CREATE INDEX IDX_QRTZ_FT_JG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_GROUP);
 CREATE INDEX IDX_QRTZ_FT_T_G ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP);
 CREATE INDEX IDX_QRTZ_FT_TG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_GROUP);
+
+
+-- ###################### JOB数据表 ###################
+--
+-- ####################################################
+DROP TABLE IF EXISTS `t_schedule_job`;
+CREATE TABLE `t_schedule_job` (
+	`id` VARCHAR ( 200 ) NOT NULL COMMENT '主键ID',
+	`schedule_name` VARCHAR ( 200 ) NULL COMMENT '调度器名字',
+	`job_name` VARCHAR ( 200 ) NULL COMMENT 'Job名字',
+	`job_group` VARCHAR ( 200 ) NULL COMMENT 'Job组',
+	`description` VARCHAR ( 200 ) NULL COMMENT '描述',
+	`job_class_name` VARCHAR ( 200 ) NULL COMMENT 'JOB类路径',
+	`cron_expression` VARCHAR ( 200 ) NULL COMMENT 'cron表达式',
+	`deleted` INT ( 2 ) NULL COMMENT '是否逻辑删除 1：已删除 0：未删除',
+    `create_time` datetime ( 0 ) NULL COMMENT '创建时间',
+	`create_user` VARCHAR ( 50 ) NULL COMMENT '创建用户',
+	`modify_time` datetime ( 0 ) NULL COMMENT '修改时间',
+	`modify_user` VARCHAR ( 50 ) NULL COMMENT '修改用户',
+	PRIMARY KEY ( `id` ) USING BTREE
+) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT '调度JOB';

@@ -43,7 +43,7 @@ spring:
     password: admin
   cloud:
     consul:
-      host: localhost
+      host: 127.0.0.1
       port: 8500
       discovery:
         register: true
@@ -82,7 +82,7 @@ spring:
             threadsInheritContextClassLoaderOfInitializingThread: true
 # 日志配置
 logging:
-  config: classpath:logback-spring.xml
+  config: classpath:logback-config.xml
 
 # mybatis-plus
 mybatis-plus:

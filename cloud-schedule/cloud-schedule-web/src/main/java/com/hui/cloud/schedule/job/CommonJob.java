@@ -1,6 +1,8 @@
 package com.hui.cloud.schedule.job;
 
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 
 /**
  * <code>CommonJob</code>
@@ -11,54 +13,11 @@ import org.quartz.*;
  *
  * @author Gary.Hu
  */
-public class CommonJob implements JobDetail {
+@DisallowConcurrentExecution
+@Slf4j
+public class CommonJob extends QuartzJobBean {
     @Override
-    public JobKey getKey() {
-        return null;
-    }
-
-    @Override
-    public String getDescription() {
-        return null;
-    }
-
-    @Override
-    public Class<? extends Job> getJobClass() {
-        return null;
-    }
-
-    @Override
-    public JobDataMap getJobDataMap() {
-        return null;
-    }
-
-    @Override
-    public boolean isDurable() {
-        return false;
-    }
-
-    @Override
-    public boolean isPersistJobDataAfterExecution() {
-        return false;
-    }
-
-    @Override
-    public boolean isConcurrentExectionDisallowed() {
-        return false;
-    }
-
-    @Override
-    public boolean requestsRecovery() {
-        return false;
-    }
-
-    @Override
-    public Object clone() {
-        return null;
-    }
-
-    @Override
-    public JobBuilder getJobBuilder() {
-        return null;
+    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        log.info("CommonJob excuting .........");
     }
 }

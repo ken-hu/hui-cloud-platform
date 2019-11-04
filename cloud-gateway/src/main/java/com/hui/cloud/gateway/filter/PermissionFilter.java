@@ -18,6 +18,11 @@ public class PermissionFilter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        //1.通过JWT获取用户ID
+
+        //2.通过用户ID处查询Redis的权限
+
+        //3. 判断是否有该权限
         return null;
     }
 }

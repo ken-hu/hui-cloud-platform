@@ -2,8 +2,10 @@ package com.hui.cloud.uc.controller;
 
 
 import com.hui.cloud.common.model.ResponseVO;
+import com.hui.cloud.uc.dto.SysRoleDTO;
 import com.hui.cloud.uc.entity.SysRole;
 import com.hui.cloud.uc.service.SysRoleService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,6 @@ import java.util.List;
  * @since 2019-09-19
  */
 @RestController
-@RequestMapping("/sys-role")
 public class SysRoleController {
 
     private SysRoleService sysRoleService;
@@ -49,10 +50,24 @@ public class SysRoleController {
      * @param roleId
      * @return
      */
-    @PutMapping(value = "/rols/{id}/permissions", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PutMapping(value = "/role/{id}/permissions", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO bindPermissions(@PathVariable("id") Long roleId, @RequestParam List<Long> permissionId) {
         sysRoleService.bindPermissions(permissionId, roleId);
         return ResponseVO.ok();
     }
+
+    /**
+     * 创建OR更新角色
+     * @param sysRoleDTO
+     * @return
+     */
+    @PostMapping(value = "/role",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseVO saveRole(@RequestBody SysRoleDTO sysRoleDTO){
+        SysRole sysRole = new SysRole();
+        BeanUtils.copyProperties(sysRoleDTO,sysRole);
+        sysRoleService.saveOrUpdate(sysRole);
+        return ResponseVO.ok(sysRole);
+    }
+
 }
 

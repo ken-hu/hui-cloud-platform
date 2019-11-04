@@ -2,6 +2,8 @@ package com.hui.cloud.uc.controller;
 
 
 import com.hui.cloud.common.model.ResponseVO;
+import com.hui.cloud.uc.dto.SysPermissionDTO;
+import com.hui.cloud.uc.entity.SysPermission;
 import com.hui.cloud.uc.entity.SysResource;
 import com.hui.cloud.uc.service.SysPermissionService;
 import com.hui.cloud.uc.service.SysResourceService;
@@ -21,7 +23,6 @@ import java.util.List;
  * @since 2019-09-20
  */
 @RestController
-@RequestMapping("/sys-permission")
 public class SysPermissionController {
 
     private SysResourceService sysResourceService;
@@ -57,5 +58,19 @@ public class SysPermissionController {
         sysPermissionService.bindResource(resourcesIds, permissionId);
         return ResponseVO.ok();
     }
+
+
+    /**
+     * 创建OR更新权限
+     * @param sysPermissionDTO
+     * @return
+     */
+    @PostMapping(value = "/permission",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseVO savePermission(@RequestBody SysPermissionDTO sysPermissionDTO){
+        SysPermission sysPermission = new SysPermission();
+        sysPermissionService.saveOrUpdate(sysPermission);
+        return ResponseVO.ok();
+    }
+
 }
 

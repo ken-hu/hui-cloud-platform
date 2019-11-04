@@ -2,6 +2,8 @@ package com.hui.cloud.uc.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * <b><code>UserDTO</code></b>
  * <p/>
@@ -12,24 +14,10 @@ import lombok.Data;
  * @author Gary.Hu
  */
 @Data
-public class SysUserDTO {
-    /**
-     * 用户ID
-     */
+public class SysUserDTO implements Serializable {
+    private static final long serialVersionUID = -1097540993472283459L;
+
     private Long userId;
 
-    /**
-     * 用户密码
-     */
-    private String password;
-
-    /**
-     * 用户名
-     */
     private String userName;
-
-    /**
-     * 是否逻辑删除 1：已删除 0：未删除
-     */
-    private Integer deleted;
 }

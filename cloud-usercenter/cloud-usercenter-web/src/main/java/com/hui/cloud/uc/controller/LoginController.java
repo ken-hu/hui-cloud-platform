@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
  * @author Gary.Hu
  */
 @RestController
-@RequestMapping("/sys-user")
 @Slf4j
 public class LoginController {
 
@@ -46,7 +45,7 @@ public class LoginController {
      * @param loginRequestDTO
      * @return
      */
-    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/user/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO login(@RequestHeader(value = "Authorization") String authorization,
                             @RequestBody LoginRequestDTO loginRequestDTO) {
         SysUser sysUser = sysUserService.getUserByName(loginRequestDTO.getUserName());
@@ -55,7 +54,6 @@ public class LoginController {
         }
         AuthTokenDTO authTokenDTO= authClient.getToken(authorization, loginRequestDTO.getUserName(), loginRequestDTO.getPassword(), "password");
 
-        log.info("the user {} login success ", loginRequestDTO.getUserName());
         LoginUserVO loginUserVO = new LoginUserVO();
         BeanUtils.copyProperties(authTokenDTO,loginUserVO);
         BeanUtils.copyProperties(sysUser, loginUserVO);
