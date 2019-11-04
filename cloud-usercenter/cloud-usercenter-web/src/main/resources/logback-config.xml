@@ -29,14 +29,8 @@
 
         <!-- 2. Log输出到文件-->
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <encoder>
-                <pattern>${FILE_LOG_PATTERN}</pattern>
-                <charset>utf-8</charset>
-            </encoder>
-
             <!-- 文件路径 ，注意LOG_PATH是默认值，它的配置对应application.properties里的logging.path值-->
-            <!--配置了fileNamePattern就不用配置这个-->
-            <!--<file>${LOG_DIR}/${APPLICATION_NAME}-console.log</file>-->
+            <file>${LOG_DIR}/${APPLICATION_NAME}-console.log</file>
 
             <!--rolling: 当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名 -->
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -47,16 +41,24 @@
                 <!--TimeBasedRollingPolicy: 时间滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动 -->
                 <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                     <!-- maxFileSize:这是活动文件的大小，默认值是10MB，测试时可改成1KB看效果 -->
-                    <maxFileSize>10MB</maxFileSize>
+                    <maxFileSize>100MB</maxFileSize>
                 </timeBasedFileNamingAndTriggeringPolicy>
             </rollingPolicy>
+
+            <encoder>
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+                <charset>utf-8</charset>
+            </encoder>
+
             <!-- 追加方式记录日志 -->
             <append>true</append>
-            <filter class="ch.qos.logback.classic.filter.LevelFilter">
-                <level>DEBUG</level>
+
+            <!--只记录INFO级别日志-->
+            <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">
+                <level>INFO</level>
                 <onMatch>ACCEPT</onMatch>
                 <onMismatch>DENY</onMismatch>
-            </filter>
+            </filter>-->
         </appender>
 
         <!--异步写日志-->
@@ -96,8 +98,7 @@
             </encoder>
 
             <!-- 文件路径 ，注意LOG_PATH是默认值，它的配置对应application.properties里的logging.path值-->
-            <!--配置了fileNamePattern就不用配置这个-->
-            <!--<file>${LOG_DIR}/${APPLICATION_NAME}-console.log</file>-->
+            <file>${LOG_DIR}/${APPLICATION_NAME}-console.log</file>
 
             <!--rolling: 当发生滚动时，决定 RollingFileAppender 的行为，涉及文件移动和重命名 -->
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -108,16 +109,17 @@
                 <!--TimeBasedRollingPolicy: 时间滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动 -->
                 <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                     <!-- maxFileSize:这是活动文件的大小，默认值是10MB，测试时可改成1KB看效果 -->
-                    <maxFileSize>10MB</maxFileSize>
+                    <maxFileSize>100MB</maxFileSize>
                 </timeBasedFileNamingAndTriggeringPolicy>
             </rollingPolicy>
             <!-- 追加方式记录日志 -->
             <append>true</append>
-            <filter class="ch.qos.logback.classic.filter.LevelFilter">
-                <level>DEBUG</level>
+            <!--只记录INFO级别日志-->
+            <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">
+                <level>INFO</level>
                 <onMatch>ACCEPT</onMatch>
                 <onMismatch>DENY</onMismatch>
-            </filter>
+            </filter>-->
         </appender>
 
         <!--异步写日志-->

@@ -34,7 +34,7 @@ spring:
       min-evictable-idle-time-millis: 30000
       max-open-prepared-statements: 20
   redis:
-    host: 192.168.64.144
+    host: 127.0.0.1
     port: 6379
   rabbitmq:
     host: 127.0.0.1
@@ -43,7 +43,7 @@ spring:
     password: admin
   cloud:
     consul:
-      host: 192.168.64.144
+      host: 127.0.0.1
       port: 8500
       discovery:
         register: true
