@@ -2,6 +2,12 @@
 
 企业级微服务项目基础服务的骨架，集成各种组件。做到真正的快速开发，尽量做到基础服务能容易扩展
 
+## log 
+2019-10 
+- 新增sleuth日志链路
+- 修改了logback配置，对应多环境的log不同输出
+- 新增集成quartz后的简单实例
+
 ## 目标
 1. 集成微服务的各种基础组件
 2. 集成监控等服务，做到快速辅助开发和线上调试
@@ -47,7 +53,7 @@
 |          | 网关中心 |     springcloud-gateway      |  √   |                                        |
 |          | 服务调用 |    springcloud-openfeign     |  √   |                                        |
 |          | 服务监控 |       springboot-admin       |  ×   |                                        |
-|          | 链路追踪 |      springcloud-seluth      |  ×   |                                        |
+|          | 链路追踪 |      springcloud-seluth      |  √   |                                        |
 |          | 文档管理 |           swagger2           |  √   | 已经用springcloud聚合swagger2做API文档 |
 |          | 日志管理 |             elk              |  ×   |                                        |
 
@@ -85,11 +91,12 @@ $ docker run -d --name=dev-redis -p6379:6379 redis
 |     service      | service-name |             features             | note |
 | :--------------: | :--------------------------------: | :------------------------------: | :--: |
 |     注册中心     |    springcloud-consul-discovery    | 注册中心，服务发现和治理          |      |
-|     配置中心     | springcloud-consul-config | 配置中心，动态获取配置，灵活配置  |      |
-| 分布式事务TX-LCN |        txlcn-service        |                                  |      |
-|     网关中心     |         gateway-service         | 网关中心，配置路由映射,全局过滤   |      |
-|   授权服务       |           auth-service          |                                  |      |
-|   用户中心       |      usercenter-service         |                                  |      |
+|     配置中心     |     springcloud-consul-config      | 配置中心，动态获取配置，灵活配置  |      |
+| 分布式事务TX-LCN |        txlcn-service               |                                  |      |
+|     网关中心     |         gateway-service            | 网关中心，配置路由映射,全局过滤   |      |
+|     授权服务     |           auth-service             |                                  |      |
+|     用户中心     |      usercenter-service            |                                  |      |
+|     调度中心     |        schedule-service            | 调度中心，定时任务，任务管控      |      |
 
 ### 2.服务启动顺序
 
