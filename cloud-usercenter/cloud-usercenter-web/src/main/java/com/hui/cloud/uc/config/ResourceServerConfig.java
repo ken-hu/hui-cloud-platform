@@ -38,7 +38,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/v2/**").permitAll()
                 .antMatchers("/usercenter-service/**").permitAll()
                 //允许登录、注册放行
-                .antMatchers("/sys-user/user","/sys-user/login","/sys-user/register","/h2-console").permitAll()
+                .antMatchers("/user","/user/login","/user/register","/h2-console").permitAll()
                 // 健康检查放行
                 .antMatchers("/actuator/**").permitAll()
                 //OPTIONS请求 放行

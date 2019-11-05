@@ -1,6 +1,5 @@
 package com.hui.cloud.auth.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -8,7 +7,8 @@ import java.io.Serializable;
 /**
  * <code>AuthTokenDTO</code>
  * <desc>
- * 描述：
+ * 描述： 罪过,为了适配oauth2 返回的信息，没用驼峰结构。
+ * 而common-model被抽出来,让api模块轻量级，所以没有json的package去使用 @JsonProperty("access_token")
  * <desc/>
  * Creation Time: 2019/9/23 0:36.
  *
@@ -16,17 +16,13 @@ import java.io.Serializable;
  */
 @Data
 public class AuthTokenDTO implements Serializable {
-    @JsonProperty("access_token")
-    private String accessToken;
+    private String access_token;
 
-    @JsonProperty("refresh_token")
-    private String refreshToken;
+    private String refresh_token;
 
-    @JsonProperty("token_type")
-    private String tokenType;
+    private String token_type;
 
-    @JsonProperty("expires_in")
-    private Integer expiresIn;
+    private Integer expires_in;
 
     private String scope;
 

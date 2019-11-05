@@ -11,6 +11,13 @@
 
     <artifactId>cloud-schedule-web</artifactId>
     <dependencies>
+
+        <dependency>
+            <groupId>com.hui.cloud</groupId>
+            <artifactId>cloud-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
         <!--spring-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

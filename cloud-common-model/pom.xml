@@ -9,11 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cloud-usercenter</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>cloud-usercenter-api</module>
-        <module>cloud-usercenter-web</module>
-    </modules>
+    <artifactId>cloud-common-model</artifactId>
+
 
 </project>
