@@ -18,6 +18,7 @@
         <module>cloud-tx-lcn</module>
         <module>cloud-datacenter</module>
         <module>cloud-common-model</module>
+        <module>cloud-common-utils</module>
     </modules>
 
     <properties>

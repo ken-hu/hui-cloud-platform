@@ -1,27 +1,31 @@
 package com.hui.cloud.schedule.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
  * <p>
- * 调度JOB
+ * 调度JOB实例
  * </p>
  *
  * @author Gary.hu
- * @since 2019-11-04
+ * @since 2019-11-09
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_schedule_job")
-public class Job extends Model<Job> {
+@TableName("t_schedule_job_inst")
+public class JobInst extends Model<JobInst> {
 
     private static final long serialVersionUID=1L;
 

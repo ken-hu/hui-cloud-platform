@@ -24,23 +24,19 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>commons-net</groupId>
-            <artifactId>commons-net</artifactId>
-            <version>${common-net}</version>
-        </dependency>
-
         <!-- mybatis plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus}</version>
         </dependency>
+
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>${mybatis-plus}</version>
         </dependency>
+
         <!--Mysql-->
         <dependency>
             <groupId>mysql</groupId>
@@ -53,6 +49,7 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
             <version>2.1</version>
+            <scope>runtime</scope>
         </dependency>
 
     </dependencies>

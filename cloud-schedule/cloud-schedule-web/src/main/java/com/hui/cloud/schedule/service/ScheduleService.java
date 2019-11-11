@@ -10,13 +10,12 @@ package com.hui.cloud.schedule.service;
  * @author Gary.Hu
  */
 public interface ScheduleService {
-    void listJobs();
 
     void starJob();
 
     void delJob();
 
-    void newJob();
+    void newJob(String jobName, String jobGroup, String cronExpress);
 
     void pauseJob();
 

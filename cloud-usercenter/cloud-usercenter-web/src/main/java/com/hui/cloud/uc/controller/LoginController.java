@@ -4,11 +4,10 @@ import com.hui.cloud.auth.api.AuthClient;
 import com.hui.cloud.auth.dto.AuthTokenDTO;
 import com.hui.cloud.common.model.ResponseVO;
 import com.hui.cloud.uc.dto.LoginRequestDTO;
-import com.hui.cloud.uc.vo.LoginUserVO;
 import com.hui.cloud.uc.entity.SysUser;
-import com.hui.cloud.uc.service.SysUserService;
 import com.hui.cloud.uc.exception.SysUserException;
-import lombok.extern.slf4j.Slf4j;
+import com.hui.cloud.uc.service.SysUserService;
+import com.hui.cloud.uc.vo.LoginUserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
  * @author Gary.Hu
  */
 @RestController
-@Slf4j
 public class LoginController {
 
     private SysUserService sysUserService;

@@ -1,8 +1,8 @@
 package com.hui.cloud.schedule.controller;
 
 import com.hui.cloud.common.model.ResponseVO;
-import com.hui.cloud.schedule.entity.Job;
-import com.hui.cloud.schedule.service.JobService;
+import com.hui.cloud.schedule.entity.JobInst;
+import com.hui.cloud.schedule.service.JobInstService;
 import com.hui.cloud.schedule.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,36 +20,39 @@ import java.util.List;
  * @author Gary.Hu
  */
 @RestController
-@RequestMapping("/schedule")
 public class ScheduleJobController {
 
     private ScheduleService scheduleService;
 
-    private JobService jobService;
+    private JobInstService jobInstService;
 
     @Autowired
-    public ScheduleJobController(ScheduleService scheduleService, JobService jobService) {
+    public ScheduleJobController(ScheduleService scheduleService, JobInstService jobInstService) {
         this.scheduleService = scheduleService;
-        this.jobService = jobService;
+        this.jobInstService = jobInstService;
     }
 
     /**
      * 分页查询JOB实例
+     *
      * @return
      */
-    @GetMapping(value = "/jobs",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseVO listJobs(@RequestParam Integer pageSize,@RequestParam Integer pageNum){
-        List<Job> jobList = jobService.list();
-        return ResponseVO.ok(jobList);
+    @GetMapping(value = "/jobs", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseVO listJobs(@RequestParam Integer pageSize, @RequestParam Integer pageNum) {
+        List<JobInst> jobInsts = jobInstService.list();
+        return ResponseVO.ok(jobInsts);
     }
 
 
     /**
      * 创建JOB
+     *
      * @return
      */
-    @PostMapping(value = "/job",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseVO createJob(){
+    @PostMapping(value = "/job", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseVO createJob(@RequestParam String jobName,
+                                @RequestParam String jobGroup,
+                                @RequestParam String cronExpress) {
         scheduleService.newJob();
         return ResponseVO.ok();
     }
@@ -57,10 +60,11 @@ public class ScheduleJobController {
 
     /**
      * 暂停 JOB
+     *
      * @return
      */
-    @PostMapping(value = "/job/pause",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseVO pauseJob(){
+    @PostMapping(value = "/job/pause", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseVO pauseJob() {
         scheduleService.pauseJob();
         return ResponseVO.ok();
     }
@@ -68,20 +72,23 @@ public class ScheduleJobController {
 
     /**
      * 重新开始 JOB
+     *
      * @return
      */
-    @PostMapping(value = "/job/start",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseVO startJob(){
+    @PostMapping(value = "/job/start", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseVO startJob() {
         scheduleService.starJob();
         return ResponseVO.ok();
     }
 
     /**
      * 删除 | 取消 JOB
+     *
      * @return
      */
-    @PostMapping(value = "/job/del",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseVO delJob(){
+    @PostMapping(value = "/job/del", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseVO delJob() {
+        scheduleService.delJob();
         return ResponseVO.ok();
     }
 

@@ -1,7 +1,6 @@
 package com.hui.cloud.common.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Scope;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -21,7 +20,6 @@ import java.util.Map;
  * @author Hu-Weihui
  * @since hui-base-java ${PROJECT_VERSION}
  */
-@Scope("singleton")
 @Slf4j
 public class DateUtil {
     private static final String DEFAULT_DATE_FORMAT = "yyyyMMddHHmmss";

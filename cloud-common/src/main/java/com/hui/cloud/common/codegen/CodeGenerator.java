@@ -35,7 +35,7 @@ public class CodeGenerator {
      * INFO
      */
     private static final String AUTH = "Gary.hu";
-    private static final String[] TABLES = new String[]{"t_schedule_job"};
+    private static final String[] TABLES = new String[]{"t_schedule_job_inst"};
     private static final String TABLE_PREFIX = "t_schedule";
     private static final String BASE_ENTITY_CLASS = "com.hui.cloud.common.model.BaseEntity";
 

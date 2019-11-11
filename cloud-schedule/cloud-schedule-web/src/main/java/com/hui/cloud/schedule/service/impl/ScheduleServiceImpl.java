@@ -7,8 +7,6 @@ import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 /**
  * <code>ScheduleServiceImpl</code>
  * <desc>
@@ -29,11 +27,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public void listJobs() {
-
-    }
-
-    @Override
     public void starJob() {
         try {
             scheduler.resumeJob(JobKey.jobKey("e65e2a67-3b26-4954-a3d5-1a126fedd6b2", "com.hui.cloud.schedule.job.CommonJob"));
@@ -47,8 +40,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public void newJob() {
-        String jobName = UUID.randomUUID().toString();
+    public void newJob(String jobName, String jobGroup, String cronExpress) {
+//        String jobName = UUID.randomUUID().toString();
 
         String group = CommonJob.class.getName();
 
