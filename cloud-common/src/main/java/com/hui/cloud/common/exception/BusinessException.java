@@ -10,29 +10,29 @@ package com.hui.cloud.common.exception;
  * @author HuWeihui
  */
 
-public abstract class BussinessException extends RuntimeException {
+public abstract class BusinessException extends RuntimeException {
     private static final long serialVersionUID = 176810934576819906L;
 
     private int code;
     private String message;
 
-    public BussinessException(String message) {
+    public BusinessException(String message) {
         super(message);
         this.message = message;
     }
 
-    public BussinessException(int code, String message) {
+    public BusinessException(int code, String message) {
         super(message);
         this.code = code;
         this.message = message;
     }
 
-    public BussinessException(String message, Throwable cause) {
+    public BusinessException(String message, Throwable cause) {
         super(message, cause);
         this.message = message;
     }
 
-    public BussinessException(int code, String message, Throwable cause) {
+    public BusinessException(int code, String message, Throwable cause) {
         super(message, cause);
         this.code = code;
         this.message = message;

@@ -1,8 +1,6 @@
 package com.hui.cloud.common.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -16,11 +14,11 @@ import java.io.Serializable;
  * @author Hu-Weihui
  */
 @ToString
-@Getter
-@Setter
+@Data
 public class ResponseVO<T> implements Serializable {
 
     private static final long serialVersionUID = 1052605236159056373L;
+
 
     private ResponseVO() {
     }
@@ -31,178 +29,185 @@ public class ResponseVO<T> implements Serializable {
         this.data = data;
     }
 
-    public ResponseVO(T data) {
-        this.data = data;
-    }
-
-    public ResponseVO(Integer code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
-
     private Integer code;
     private String msg;
     private T data;
 
-    private static <T> ResponseVO<T> response(Integer code, String msg, T data) {
-        return new ResponseVO<>(code, msg, data);
-    }
 
     /**
+     * ============================================================================
      * OK
+     * ============================================================================
      *
+     * @param code
+     * @param msg
+     * @param data
      * @param <T>
      * @return
      */
-    public static <T> ResponseVO<T> ok() {
-        return new ResponseVO<>(ResponseConstant.SUCCESS_CODE, ResponseConstant.SUCCESS, null);
+    public static <T> ResponseVO build(Integer code, String msg, T data) {
+        return new ResponseVO(code, msg, data);
     }
 
-    public static <T> ResponseVO<T> ok(T data) {
-        return new ResponseVO<>(ResponseConstant.SUCCESS_CODE, ResponseConstant.SUCCESS, data);
+
+    public static <T> ResponseVO ok() {
+        return ok(null);
     }
 
-    public static <T> ResponseVO<T> ok(String msg) {
-        return new ResponseVO<>(ResponseConstant.SUCCESS_CODE, msg, null);
+    public static <T> ResponseVO ok(String msg) {
+        return ok(msg, null);
     }
 
-    public static <T> ResponseVO<T> ok(String msg, T data) {
-        return new ResponseVO<>(ResponseConstant.SUCCESS_CODE, msg, data);
+    public static <T> ResponseVO ok(T data) {
+        return ok(ResponseCons.SUCCESS.msg, data);
+    }
+
+    public static <T> ResponseVO ok(String msg, T data) {
+        return build(ResponseCons.SUCCESS.code, msg, data);
     }
 
 
     /**
+     * ============================================================================
      * Error
+     * ============================================================================
      *
      * @param <T>
      * @return
      */
-    public static <T> ResponseVO<T> error() {
-        return new ResponseVO<>(ResponseConstant.ERROR_CODE, ResponseConstant.ERROR, null);
+
+    public static <T> ResponseVO error() {
+        return error(null);
     }
 
-    public static <T> ResponseVO<T> error(T data) {
-        return new ResponseVO<>(ResponseConstant.ERROR_CODE, ResponseConstant.ERROR, data);
+    public static <T> ResponseVO error(String msg) {
+        return error(msg, null);
     }
 
-    public static <T> ResponseVO<T> error(String msg) {
-        return new ResponseVO<>(ResponseConstant.ERROR_CODE, msg, null);
+    public static <T> ResponseVO error(T data) {
+        return error(ResponseCons.SERVICE_ERROR.msg, data);
     }
 
-    public static <T> ResponseVO<T> error(String msg, T data) {
-        return new ResponseVO<>(ResponseConstant.ERROR_CODE, msg, data);
+    public static <T> ResponseVO error(String msg, T data) {
+        return build(ResponseCons.SERVICE_ERROR.code, msg, data);
     }
 
     /**
+     * ============================================================================
      * FORBIDDEN
+     * ============================================================================
      *
      * @param <T>
      * @return
      */
-    public static <T> ResponseVO<T> forbidden() {
-        return new ResponseVO<>(ResponseConstant.FORBIDDEN_CODE, ResponseConstant.FORBIDDEN, null);
+    public static <T> ResponseVO forbidden() {
+        return forbidden(null);
     }
 
-    public static <T> ResponseVO<T> forbidden(T data) {
-        return new ResponseVO<>(ResponseConstant.FORBIDDEN_CODE, ResponseConstant.FORBIDDEN, data);
+    public static <T> ResponseVO forbidden(String msg) {
+        return forbidden(msg, null);
     }
 
-    public static <T> ResponseVO<T> forbidden(String msg) {
-        return new ResponseVO<>(ResponseConstant.FORBIDDEN_CODE, msg, null);
+    public static <T> ResponseVO forbidden(T data) {
+        return forbidden(ResponseCons.FORBIDDEN.msg, data);
     }
 
-    public static <T> ResponseVO<T> forbidden(String msg, T data) {
-        return new ResponseVO<>(ResponseConstant.FORBIDDEN_CODE, msg, data);
+    public static <T> ResponseVO forbidden(String msg, T data) {
+        return build(ResponseCons.FORBIDDEN.code, msg, data);
     }
 
 
     /**
+     * ============================================================================
      * UNAUTHORIZED
+     * ============================================================================
      *
      * @param <T>
      * @return
      */
-    public static <T> ResponseVO<T> unauthorized() {
-        return new ResponseVO<>(ResponseConstant.UNAUTHORIZED_CODE, ResponseConstant.UNAUTHORIZED, null);
+    public static <T> ResponseVO unauthorized() {
+        return unauthorized(null);
     }
 
-    public static <T> ResponseVO<T> unauthorized(T data) {
-        return new ResponseVO<>(ResponseConstant.UNAUTHORIZED_CODE, ResponseConstant.UNAUTHORIZED, data);
-    }
 
-    public static <T> ResponseVO<T> unauthorized(String msg) {
-        return new ResponseVO<>(ResponseConstant.UNAUTHORIZED_CODE, msg, null);
+    public static <T> ResponseVO unauthorized(String msg) {
+        return unauthorized(msg, null);
 
     }
 
-    public static <T> ResponseVO<T> unauthorized(String msg, T data) {
-        return new ResponseVO<>(ResponseConstant.UNAUTHORIZED_CODE, msg, data);
+    public static <T> ResponseVO unauthorized(T data) {
+        return unauthorized(ResponseCons.UNAUTHORIZED.msg, data);
+    }
+
+    public static <T> ResponseVO unauthorized(String msg, T data) {
+        return build(ResponseCons.UNAUTHORIZED.code, msg, data);
     }
 
     /**
+     * ============================================================================
      * NOT_FOUND
+     * ============================================================================
      *
      * @param <T>
      * @return
      */
-    public static <T> ResponseVO<T> notFound() {
-        return new ResponseVO<>(ResponseConstant.NOT_FOUND_CODE, ResponseConstant.NOT_FOUND, null);
+    public static <T> ResponseVO notFound() {
+        return notFound(null);
     }
 
-    public static <T> ResponseVO<T> notFound(T data) {
-        return new ResponseVO<>(ResponseConstant.NOT_FOUND_CODE, ResponseConstant.NOT_FOUND, data);
+    public static <T> ResponseVO notFound(String msg) {
+        return notFound(msg, null);
     }
 
-    public static <T> ResponseVO<T> notFound(String msg) {
-        return new ResponseVO<>(ResponseConstant.NOT_FOUND_CODE, msg, null);
-
+    public static <T> ResponseVO notFound(T data) {
+        return notFound(ResponseCons.NOT_FOUND.msg, data);
     }
 
-    public static <T> ResponseVO<T> notFound(String msg, T data) {
-        return new ResponseVO<>(ResponseConstant.NOT_FOUND_CODE, msg, data);
+    public static <T> ResponseVO notFound(String msg, T data) {
+        return build(ResponseCons.NOT_FOUND.code, ResponseCons.NOT_FOUND.msg, data);
     }
 
 
     /**
+     * ============================================================================
      * BAD_REQUEST
+     * ============================================================================
      *
      * @param <T>
      * @return
      */
-    public static <T> ResponseVO<T> badRequest() {
-        return new ResponseVO<>(ResponseConstant.BAD_REQUEST_CODE, ResponseConstant.BAD_REQUEST, null);
+    public static <T> ResponseVO badRequest() {
+        return badRequest(null);
     }
 
-    public static <T> ResponseVO<T> badRequest(T data) {
-        return new ResponseVO<>(ResponseConstant.BAD_REQUEST_CODE, ResponseConstant.BAD_REQUEST, data);
+    public static <T> ResponseVO badRequest(String msg) {
+        return badRequest(msg, null);
     }
 
-    public static <T> ResponseVO<T> badRequest(String msg) {
-        return new ResponseVO<>(ResponseConstant.BAD_REQUEST_CODE, msg, null);
+    public static <T> ResponseVO badRequest(T data) {
+        return badRequest(ResponseCons.BAD_REQUEST.msg, data);
     }
 
-    public static <T> ResponseVO<T> badRequest(String msg, T data) {
-        return new ResponseVO<>(ResponseConstant.BAD_REQUEST_CODE, msg, data);
+    public static <T> ResponseVO badRequest(String msg, T data) {
+        return build(ResponseCons.BAD_REQUEST.code, ResponseCons.BAD_REQUEST.msg, data);
     }
 
-    public static class ResponseConstant {
-        public static final String SUCCESS = "SUCCESS";
-        public static final Integer SUCCESS_CODE = 200;
 
-        public static final String ERROR = "ERROR";
-        public static final Integer ERROR_CODE = 500;
+    @Getter
+    @AllArgsConstructor
+    public enum ResponseCons {
+        /**
+         * response 返回通用信息
+         */
+        SUCCESS(200, "SUCCESS"),
+        SERVICE_ERROR(500, "SERVICE_ERROR"),
+        BAD_REQUEST(400, "BAD_REQUEST"),
+        UNAUTHORIZED(401, "UNAUTHORIZED"),
+        FORBIDDEN(403, "FORBIDDEN"),
+        NOT_FOUND(404, "NOT_FOUND");
 
-        public static final String FORBIDDEN = "FORBIDDEN";
-        public static final Integer FORBIDDEN_CODE = 403;
-
-        public static final String UNAUTHORIZED = "UNAUTHORIZED";
-        public static final Integer UNAUTHORIZED_CODE = 401;
-
-        public static final String NOT_FOUND = "NOT_FOUND";
-        public static final Integer NOT_FOUND_CODE = 404;
-
-        public static final String BAD_REQUEST = "BAD_REQUEST";
-        public static final Integer BAD_REQUEST_CODE = 400;
+        private int code;
+        private String msg;
     }
 
 }

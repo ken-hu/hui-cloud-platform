@@ -1,6 +1,6 @@
 package com.hui.cloud.auth.service.exception;
 
-import com.hui.cloud.common.exception.BussinessException;
+import com.hui.cloud.common.exception.BusinessException;
 
 /**
  * <code>AuthException</code>
@@ -11,7 +11,7 @@ import com.hui.cloud.common.exception.BussinessException;
  *
  * @author Gary.Hu
  */
-public class AuthException extends BussinessException {
+public class AuthException extends BusinessException {
 
     public AuthException(String message) {
         super(message);

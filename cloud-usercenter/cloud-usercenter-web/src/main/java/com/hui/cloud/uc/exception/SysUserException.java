@@ -1,6 +1,6 @@
 package com.hui.cloud.uc.exception;
 
-import com.hui.cloud.common.exception.BussinessException;
+import com.hui.cloud.common.exception.BusinessException;
 
 /**
  * <code>SysUserException</code>
@@ -11,7 +11,7 @@ import com.hui.cloud.common.exception.BussinessException;
  *
  * @author Gary.Hu
  */
-public class SysUserException extends BussinessException {
+public class SysUserException extends BusinessException {
     public SysUserException(String message) {
         super(message);
     }

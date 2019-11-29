@@ -53,7 +53,7 @@ public class ScheduleJobController {
     public ResponseVO createJob(@RequestParam String jobName,
                                 @RequestParam String jobGroup,
                                 @RequestParam String cronExpress) {
-        scheduleService.newJob();
+        scheduleService.newJob(jobName, jobGroup, cronExpress);
         return ResponseVO.ok();
     }
 

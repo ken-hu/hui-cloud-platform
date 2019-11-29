@@ -179,7 +179,7 @@ Val: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidXNlcmNlbnRlci1zZX
 │      │          └─cloud
 │      │              └─admin
 │      └─generated-sources
-│          └─annotations
+│          └─com.hui.cloud.common.anno
 ├─cloud-auth
 │  ├─cloud-auth-api
 │  │  ├─src
@@ -203,7 +203,7 @@ Val: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidXNlcmNlbnRlci1zZX
 │  │      │                  ├─api
 │  │      │                  └─dto
 │  │      └─generated-sources
-│  │          └─annotations
+│  │          └─com.hui.cloud.common.anno
 │  └─cloud-auth-web
 │      ├─src
 │      │  ├─main
@@ -248,7 +248,7 @@ Val: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidXNlcmNlbnRlci1zZX
 │          │  │  └─auth
 │          │  └─sql
 │          └─generated-sources
-│              └─annotations
+│              └─com.hui.cloud.common.anno
 ├─cloud-common
 │  ├─src
 │  │  ├─main
@@ -279,7 +279,7 @@ Val: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidXNlcmNlbnRlci1zZX
 │      │                  ├─model
 │      │                  └─utils
 │      └─generated-sources
-│          └─annotations
+│          └─com.hui.cloud.common.anno
 ├─cloud-gateway
 │  ├─src
 │  │  ├─main
@@ -303,7 +303,7 @@ Val: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidXNlcmNlbnRlci1zZX
 │      │                  ├─config
 │      │                  └─handler
 │      └─generated-sources
-│          └─annotations
+│          └─com.hui.cloud.common.anno
 ├─cloud-schedule
 │  ├─cloud-schedule-api
 │  │  └─src
@@ -333,7 +333,7 @@ Val: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidXNlcmNlbnRlci1zZX
 │          │  │          └─schedule
 │          │  └─sql
 │          └─generated-sources
-│              └─annotations
+│              └─com.hui.cloud.common.anno
 ├─cloud-tx-lcn
 │  ├─src
 │  │  ├─main
@@ -352,7 +352,7 @@ Val: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidXNlcmNlbnRlci1zZX
 │      │          └─cloud
 │      │              └─txlcn
 │      └─generated-sources
-│          └─annotations
+│          └─com.hui.cloud.common.anno
 ├─cloud-usercenter
 │  ├─cloud-usercenter-api
 │  │  ├─src
@@ -378,7 +378,7 @@ Val: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidXNlcmNlbnRlci1zZX
 │  │      │                  ├─dto
 │  │      │                  └─vo
 │  │      └─generated-sources
-│  │          └─annotations
+│  │          └─com.hui.cloud.common.anno
 │  └─cloud-usercenter-web
 │      ├─src
 │      │  ├─main
@@ -426,9 +426,9 @@ Val: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidXNlcmNlbnRlci1zZX
 │          │  │  └─uc
 │          │  └─sql
 │          ├─generated-sources
-│          │  └─annotations
+│          │  └─com.hui.cloud.common.anno
 │          ├─generated-test-sources
-│          │  └─test-annotations
+│          │  └─test-com.hui.cloud.common.anno
 │          └─test-classes
 │              ├─com
 │              │  └─hui
