@@ -4,14 +4,17 @@ import com.hui.cloud.auth.api.AuthClient;
 import com.hui.cloud.auth.dto.AuthTokenDTO;
 import com.hui.cloud.common.model.ResponseVO;
 import com.hui.cloud.uc.dto.LoginRequestDTO;
-import com.hui.cloud.uc.entity.SysUser;
+import com.hui.cloud.uc.entity.User;
 import com.hui.cloud.uc.exception.SysUserException;
-import com.hui.cloud.uc.service.SysUserService;
+import com.hui.cloud.uc.service.UserService;
 import com.hui.cloud.uc.vo.LoginUserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <code>LoginController</code>
@@ -25,15 +28,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class LoginController {
 
-    private SysUserService sysUserService;
+    private UserService userService;
 
     private AuthClient authClient;
 
     @Autowired
-    public LoginController(SysUserService sysUserService, AuthClient authClient) {
-        this.sysUserService = sysUserService;
+    public LoginController(UserService userService, AuthClient authClient) {
+        this.userService = userService;
         this.authClient = authClient;
     }
+
 
     /**
      * 用户登录
@@ -46,7 +50,7 @@ public class LoginController {
     @PostMapping(value = "/user/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseVO login(@RequestHeader(value = "Authorization") String authorization,
                             @RequestBody LoginRequestDTO loginRequestDTO) {
-        SysUser sysUser = sysUserService.getUserByName(loginRequestDTO.getUserName());
+        User sysUser = userService.getUserByName(loginRequestDTO.getUserName());
         if(null==sysUser){
             throw new SysUserException("该用户不存在");
         }

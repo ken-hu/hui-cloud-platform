@@ -1,16 +1,14 @@
 package com.hui.cloud.uc.controller;
 
-import com.hui.cloud.auth.api.AuthClient;
 import com.hui.cloud.common.model.ResponseVO;
 import com.hui.cloud.uc.dto.RegisterRequestDTO;
-import com.hui.cloud.uc.entity.SysUser;
-import com.hui.cloud.uc.service.SysUserService;
+import com.hui.cloud.uc.entity.User;
+import com.hui.cloud.uc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,12 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RegisterController {
 
-    private SysUserService sysUserService;
+    private UserService userService;
 
     @Autowired
-    public RegisterController(SysUserService sysUserService) {
-        this.sysUserService = sysUserService;
+    public RegisterController(UserService userService) {
+        this.userService = userService;
     }
+
     /**
      * 用户注册
      *
@@ -41,10 +40,10 @@ public class RegisterController {
     public ResponseVO register(@RequestBody RegisterRequestDTO registerRequestDTO) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodePassword = encoder.encode(registerRequestDTO.getPassword());
-        SysUser sysUser = new SysUser();
+        User sysUser = new User();
         sysUser.setUserName(registerRequestDTO.getUserName());
         sysUser.setPassword(encodePassword);
-        sysUserService.save(sysUser);
+        userService.save(sysUser);
         return ResponseVO.ok();
     }
 }

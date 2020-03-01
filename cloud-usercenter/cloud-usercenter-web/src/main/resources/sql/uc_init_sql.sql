@@ -1,7 +1,7 @@
 CREATE DATABASE `hui_cloud_uc` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
-
-DROP TABLE IF EXISTS `t_uc_sys_user`;
-CREATE TABLE `t_uc_sys_user`
+USE `hui_cloud_uc`;
+DROP TABLE IF EXISTS `t_uc_user`;
+CREATE TABLE `t_uc_user`
 (
     `user_id`     BIGINT(20)   NOT NULL COMMENT '用户ID',
     `user_name`   VARCHAR(50)  NULL COMMENT '用户名',
@@ -15,8 +15,8 @@ CREATE TABLE `t_uc_sys_user`
 ) ENGINE = INNODB ,
   DEFAULT CHARSET = utf8 ,COMMENT '用户表';
 
-DROP TABLE IF EXISTS `t_uc_sys_role`;
-CREATE TABLE `t_uc_sys_role`
+DROP TABLE IF EXISTS `t_uc_role`;
+CREATE TABLE `t_uc_role`
 (
     `role_id`     BIGINT(20)  NOT NULL COMMENT '角色ID',
     `role_code`   VARCHAR(50) NULL COMMENT '角色代码',
@@ -29,8 +29,8 @@ CREATE TABLE `t_uc_sys_role`
 ) ENGINE = INNODB,
   DEFAULT CHARSET = utf8, COMMENT '角色表';
 
-DROP TABLE IF EXISTS `t_uc_sys_user_role_rel`;
-CREATE TABLE `t_uc_sys_user_role_rel`
+DROP TABLE IF EXISTS `t_uc_user_role_rel`;
+CREATE TABLE `t_uc_user_role_rel`
 (
     `id`          BIGINT(20)  NOT NULL AUTO_INCREMENT COMMENT '主键ID自增',
     `user_id`     VARCHAR(50) NULL COMMENT '用户ID',
@@ -43,8 +43,8 @@ CREATE TABLE `t_uc_sys_user_role_rel`
 ) ENGINE = INNODB,
   DEFAULT CHARSET = utf8, COMMENT '用户-角色-关联表';
 
-DROP TABLE IF EXISTS `t_uc_sys_resource`;
-CREATE TABLE `t_uc_sys_resource`
+DROP TABLE IF EXISTS `t_uc_resource`;
+CREATE TABLE `t_uc_resource`
 (
     `resource_id`   BIGINT(20)  NOT NULL COMMENT '资源ID',
     `resource_code` VARCHAR(50) NULL COMMENT '资源代码',
@@ -59,8 +59,8 @@ CREATE TABLE `t_uc_sys_resource`
 ) ENGINE = INNODB,
   DEFAULT CHARSET = utf8, COMMENT '资源表';
 
-DROP TABLE IF EXISTS `t_uc_sys_permission`;
-CREATE TABLE `t_uc_sys_permission`
+DROP TABLE IF EXISTS `t_uc_permission`;
+CREATE TABLE `t_uc_permission`
 (
     `permission_id`   BIGINT(20)  NOT NULL COMMENT '权限ID',
     `permission_code` VARCHAR(50) NULL COMMENT '权限代码',
@@ -73,8 +73,8 @@ CREATE TABLE `t_uc_sys_permission`
 ) ENGINE = INNODB,
   DEFAULT CHARSET = utf8, COMMENT '权限表';
 
-DROP TABLE IF EXISTS `t_uc_sys_resource_permission_rel`;
-CREATE TABLE `t_uc_sys_resource_permission_rel`
+DROP TABLE IF EXISTS `t_uc_resource_permission_rel`;
+CREATE TABLE `t_uc_resource_permission_rel`
 (
     `id`            BIGINT(20)  NOT NULL AUTO_INCREMENT COMMENT '主键ID自增',
     `resource_id`   VARCHAR(50) NULL COMMENT '资源ID',
@@ -87,8 +87,8 @@ CREATE TABLE `t_uc_sys_resource_permission_rel`
 ) ENGINE = INNODB,
   DEFAULT CHARSET = utf8, COMMENT '资源-权限-关联表';
 
-DROP TABLE IF EXISTS `t_uc_sys_role_permission_rel`;
-CREATE TABLE `t_uc_sys_role_permission_rel`
+DROP TABLE IF EXISTS `t_uc_role_permission_rel`;
+CREATE TABLE `t_uc_role_permission_rel`
 (
     `id`            BIGINT(20)  NOT NULL AUTO_INCREMENT COMMENT '主键ID自增',
     `role_id`       VARCHAR(50) NULL COMMENT '角色ID',
@@ -101,8 +101,8 @@ CREATE TABLE `t_uc_sys_role_permission_rel`
 ) ENGINE = INNODB,
   DEFAULT CHARSET = utf8, COMMENT '角色-权限-关联表';
 
-DROP TABLE IF EXISTS `t_uc_sys_group`;
-CREATE TABLE `t_uc_sys_group`
+DROP TABLE IF EXISTS `t_uc_group`;
+CREATE TABLE `t_uc_group`
 (
     `group_id`    BIGINT(20)  NOT NULL COMMENT '组ID',
     `group_code`  VARCHAR(50) NULL COMMENT '组代码',
@@ -115,8 +115,8 @@ CREATE TABLE `t_uc_sys_group`
 ) ENGINE = INNODB,
   DEFAULT CHARSET = utf8, COMMENT '组表';
 
-DROP TABLE IF EXISTS `t_uc_sys_user_group_rel`;
-CREATE TABLE `t_uc_sys_user_group_rel`
+DROP TABLE IF EXISTS `t_uc_user_group_rel`;
+CREATE TABLE `t_uc_user_group_rel`
 (
     `id`          BIGINT(20)  NOT NULL AUTO_INCREMENT COMMENT '主键ID自增',
     `user_id`     VARCHAR(50) NULL COMMENT '用户ID',
@@ -129,8 +129,8 @@ CREATE TABLE `t_uc_sys_user_group_rel`
 ) ENGINE = INNODB,
   DEFAULT CHARSET = utf8, COMMENT '用户-组-关联表';
 
-DROP TABLE IF EXISTS `t_uc_sys_role_group_rel`;
-CREATE TABLE `t_uc_sys_role_group_rel`
+DROP TABLE IF EXISTS `t_uc_role_group_rel`;
+CREATE TABLE `t_uc_role_group_rel`
 (
     `id`          BIGINT(20)  NOT NULL AUTO_INCREMENT COMMENT '主键ID自增',
     `role_id`     VARCHAR(50) NULL COMMENT '角色ID',
